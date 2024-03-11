@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>S.C Hospital</title>
+    <meta name="discription"content="Find professional doctors or clinc for you ,Book Appointment with the doctor you want">
+    <meta name="keywords" content="clinc, doctor, health">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/mystyle.css">
+    <link rel="icon" type="image/x-icon"href="images/logo.png">
+    <style>
+        body{
+            height: 100vh;
+            background-color: #eee;
+        }
+        form{
+            box-shadow: 0 0 7px;
+        }
+
+    </style>
+</head>
+<body>
+
+
+
+    <!-- NavBar -->
+
+
+
+    <nav class="navbar navbar-expand-lg bg-light navbar-light sticky-top">
+        <a href="index.html" class="navbar-brand text-primary">S.C Hospital</a><!--special care hospital-->
+        <!-- <input type="text"placeholder=search class=" d-lg-none mr-4 "style=width:50%;outline:none;> -->
+        <a href="#N"data-toggle=collapse class="navbar-toggler"><span class="navbar-toggler-icon"></span></a>
+        
+        <div class="collapse navbar-collapse" id="N">
+            <ul class="navbar-nav ml-auto ">
+                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="#serv" class="nav-link">Services</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link">Contact us</a></li>
+                <li class="nav-item"><a href="#about" class="nav-link">About us</a></li>
+                <li class="nav-item"><a href="#feed" class="nav-link">Feedback</a></li>
+                <!-- <li class="nav-item"><a href="#" class="nav-link btn btn-outline-primary text-primary rounded">Login</a></li>-->
+            
+            </ul>
+            <a href="#login" class="nav-link btn btn-outline-primary ml-lg-2 mt-sm-3 mt-lg-0  "style=max-width:78px>Login</a>
+        </div>
+    </nav>
+
+
+<div class="container align-items-center ">
+
+<h4 class="mt-5 text-primary"style="font-size:1.9em">Email Confiramtion</h4>
+<form class="form-control p-5 chgpass mt-5 ">
+<label for="verification"class="text-muted"style="font-size:1.3em">A code has been sent to your email</label>
+<input type="text"id="verification"placeholder="Enter the verification code"style="font-size:1.05em"required class="form-control mt-2">
+
+<input type="submit" value="Verify" class="btn btn-outline-primary mt-3">
+</form>
+</div>
+
+
+     
+
+    <script src="js/popper.min.js"></script>
+    <script src="js/jquery-3.6.1.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script type="module" src="js/shared.js"></script>
+  
+    <script src="js/emailConfirmation.js"type=module></script>
+</body>
+</html>

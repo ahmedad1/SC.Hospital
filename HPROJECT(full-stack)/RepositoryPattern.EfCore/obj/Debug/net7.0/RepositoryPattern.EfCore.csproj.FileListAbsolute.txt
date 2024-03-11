@@ -1,0 +1,17 @@
+C:\Users\Infotech\Desktop\HPROJECT(full-stack)\RepositoryPattern.EfCore\bin\Debug\net7.0\RepositoryPattern.EfCore.deps.json
+C:\Users\Infotech\Desktop\HPROJECT(full-stack)\RepositoryPattern.EfCore\bin\Debug\net7.0\RepositoryPattern.EfCore.runtimeconfig.json
+C:\Users\Infotech\Desktop\HPROJECT(full-stack)\RepositoryPattern.EfCore\bin\Debug\net7.0\RepositoryPattern.EfCore.dll
+C:\Users\Infotech\Desktop\HPROJECT(full-stack)\RepositoryPattern.EfCore\bin\Debug\net7.0\RepositoryPattern.EfCore.pdb
+C:\Users\Infotech\Desktop\HPROJECT(full-stack)\RepositoryPattern.EfCore\bin\Debug\net7.0\RepositoryPattern.Core.dll
+C:\Users\Infotech\Desktop\HPROJECT(full-stack)\RepositoryPattern.EfCore\bin\Debug\net7.0\RepositoryPattern.Core.pdb
+C:\Users\Infotech\Desktop\HPROJECT(full-stack)\RepositoryPattern.EfCore\obj\Debug\net7.0\RepositoryPattern.EfCore.csproj.AssemblyReference.cache
+C:\Users\Infotech\Desktop\HPROJECT(full-stack)\RepositoryPattern.EfCore\obj\Debug\net7.0\RepositoryPattern.EfCore.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Infotech\Desktop\HPROJECT(full-stack)\RepositoryPattern.EfCore\obj\Debug\net7.0\RepositoryPattern.EfCore.AssemblyInfoInputs.cache
+C:\Users\Infotech\Desktop\HPROJECT(full-stack)\RepositoryPattern.EfCore\obj\Debug\net7.0\RepositoryPattern.EfCore.AssemblyInfo.cs
+C:\Users\Infotech\Desktop\HPROJECT(full-stack)\RepositoryPattern.EfCore\obj\Debug\net7.0\RepositoryPattern.EfCore.csproj.CoreCompileInputs.cache
+C:\Users\Infotech\Desktop\HPROJECT(full-stack)\RepositoryPattern.EfCore\obj\Debug\net7.0\RepositoryPattern.EfCore.csproj.CopyComplete
+C:\Users\Infotech\Desktop\HPROJECT(full-stack)\RepositoryPattern.EfCore\obj\Debug\net7.0\RepositoryPattern.EfCore.dll
+C:\Users\Infotech\Desktop\HPROJECT(full-stack)\RepositoryPattern.EfCore\obj\Debug\net7.0\refint\RepositoryPattern.EfCore.dll
+C:\Users\Infotech\Desktop\HPROJECT(full-stack)\RepositoryPattern.EfCore\obj\Debug\net7.0\RepositoryPattern.EfCore.pdb
+C:\Users\Infotech\Desktop\HPROJECT(full-stack)\RepositoryPattern.EfCore\obj\Debug\net7.0\RepositoryPattern.EfCore.genruntimeconfig.cache
+C:\Users\Infotech\Desktop\HPROJECT(full-stack)\RepositoryPattern.EfCore\obj\Debug\net7.0\ref\RepositoryPattern.EfCore.dll
