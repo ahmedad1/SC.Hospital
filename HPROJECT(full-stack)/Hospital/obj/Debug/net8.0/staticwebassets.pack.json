@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\Analysis.html"
     },
     {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\ProfileSettings.html",
+      "PackagePath": "staticwebassets\\ProfileSettings.html"
+    },
+    {
       "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\bones.html",
       "PackagePath": "staticwebassets\\bones.html"
     },
@@ -177,6 +181,10 @@
       "PackagePath": "staticwebassets\\images\\internalmedicine.jpg"
     },
     {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\loading.png",
+      "PackagePath": "staticwebassets\\images\\loading.png"
+    },
+    {
       "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\logo.png",
       "PackagePath": "staticwebassets\\images\\logo.png"
     },
@@ -199,6 +207,10 @@
     {
       "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\internal.html",
       "PackagePath": "staticwebassets\\internal.html"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\js\\ProfileSettings.js",
+      "PackagePath": "staticwebassets\\js\\ProfileSettings.js"
     },
     {
       "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\js\\analysis.js",
@@ -227,6 +239,10 @@
     {
       "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\js\\emailConfirmation.js",
       "PackagePath": "staticwebassets\\js\\emailConfirmation.js"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\js\\formvalidation.js",
+      "PackagePath": "staticwebassets\\js\\formvalidation.js"
     },
     {
       "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\js\\index.js",

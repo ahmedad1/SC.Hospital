@@ -94,8 +94,10 @@ namespace Hospital.Controllers
         {
             var email = ExtractJwt().Payload[JwtRegisteredClaimNames.Email].ToString();
             var result = await unitOfWork.UserRepository.ModifyInSensitiveDataAsync(InsensitiveDto, email!);
-            if (!result)
-                return NotFound(email);
+            if (!result.Success && result.HasRepeatedUserName)
+                return BadRequest();
+            else if (!result.Success && !result.HasRepeatedUserName)
+                return NotFound();
             await unitOfWork.SaveChangesAsync();
             return Ok();
         }
@@ -105,17 +107,21 @@ namespace Hospital.Controllers
         {
             var result = await unitOfWork.UserRepository.ChangePassword(changePasswordDto, ExtractJwt().Payload[JwtRegisteredClaimNames.NameId].ToString()!);
             if (!result)
-                return NotFound();
+                return BadRequest();
             await unitOfWork.SaveChangesAsync();
             return Ok();
         }
         [HttpPost("UpdateTokens")]
-        public async Task<IActionResult> UpdateTokens(UpdateTokensDto updateTokensDto)
+        public async Task<IActionResult> UpdateTokens()
         {
-            var result = await unitOfWork.UserRepository.UpdateTokensAsync(updateTokensDto);
+            if (!Request.Cookies.TryGetValue(RefreshTokenCookieKey,out string? refToken)||!Request.Cookies.TryGetValue(UserNameCookieKey,out string? userName))
+                return Unauthorized();
+            
+            
+            var result = await unitOfWork.UserRepository.UpdateTokensAsync(new() { RefreshToken = refToken, UserName = userName });
             await unitOfWork.SaveChangesAsync();
             if (!result.Success)
-                return Forbid();
+                return Unauthorized();
             CookiesHandler.SetCookie(JwtCookieKey, result.Jwt, ExpirationOfJwt, true,Response);
             CookiesHandler.SetCookie(RefreshTokenCookieKey, result.RefreshToken, ExpirationOfRefreshToken, true, Response);
             return Ok();
@@ -155,7 +161,14 @@ namespace Hospital.Controllers
             return Ok();
         }
 
-
+        [Authorize]
+        [HttpPost("VerifyPassword")]
+        public async Task<IActionResult>VerifyPassword([FromBody]string password)
+        {
+            string email = ExtractJwt().Payload["email"].ToString()!;
+            var result=await unitOfWork.UserRepository.VerifyPassword(email, password);
+            return result ? Ok() : NotFound();
+        }
 
     }
 }

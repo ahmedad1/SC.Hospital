@@ -19,8 +19,9 @@ namespace RepositoryPattern.Core.Interfaces
         public Task<bool> MakeDoctorAccount(MakeDoctorProfileDto createDoctorProfileDto);
         public Task<bool> ChangePassword(ChangePasswordDto changePasswordDto, string userName);
 
-        public Task<bool> ModifyInSensitiveDataAsync(JsonPatchDocument<User> modifyInsensitiveData, string email);
+        public Task<ModifyInsensitveDataResult> ModifyInSensitiveDataAsync(JsonPatchDocument<User> modifyInsensitiveData, string email);
         public Task<bool> DeleteAccountAsync(string username);
+        public Task<bool> VerifyPassword(string email, string password);
 
 
     }

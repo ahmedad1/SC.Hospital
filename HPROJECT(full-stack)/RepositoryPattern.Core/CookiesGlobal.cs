@@ -3,7 +3,7 @@
     public static class CookiesGlobal
     {
         public static DateTime ExpirationOfJwt => DateTime.Now.AddMinutes(15);
-        public static DateTime ExpirationOfRefreshToken => DateTime.Now.AddMinutes(15);
+        public static DateTime ExpirationOfRefreshToken => DateTime.Now.AddDays(1);
         public static string JwtCookieKey => "jwt";
         public static string RefreshTokenCookieKey => "refreshToken";
         public static string UserNameCookieKey => "userName";

@@ -1,4 +1,6 @@
-export const backendOrigin=location.origin+"/api/Account/"
+const backendOrigin=location.origin
+export const backendAccountApi=backendOrigin+"/api/Account/"
+const loadingIcon='<img src="images/loading.png"class="loading" alt=""class="ml-2">'
 export function getCookie(key){
     let cookies=document.cookie;
     let KVPairs=cookies.split("; ")
@@ -11,6 +13,20 @@ export function getCookie(key){
     return null;
     
 }
+export function getRequiredDateFormat(date){
+    //yyyy-MM-dd
+    //8/4/2002
+    if(/\d{4}-\d{2}-\d{2}/ig.test(date))
+    return date
+    let splittedDate=date.split("/")
+    let month=splittedDate[0]
+    let day=splittedDate[1]
+    let year=splittedDate[2]
+    month=month.padStart(2,'0')
+    day= day.padStart(2,'0')
+    return year+'-'+month+'-'+day
+
+}
 export function setCookie(name, value, days) {
     var expires = "";
     if (days) {
@@ -22,10 +38,22 @@ export function setCookie(name, value, days) {
 }
 
 export async function postJSON(url,body){
-        return await fetch(url,{method:"POST",
-                  headers:{"content-type":"application/json"},
-                  body:JSON.stringify(body)
+        return await fetch(url,{
+                method:"POST",
+                headers:{"content-type":"application/json"},
+                body:JSON.stringify(body)
                 });
+}
+export async function patchJSON(url,body){
+    return await fetch(url,{
+        method:"PATCH",
+        headers:{
+            "content-type":'application/json',
+        
+        },
+        body:JSON.stringify(body)
+
+})
 }
 export async function DeleteRequest(url){
 return await fetch (url,{
@@ -44,7 +72,9 @@ export function deleteAllCookies(){
 
 }
 export async function signOut(){
-    let result=await DeleteRequest(`${backendOrigin}SignOut`)
+    let signOutBtn=document.querySelector(".signout");
+    appendLoadingIcon(signOutBtn);
+    let result=await DeleteRequest(`${backendAccountApi}SignOut`)
     if(result.status==200)
     location.href=`${location.origin}/index.html`
 }
@@ -61,12 +91,19 @@ export async function checkForCookies(){
         ){
           
          await signOut();
+         location.href='/index.html'
        
           
       
         }
       
       
+}
+export async function UpdateTokens(){
+let result=await postJSON(`${backendAccountApi}UpdateTokens`)
+if(result.status==200)
+return result.status
+location.href="/"
 }
 export function getTextFromHtml(str){
     let map={
@@ -97,9 +134,52 @@ export function getNavAfterLogin(name){
         <!-- <a href="#login" class="nav-link btn btn-outline-primary ml-lg-2 mt-sm-3 mt-lg-0  "style=max-width:78px>Login</a> -->
        <div class="nav-link d-flex p-0 mt-lg-0 mt-3"style="gap:5px">
         <img src="./images/user-solid.svg"class="ml-lg-2  mt-lg-0  "width=15 alt="">
-        <span class="text-muted usernamespan">${getTextFromHtml(name)}</span>
+        <a href="ProfileSettings.html" class="text-muted usernamespan">${getTextFromHtml(name)}</a>
        
         </div> 
     <button class=" btn btn-outline-primary ml-lg-3 mt-3 mt-lg-0 signout">Sign out</button>
     </div>`
+}
+
+
+
+export function DisplayAlertModal(str,color="text-danger"){
+    let textWithoutSpaces=getTextFromHtml(str).split(" ").join("")
+    
+    if(!document.body.innerHTML.slice(25).includes(`<div class="modal fade ${textWithoutSpaces}`)){
+        document.body.insertAdjacentHTML("beforeend",`<div class="modal fade ${textWithoutSpaces}" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title text-muted" id="exampleModalLabel">Alert</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body ${color}"style="">
+            ${getTextFromHtml(str)}
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary closemodal" data-dismiss="modal">Close</button>
+            
+            </div>
+        </div>
+        </div>
+        </div>`);
+    }
+let curModalHTML=document.querySelector(`.${textWithoutSpaces}`)
+let newModal=new bootstrap.Modal(curModalHTML)
+newModal.show()
+
+
+
+}
+export function appendLoadingIcon(src){
+src.insertAdjacentHTML("beforeend",loadingIcon);
+}
+export function removeLoadingIcon(src){
+    
+        if(src.children.length)
+        src.children[0].remove();
+    
 }

@@ -1,5 +1,6 @@
-import { backendOrigin, getCookie, postJSON } from "./shared.js"
+import { DisplayAlertModal, appendLoadingIcon, backendAccountApi, getCookie, postJSON, removeLoadingIcon } from "./shared.js"
 let inpVerification=document.querySelector("#verification");
+let verifyCodeBtn=document.querySelector(".verifyCodeBtn")
 let form=document.querySelector("form")
 inpVerification.onkeydown=function(e){
     console.log(e)
@@ -12,19 +13,24 @@ inpVerification.onpaste=function(e){
     e.preventDefault();
 }
 onload=async function(){
-    let result=await postJSON(`${backendOrigin}SendCode`,{"email":getCookie("email")})
+    let result=await postJSON(`${backendAccountApi}SendCode`,{"email":getCookie("email")})
     if(result.status!=200)
-    this.alert("Unable to send the message , Try Again")
+    DisplayAlertModal("Unable to send the message , Try Again","text-info")
 
 }
+
 form.onsubmit=async function(e){
     e.preventDefault();
     if(getCookie("email")==null)
     return
-    let result=await postJSON(`${backendOrigin}ValidateCode`,{"email":getCookie("email"),"code":inpVerification.value})
-    
-    if(result.status !=200)
-    alert("Invalid Code.... Try again")
-    alert("Email Confirmed Successfully")
-    location.href=`${location.origin}/index.html`
+    appendLoadingIcon(verifyCodeBtn)
+    let result=await postJSON(`${backendAccountApi}ValidateCode`,{"email":getCookie("email"),"code":inpVerification.value})
+    removeLoadingIcon(verifyCodeBtn)
+    if(result.status !=200){
+    DisplayAlertModal("Invalid Code.... Try again")
+    return;
+    }
+    DisplayAlertModal("Email Confirmed Successfully","text-success")
+    onclick=()=>{
+    location.href=`${location.origin}/index.html`}
 }

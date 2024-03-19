@@ -2,8 +2,8 @@ import {  checkForCookies, getCookie, signOut } from "./shared.js"
 
 onload=checkForCookies
 let usernamespan=document.querySelector('.usernamespan')
-usernamespan.innerText=getCookie("firstName")
 let signOutBtn=document.querySelector(".signout")
+usernamespan.innerText=getCookie("firstName")
 signOutBtn.addEventListener("click",signOut)
 
 

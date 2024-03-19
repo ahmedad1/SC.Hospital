@@ -141,7 +141,7 @@
         <div class="container mt-5"id=login>
             <div class="d-flex justify-content-center"><h3>Login</h3></div>
             <div >
-                <form action="" class=" mt-4 form-control formlog">
+                <form method="POST" class=" mt-4 form-control formlog">
                     <div class="usrlogo d-flex justify-content-center"><img src="images/userlogo.png" alt=""></div>
                    
                     <div class="form-group">
@@ -154,10 +154,10 @@
                         
                     </div>
                     <div class="form-check">
-                        <input id="check"class=form-check-input type="checkbox">
-                        <label style="cursor: pointer;" for="check">Show my password</label>
+                        <input id="showPassLogin"class=form-check-input type="checkbox">
+                        <label style="cursor: pointer;" for="showPassLogin">Show my password</label>
                     </div>
-                    <div class="form-group"><input type="submit"class="btn btn-outline-primary w-100"value="Login"></div>
+                    <div class="form-group"><button type="submit"class="btn btn-outline-primary w-100 loginBtn">Login</button></div>
                     
                 </form>
 
@@ -262,10 +262,10 @@
                     </div>
                   </div>
                     <div class="form-check mt-2">
-                        <input type="checkbox"  id="showpass" class="form-check-input">
-                        <label for="showpass" class="form-check-label"style=cursor:pointer>Show My Password</label>
+                        <input type="checkbox"  id="showPassSignUp" class="form-check-input">
+                        <label for="showPassSignUp" class="form-check-label"style=cursor:pointer>Show My Password</label>
                     </div>
-                  <input type="submit"value="Create My Account" class="btn btn-outline-primary w-100 mt-2">
+                  <button type="submit" class="btn btn-outline-primary w-100 mt-2 signUpBtn">Create My Account</button>
 
             </form>
 

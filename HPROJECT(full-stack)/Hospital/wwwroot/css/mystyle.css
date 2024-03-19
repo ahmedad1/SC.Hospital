@@ -68,3 +68,21 @@ nav:hover{
         height: 15em !important;
     }
 }
+.usernamespan{
+    text-decoration: none !important;
+}
+.usernamespan:hover{
+    color: var(--primary)!important;
+}
+.loading{
+    animation-name: load;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    width: 1.2em;
+}
+@keyframes load{
+  100%{
+      transform: rotate(360deg);
+  }
+}

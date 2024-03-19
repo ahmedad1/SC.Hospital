@@ -128,13 +128,7 @@
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
-    "Parameters": [
-      {
-        "Name": "updateTokensDto",
-        "Type": "RepositoryPattern.Core.DTOs.UpdateTokensDto",
-        "IsRequired": true
-      }
-    ],
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -148,6 +142,22 @@
       {
         "Name": "validateCode",
         "Type": "RepositoryPatternWithUOW.Core.DTOs.ValidateCodeDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Hospital.Controllers.AccountController",
+    "Method": "VerifyPassword",
+    "RelativePath": "api/Account/VerifyPassword",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "password",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],

@@ -1,9 +1,11 @@
-import { backendOrigin, getCookie, postJSON, setCookie } from "./shared.js";
+import { DisplayAlertModal, appendLoadingIcon, backendAccountApi, getCookie, postJSON, removeLoadingIcon, setCookie } from "./shared.js";
 
 // login
 let formLog=document.querySelector('.formlog')
 let userNameLog=document.querySelector('input[name=userNameLog]')
 let passwordLog=document.querySelector('input[name=passwordLog]')
+let loginBtn=document.querySelector(".loginBtn");
+let showPassLogin=document.querySelector("#showPassLogin")
 //--------------------------------------------
 // sign up
 let formsignup=document.querySelector('.formsignup');
@@ -14,6 +16,9 @@ let gender=document.querySelectorAll('input[name=gender]')
 let passwordSign=document.querySelector('input[name=passwordsign]')
 let bDate=document.querySelector('input[name=bDate]')
 let userNameSign=document.querySelector("input[name=userNameSign]")
+let signUpBtn=document.querySelector(".signUpBtn")
+let showPassSignUp=document.querySelector("#showPassSignUp")
+
 //-----------------------
 //contactus
 let contactusform=document.querySelector('.contactus')
@@ -23,9 +28,14 @@ let feedbackform=document.querySelector('.feedbackform')
 //-----------------------------
 let analysisanchor=document.querySelector('.analysisanchor')
  
-
+showPassLogin.addEventListener("change",()=>{
+    passwordLog.type=passwordLog.type=="password"?"text":"password"
+})
+showPassSignUp.addEventListener("change",()=>{
+    passwordSign.type=passwordSign.type=="password"?"text":"password"
+})
 async function logIn (username , password){
-   let result= await postJSON(`${backendOrigin}LogIn`,{"userName":username,"password":password})
+   let result= await postJSON(`${backendAccountApi}LogIn`,{"userName":username,"password":password})
     if(result.status==200)
         return await result.json();
     else return false;
@@ -33,7 +43,7 @@ async function logIn (username , password){
     
 }
 async function signUp(firstName,lastName,email,userName,password,birthDate,gender){
-    let result =await postJSON(`${backendOrigin}SignUp`,{
+    let result =await postJSON(`${backendAccountApi}SignUp`,{
     "firstName":firstName,
     "lastName":lastName,
     "email":email,
@@ -59,9 +69,12 @@ else
 
 formLog.onsubmit=async (e)=>{
 e.preventDefault();
+appendLoadingIcon(loginBtn)
 let result=await logIn(userNameLog.value,passwordLog.value);
+removeLoadingIcon(loginBtn)
 if(result==false){
-alert("Invalid UserName Or Password")
+DisplayAlertModal("Invalid UserName Or Password")
+
 return;
 }
 else if (result.success==true &&result.emailConfirmed==false){
@@ -78,11 +91,16 @@ location.href=`${location.origin}/doctor.html`;
 }
 formsignup.onsubmit=async (e)=>{
 e.preventDefault();
-if(!(emailSign.value&&fName.value&&bDate.value&&lName.value&&userNameSign.value&&passwordSign.value))
+appendLoadingIcon(signUpBtn)
+if(!(emailSign.value&&fName.value&&bDate.value&&lName.value&&userNameSign.value&&passwordSign.value)){
+    removeLoadingIcon(signUpBtn)
 return
+}
 let regexEmail=/\w+@\w+\.\w+(\.\w+)*/ig
-if(!regexEmail.test(emailSign.value))
+if(!regexEmail.test(emailSign.value)){
+    removeLoadingIcon(signUpBtn)
 return
+}
 let result=await signUp(
      fName.value
     ,lName.value
@@ -92,8 +110,10 @@ let result=await signUp(
     ,bDate.value
     ,gender[0].checked?gender[0].value:gender[1].value
     )
+removeLoadingIcon(signUpBtn)
+
 if(result!==true){
-alert(`${result} is already exist`)
+DisplayAlertModal(`${result} is already exist`)
 return
 }
 setCookie("email",emailSign.value,1);
@@ -102,11 +122,11 @@ location.href=`${location.origin}/emailConfirmation.html`;
 }
 contactusform.onsubmit=(e)=>{
 e.preventDefault();
-    alert('Message Sent Successfully')
+    DisplayAlertModal('Message Sent Successfully',"text-success")
     location.reload();
 }
 feedbackform.onsubmit=(e)=>{
    e.preventDefault()
-    alert('Thank You For Your FeedBack')
+    DisplayAlertModal('Thank You For Your FeedBack',"text-success")
     location.reload()
 }

@@ -188,17 +188,17 @@ namespace RepositoryPattern.EfCore.Repositories
                 context.Remove(refToken);
                 return new() { Success = false };    
             }
-            var expOfJwt = DateTime.Now.AddMinutes(15);
-            var expOfRefreshToken = DateTime.Now.AddHours(24);
-            var newJwt = Tokens.Generate(refToken.User, JwtOptions,expOfJwt);
+            
+         
+            var newJwt = Tokens.Generate(refToken.User, JwtOptions,ExpirationOfJwt);
             var newRefToken = Tokens.Generate();
             context.Remove(refToken);
 
-            await context.AddAsync(new RefreshToken() { CreatedAt=DateTime.Now,ExpiresAt=expOfRefreshToken,Token=newRefToken,UserId=refToken.UserId});
+            await context.AddAsync(new RefreshToken() { CreatedAt=DateTime.Now,ExpiresAt=ExpirationOfRefreshToken,Token=newRefToken,UserId=refToken.UserId});
             return new()
             {
-                ExpirationOfJwt = expOfJwt,
-                ExpirationOfRefreshToken = expOfRefreshToken,
+                ExpirationOfJwt = ExpirationOfJwt,
+                ExpirationOfRefreshToken = ExpirationOfRefreshToken,
                 Jwt = newJwt,
                 RefreshToken = newRefToken,
                 Success=true
@@ -227,32 +227,38 @@ namespace RepositoryPattern.EfCore.Repositories
             context.Update(user);
             return true;
         }
-        public async Task<bool> ModifyInSensitiveDataAsync(JsonPatchDocument<User> modifyInsensitiveData,string email)
+        public async Task<ModifyInsensitveDataResult> ModifyInSensitiveDataAsync(JsonPatchDocument<User> modifyInsensitiveData,string email)
         {
             try
             {
-                if(modifyInsensitiveData.Operations.Exists(x=>
-                !(x.path.Equals("firstname",StringComparison.InvariantCultureIgnoreCase)
-                ||x.path.Equals("lastname",StringComparison.InvariantCultureIgnoreCase)
-                ||x.path.Equals("birthdate",StringComparison.InvariantCultureIgnoreCase)
-                ||x.path.Equals("gender",StringComparison.InvariantCultureIgnoreCase)
-                )))
+                if (!modifyInsensitiveData.Operations.Exists(x =>
+                   x.path.Equals("firstname", StringComparison.OrdinalIgnoreCase)
+                || x.path.Equals("lastname", StringComparison.OrdinalIgnoreCase)
+                || x.path.Equals("birthdate", StringComparison.OrdinalIgnoreCase)
+                || x.path.Equals("gender", StringComparison.OrdinalIgnoreCase)
+                || x.path.Equals("userName",StringComparison.OrdinalIgnoreCase))
+                )
                 {
-                    return false;
+                    return new() { Success = false };
                 }
                 context.ChangeTracker.LazyLoadingEnabled = false;
                 var user = await context.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Email == email);
                 if (user is null)
-                    return false;
+                    return new() { Success = false };
                 modifyInsensitiveData.ApplyTo(user);
                 context.Update(user);
-                return true;
+                return new() { Success = true };
 
-            
+
+            }
+            catch (DbUpdateException e)
+            {
+
+                return new() { Success=false,HasRepeatedUserName=true};
             }
             catch
             {
-                return false;
+                return new() { Success = false };
             }
         }
         public async Task<bool> DeleteAccountAsync(string username)
@@ -282,6 +288,15 @@ namespace RepositoryPattern.EfCore.Repositories
             
            
             return true;
+        }
+
+        public async Task<bool> VerifyPassword(string email, string password)
+        {
+            context.ChangeTracker.LazyLoadingEnabled = false;
+            var user=await context.Users.AsNoTracking().Select(x=>new {x.Email, x.Password}).FirstOrDefaultAsync(x => x.Email == email);
+            return user is not null && BCrypt.Net.BCrypt.EnhancedVerify(password, user.Password);
+                
+
         }
     }
 }

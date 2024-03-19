@@ -31,7 +31,6 @@ builder.Services.AddSingleton(jwtOptions!);
 builder.Services.Configure<MailOptionsModel>(builder.Configuration.GetSection("MailSettings"));
 
 builder.Services.AddSingleton<MapToUser>();
-builder.Services.AddCors();
 builder.Services.AddTransient<IMailService,MailService>();  
 builder.Services.AddAuthentication().AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
 {

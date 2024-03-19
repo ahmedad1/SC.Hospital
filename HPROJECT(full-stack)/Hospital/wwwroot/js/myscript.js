@@ -27,9 +27,9 @@ else{
 }
 
 }
-show1.onchange=()=>{
-    passInp[0].type=passInp[0].type=='password'?'text':'password';
-}
-show2.onchange=()=>{
-    passInp[1].type=passInp[1].type=='password'?'text':'password';
-}
+// show1.onchange=()=>{
+//     passInp[0].type=passInp[0].type=='password'?'text':'password';
+// }
+// show2.onchange=()=>{
+//     passInp[1].type=passInp[1].type=='password'?'text':'password';
+// }
