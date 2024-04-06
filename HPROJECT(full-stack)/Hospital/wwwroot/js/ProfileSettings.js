@@ -1,11 +1,12 @@
-import { DisplayAlertModal, UpdateTokens, appendLoadingIcon, backendAccountApi, checkForCookies, getCookie, getRequiredDateFormat, patchJSON, postJSON, removeLoadingIcon, setCookie, signOut } from "./shared.js";
+import { DisplayAlertModal, UpdateTokens, appendLoadingIcon, backendAccountApi, checkForCookies, getCookie, getNavAfterLoginAdmin, getRequiredDateFormat, patchJSON, postJSON, removeLoadingIcon, setCookie, signOut } from "./shared.js";
 
 onload=checkForCookies
+if(getCookie("role")=="Adm")
+document.querySelector("nav").innerHTML=getNavAfterLoginAdmin(getCookie("firstName"))
 let usernamespan=document.querySelector('.usernamespan')
 usernamespan.innerText=getCookie("firstName")
 let signOutBtn=document.querySelector(".signout")
 signOutBtn.addEventListener("click",signOut)
-
 let firstNameInForm=document.querySelector("#firstName")
 let lastNameInForm=document.querySelector ("#lastName")
 let emailInForm=document.querySelector("#email")

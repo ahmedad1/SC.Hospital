@@ -25,6 +25,7 @@ namespace RepositoryPattern.EfCore.TokensHandler
                 new Claim(JwtRegisteredClaimNames.Birthdate,user.BirthDate.ToString()),
                 new Claim(JwtRegisteredClaimNames.Email,user.Email),
                 new Claim(JwtRegisteredClaimNames.Gender,user.Gender.ToString()),
+                new Claim("id",user.Id.ToString()),
                 new Claim(ClaimTypes.Role,user.Discriminator)
             };
             var symmtericKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtOptions.SigningKey));

@@ -2,6 +2,7 @@ using Azure.Core;
 using Hospital;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using RepositoryPattern.Core.Interfaces;
@@ -58,6 +59,13 @@ builder.Services.AddAuthentication().AddJwtBearer(JwtBearerDefaults.Authenticati
         }
     };
 });
+builder.Services.AddResponseCompression(options =>
+{
+    options.EnableForHttps = true;
+    options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(["image/jpeg", "image/png", "image/x-png"]);
+    options.Providers.Add<BrotliCompressionProvider>();
+    options.Providers.Add<GzipCompressionProvider>();
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -67,7 +75,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
+app.UseResponseCompression();
 app.UseMiddleware<RedirectionToFrontEndMiddleware>();
 app.UseHttpsRedirection();
 

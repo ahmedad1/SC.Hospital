@@ -1,0 +1,14 @@
+body,html{
+    overflow-x:hidden;
+}
+.aside-title{
+    height: 3em;
+
+}
+.list-group-item-action{
+    height: 4em;
+    
+} 
+.input-cell{
+    width: 5em;
+}

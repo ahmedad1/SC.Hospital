@@ -12,6 +12,7 @@ using RepositoryPattern.EfCore.TokensHandler;
 using RepositoryPatternWithUOW.Core.DTOs;
 using RepositoryPatternWithUOW.Core.Enums;
 using RepositoryPatternWithUOW.Core.ReturnedModels;
+using System.Linq.Expressions;
 using static RepositoryPatternWithUOW.Core.CookiesGlobal;
 namespace RepositoryPattern.EfCore.Repositories
 {
@@ -208,7 +209,7 @@ namespace RepositoryPattern.EfCore.Repositories
         
 
         }
-        public async Task<bool> SignOutAsync(string refreshToken)
+        public async Task<bool> DeleteRefreshTokenAsync(string refreshToken)
         {
            
            int result= await context.Set<RefreshToken>().Where(x => x.Token == refreshToken).ExecuteDeleteAsync();
@@ -217,10 +218,11 @@ namespace RepositoryPattern.EfCore.Repositories
             
           
         }
-        public async Task<bool>ChangePassword(ChangePasswordDto changePasswordDto,string userName)
+        public async Task<bool>ChangePassword(ChangePasswordDto changePasswordDto,int id)
         {
             context.ChangeTracker.LazyLoadingEnabled = false;
-            var user=await context.Users.AsNoTracking().FirstOrDefaultAsync(x => x.UserName == userName);
+            context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+            var user=await context.Users.FindAsync(id);
             if(user is null||!BCrypt.Net.BCrypt.EnhancedVerify(changePasswordDto.OldPassword,user.Password)) 
                 return false;
             user.Password = BCrypt.Net.BCrypt.EnhancedHashPassword(changePasswordDto.NewPassword);
@@ -297,6 +299,40 @@ namespace RepositoryPattern.EfCore.Repositories
             return user is not null && BCrypt.Net.BCrypt.EnhancedVerify(password, user.Password);
                 
 
+        }
+
+        public async Task<bool> SignOutAsync(string refreshToken, string email)
+        {
+           var refToken=await context.Set<RefreshToken>().Include(x=>x.User).AsNoTracking().FirstOrDefaultAsync(x=>x.Token==refreshToken);
+            if(refToken is null||refToken.User.Email!=email) 
+                return false;
+
+            context.Remove(refToken);
+            return true;
+        }
+        public async Task<IEnumerable<UsersResult>?> GetPatients(int page)
+        {
+
+            if (page <= 0)
+                return Enumerable.Empty<UsersResult>();
+            context.ChangeTracker.LazyLoadingEnabled = false;
+            context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+            int pageSize = 20;
+            var result = await context.Patients.Skip(pageSize * (page - 1)).Take(pageSize).Select(x => new UsersResult(x.Id, x.FirstName, x.LastName, x.UserName, x.Email, x.Gender.ToString(), x.BirthDate, x.EmailConfirmed)).ToListAsync();
+     
+            return result;
+        }
+        public IEnumerable<UsersResult> SearchForPatients(Expression<Func<Patient, bool>> expression,int page)
+        {
+            if(page<=0)
+                return Enumerable.Empty<UsersResult>();
+            context.ChangeTracker.LazyLoadingEnabled = false;
+            int pageSize=20;
+            return context.Patients.Where(expression).Skip(pageSize*(page-1)).Take(pageSize).Select(x => new UsersResult(x.Id, x.FirstName, x.LastName, x.UserName, x.Email, x.Gender.ToString(), x.BirthDate, x.EmailConfirmed)).AsNoTracking();
+        }
+        public async Task<Patient?> GetPatientBy(Expression<Func<Patient, bool>> expression)
+        {
+            return await context.Patients.FirstOrDefaultAsync(expression);
         }
     }
 }

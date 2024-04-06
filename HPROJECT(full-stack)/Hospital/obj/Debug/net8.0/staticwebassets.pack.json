@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\ProfileSettings.html"
     },
     {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\admin.html",
+      "PackagePath": "staticwebassets\\admin.html"
+    },
+    {
       "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\bones.html",
       "PackagePath": "staticwebassets\\bones.html"
     },
@@ -19,6 +23,10 @@
     {
       "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\changepassword.html",
       "PackagePath": "staticwebassets\\changepassword.html"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\css\\admin.css",
+      "PackagePath": "staticwebassets\\css\\admin.css"
     },
     {
       "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\css\\bootstrap.css",
@@ -211,6 +219,10 @@
     {
       "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\js\\ProfileSettings.js",
       "PackagePath": "staticwebassets\\js\\ProfileSettings.js"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\js\\admin.js",
+      "PackagePath": "staticwebassets\\js\\admin.js"
     },
     {
       "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\js\\analysis.js",

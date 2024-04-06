@@ -85,8 +85,11 @@ return;
 
 if(getCookie("role")=="Pat")
 location.href=`${location.origin}/user.html`;
-else 
+else if(getCookie("role")=="Doc")
 location.href=`${location.origin}/doctor.html`;
+else if(getCookie("role")=="Adm")
+location.href=`${location.origin}/admin.html`;
+
 
 }
 formsignup.onsubmit=async (e)=>{

@@ -9,6 +9,7 @@ using RepositoryPattern.Core.DTOs;
 using RepositoryPattern.Core.Interfaces;
 using RepositoryPattern.Core.Models;
 using RepositoryPatternWithUOW.Core.DTOs;
+using RepositoryPatternWithUOW.Core.Enums;
 using RepositoryPatternWithUOW.Core.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -105,7 +106,10 @@ namespace Hospital.Controllers
         [HttpPost("ChangePassword")]
         public async Task<IActionResult> ChangePassword(ChangePasswordDto changePasswordDto)
         {
-            var result = await unitOfWork.UserRepository.ChangePassword(changePasswordDto, ExtractJwt().Payload[JwtRegisteredClaimNames.NameId].ToString()!);
+            string? idString = ExtractJwt().Payload["id"].ToString()!;
+            if (idString is null || !int.TryParse(idString, out int id))
+                return BadRequest();
+            var result = await unitOfWork.UserRepository.ChangePassword(changePasswordDto,id);
             if (!result)
                 return BadRequest();
             await unitOfWork.SaveChangesAsync();
@@ -132,9 +136,14 @@ namespace Hospital.Controllers
             string? refToken = Request.Cookies[RefreshTokenCookieKey];
             if (refToken.IsNullOrEmpty())
                 return BadRequest();
-            var result = await unitOfWork.UserRepository.SignOutAsync(refToken);
+            string?userName= Request.Cookies[EmailCookieKey];
+            if (userName.IsNullOrEmpty())
+                return BadRequest();
+
+            var result = await unitOfWork.UserRepository.SignOutAsync(refToken,userName);
             if (!result)
                 return BadRequest();
+            await unitOfWork.SaveChangesAsync();
             CookiesHandler.DeleteCookiesFromResponse(Response);
 
 
@@ -169,6 +178,37 @@ namespace Hospital.Controllers
             var result=await unitOfWork.UserRepository.VerifyPassword(email, password);
             return result ? Ok() : NotFound();
         }
+        [Authorize(Roles = "Adm")]
+        [HttpPost("GetPatients")]
+        public async Task<IActionResult> GetPatients([FromBody]int page)
+        {
+            
+            var result =await unitOfWork.UserRepository.GetPatients(page);
+            return Ok(result);
 
+        }
+        [Authorize(Roles ="Adm")]
+        [HttpPost("SearchForPatients")]
+        public IActionResult SearchForPatients(SearchDto searchDto)///next to do in front end -------------
+        {
+            switch (searchDto.Type)
+            {
+                case TypeOfSearching.FirstName:
+                    return Ok(unitOfWork.UserRepository.SearchForPatients(x => x.FirstName == searchDto.Data,searchDto.page));
+                case TypeOfSearching.LastName:
+                    return Ok(unitOfWork.UserRepository.SearchForPatients(x => x.LastName == searchDto.Data,searchDto.page));
+                case TypeOfSearching.Email:
+                    return Ok(unitOfWork.UserRepository.SearchForPatients(x => x.Email == searchDto.Data,searchDto.page));
+                case TypeOfSearching.UserName:
+                    return Ok(unitOfWork.UserRepository.SearchForPatients(x => x.UserName == searchDto.Data,searchDto.page));
+                case TypeOfSearching.EmailConfirmed:
+                    return Ok(unitOfWork.UserRepository.SearchForPatients(x => x.EmailConfirmed.ToString() == searchDto.Data,searchDto.page));
+
+                default: 
+                    return BadRequest();
+
+            }
+            
+        }
     }
 }

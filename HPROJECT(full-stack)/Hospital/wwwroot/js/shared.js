@@ -1,6 +1,7 @@
 const backendOrigin=location.origin
 export const backendAccountApi=backendOrigin+"/api/Account/"
 const loadingIcon='<img src="images/loading.png"class="loading" alt=""class="ml-2">'
+
 export function getCookie(key){
     let cookies=document.cookie;
     let KVPairs=cookies.split("; ")
@@ -141,7 +142,23 @@ export function getNavAfterLogin(name){
     </div>`
 }
 
-
+export function getNavAfterLoginAdmin(name){
+    return `<a href="admin.html" class="navbar-brand text-primary">S.C Hospital</a><!--special care hospital-->
+    <!-- <input type="text"placeholder=search class=" d-lg-none mr-4 "style=width:50%;outline:none;> -->
+    <a href="#N"data-toggle=collapse class="navbar-toggler"><span class="navbar-toggler-icon"></span></a>
+    
+    <div class="collapse navbar-collapse" id="N">
+        <ul class="navbar-nav ml-auto ">
+        </ul>
+        <!-- <a href="#login" class="nav-link btn btn-outline-primary ml-lg-2 mt-sm-3 mt-lg-0  "style=max-width:78px>Login</a> -->
+       <div class="nav-link d-flex p-0 mt-lg-0 mt-3"style="gap:5px">
+        <img src="./images/user-solid.svg"class="ml-lg-2  mt-lg-0  "width=15 alt="">
+        <a href="ProfileSettings.html" class="text-muted usernamespan">${getTextFromHtml(name)}</a>
+       
+        </div> 
+    <button class=" btn btn-outline-primary ml-lg-3 mt-3 mt-lg-0 signout">Sign out</button>
+    </div>`
+}
 
 export function DisplayAlertModal(str,color="text-danger"){
     let textWithoutSpaces=getTextFromHtml(str).split(" ").join("")
@@ -181,5 +198,161 @@ export function removeLoadingIcon(src){
     
         if(src.children.length)
         src.children[0].remove();
+    
+}
+
+let toggleDisableInput=(event)=>{
+    for(let i of event.target.parentElement.parentElement.children){
+        if(i.nodeName!="TD"||i.children[0].nodeName!="INPUT"&&i.children[0].nodeName!="SELECT"||i.children[0].classList.contains("manip")){
+       
+        continue
+        }
+
+        i.children[0].disabled= event.target.value!="update"
+    }
+}
+
+export function AddDoctorTable(section,json,changeFromPatient=false){
+    if(changeFromPatient){
+    section.innerHTML=""
+    section.insertAdjacentHTML("beforeend",`
+    <button class="btn btn-info form-control">Add Doctor</button>
+       
+        <table class="table ">
+            
+            <thead class="bg-primary text-light">
+                
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">User Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Gender</th>
+                <th scope="col">BirthDate</th>
+                <th scope="col">EmailConfirmed</th>
+                <th scope="col">Department</th>
+                <th scope="col">Schedule</th>
+                <th scope="col">Options</th>
+                <th scope="col">Commit</th>
+               
+              </tr>
+            </thead>
+            <tbody>
+             
+              
+            </tbody>
+         
+            </table>
+    
+    `)
+    }
+    if(json.length==0)
+    return
+    let tbody=document.querySelector("tbody")
+    for(let i of json)
+    tbody.insertAdjacentHTML("beforeend",`
+    <tr>
+    <th scope="row">${i.id}</th>
+    <td><input class="input-cell"type="text" value="${i.firstName}"disabled></td>
+    <td><input class="input-cell"type="text" value="${i.lastName}"disabled></td>
+    <td><input class="input-cell"type="text" value="${i.userName}"disabled></td>
+    <td><input class="input-cell"type="email" value="${i.email}"disabled></td>
+    <td><select name="options" class="form-control">
+        <option value="${i.gender=="Male"?"Male":"Female"}">${i.gender=="Male"?"Male":"Female"}</option>
+        <option value=${i.gender=="Male"?"Male":"Female"}>${i.gender=="Male"?"Male":"Female"}</option>
+    </select></td>
+    <td><input class="input-cell"type="date" value="${getRequiredDateFormat(i.birthDate)}"disabled></td>
+    <td><input class="input-cell"type="text" value="Mark"disabled>${i.emailConfirmed}</td>
+    <td><input class="input-cell"type="text" value="Mark"disabled>${i.departmentName}</td>
+    <td><a class="input-cell"type="text" href="#">Schedule</a></td>
+    <td><select name="options" class="form-control manip">
+        <option value="delete">Delete</option>
+        <option value="update">Update</option>
+    </select></td>
+    <td ><button class="btn btn-primary ">Save</button></td>
+  </tr>
+
+    `)
+
+let manips=document.querySelectorAll(".manip")
+manips.forEach(e=>{
+    
+    
+    e.addEventListener("change",event=>{
+        toggleDisableInput(event)
+        
+    })
+})
+}
+export function AddPatientTable(section,json,changeFromDoctor=false){
+  
+    if(changeFromDoctor){
+        section.innerHTML=""
+        section.insertAdjacentHTML("beforeend",`
+       
+           
+            <table class="table ">
+                
+                <thead class="bg-primary text-light">
+                    
+                  <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">User Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">BirthDate</th>
+                    <th scope="col">EmailConfirmed</th>
+                    <th scope="col">Options</th>
+                    <th scope="col">Commit</th>
+                   
+                  </tr>
+                </thead>
+                <tbody>
+                 
+                  
+                </tbody>
+             
+                </table>
+        
+        `)
+        }
+        if(json.length==0)
+        return
+        let tbody=document.querySelector("tbody")
+        for(let i of json)
+        tbody.insertAdjacentHTML("beforeend",`
+        <tr>
+        <th scope="row">${i.id}</th>
+        <td><input class="input-cell"type="text" value="${i.firstName}"disabled></td>
+        <td><input class="input-cell"type="text" value="${i.lastName}"disabled></td>
+        <td><input class="input-cell"type="text" value="${i.userName}"disabled></td>
+        <td><input class="input-cell"type="email" value="${i.email}"disabled></td>
+        <td><select name="options" class="form-control"disabled style="height: 1.85em;padding:0">
+            <option value="${i.gender=="Male"?"Male":"Female"}">${i.gender=="Male"?"Male":"Female"}</option>
+            <option value=${i.gender=="Male"?"Male":"Female"}>${i.gender=="Male"?"Male":"Female"}</option>
+        </select></td>
+        <td><input class="input-cell"type="date" value="${getRequiredDateFormat(i.birthDate)}"disabled></td>
+        <td><input class="input-cell"type="text" value="${i.emailConfirmed}"disabled></td>
+        <td><select name="options" class="form-control manip">
+         <option value="delete">Delete</option>
+            <option value="update">Update</option>
+        </select></td>
+        <td ><button class="btn btn-primary ">Save</button></td>
+      </tr>
+    
+        `)
+        let manips=document.querySelectorAll(".manip")
+        manips.forEach(e=>{
+           
+
+            e.addEventListener("change",event=>{
+               
+                toggleDisableInput(event)
+                
+            })
+        })
     
 }

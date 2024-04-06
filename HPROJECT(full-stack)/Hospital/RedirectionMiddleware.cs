@@ -25,7 +25,7 @@ namespace Hospital
                     if (!refToken.IsNullOrEmpty())
                     {
                     
-                        await unitOfWork.UserRepository.SignOutAsync(refToken);
+                        await unitOfWork.UserRepository.DeleteRefreshTokenAsync(refToken);
                         CookiesHandler.DeleteCookiesFromResponse(context.Response);
                     }
                 

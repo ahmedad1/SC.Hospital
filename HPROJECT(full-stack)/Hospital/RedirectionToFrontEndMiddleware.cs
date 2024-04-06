@@ -16,8 +16,10 @@ namespace Hospital
                 {
                     if (role == "Pat")
                         context.Response.Redirect("/user.html");
-                    else
+                    else if (role == "Doc")
                         context.Response.Redirect("/doctor.html");
+                    else if (role == "Adm")
+                        context.Response.Redirect("/admin.html");
 
                 }
                 else
@@ -25,7 +27,7 @@ namespace Hospital
                     if (!refToken.IsNullOrEmpty())
                     {
                     
-                        await unitOfWork.UserRepository.SignOutAsync(refToken);
+                        await unitOfWork.UserRepository.DeleteRefreshTokenAsync(refToken);
                         CookiesHandler.DeleteCookiesFromResponse(context.Response);
                     }
                 
