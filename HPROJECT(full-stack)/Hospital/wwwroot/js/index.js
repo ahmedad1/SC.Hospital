@@ -35,7 +35,7 @@ showPassSignUp.addEventListener("change",()=>{
     passwordSign.type=passwordSign.type=="password"?"text":"password"
 })
 async function logIn (username , password){
-   let result= await postJSON(`${backendAccountApi}LogIn`,{"userName":username,"password":password})
+   let result= await postJSON(`${backendAccountApi}log-in`,{"userName":username,"password":password})
     if(result.status==200)
         return await result.json();
     else return false;
@@ -43,7 +43,7 @@ async function logIn (username , password){
     
 }
 async function signUp(firstName,lastName,email,userName,password,birthDate,gender){
-    let result =await postJSON(`${backendAccountApi}SignUp`,{
+    let result =await postJSON(`${backendAccountApi}sign-up`,{
     "firstName":firstName,
     "lastName":lastName,
     "email":email,

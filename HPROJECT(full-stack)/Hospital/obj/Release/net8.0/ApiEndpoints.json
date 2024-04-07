@@ -1,30 +1,14 @@
 [
   {
     "ContainingType": "Hospital.Controllers.AccountController",
-    "Method": "ChangePassword",
-    "RelativePath": "api/Account/ChangePassword",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "changePasswordDto",
-        "Type": "RepositoryPatternWithUOW.Core.DTOs.ChangePasswordDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Hospital.Controllers.AccountController",
     "Method": "DeleteAccount",
-    "RelativePath": "api/Account/DeleteAccount/{UserName}",
+    "RelativePath": "api/Account/{username}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "UserName",
+        "Name": "username",
         "Type": "System.String",
         "IsRequired": true
       }
@@ -33,15 +17,47 @@
   },
   {
     "ContainingType": "Hospital.Controllers.AccountController",
-    "Method": "GetPatients",
-    "RelativePath": "api/Account/GetPatients",
+    "Method": "SendCode",
+    "RelativePath": "api/Account/code-in-email",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "page",
-        "Type": "System.Int32",
+        "Name": "sendCodeDto",
+        "Type": "RepositoryPatternWithUOW.Core.DTOs.SendCodeDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Hospital.Controllers.AccountController",
+    "Method": "ValidateCode",
+    "RelativePath": "api/Account/confirmation-code",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "validateCode",
+        "Type": "RepositoryPatternWithUOW.Core.DTOs.ValidateCodeDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Hospital.Controllers.AccountController",
+    "Method": "ModifiyInsensitiveData",
+    "RelativePath": "api/Account/insensitive-data",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "InsensitiveDto",
+        "Type": "Microsoft.AspNetCore.JsonPatch.Operations.Operation[]",
         "IsRequired": true
       }
     ],
@@ -50,7 +66,7 @@
   {
     "ContainingType": "Hospital.Controllers.AccountController",
     "Method": "Login",
-    "RelativePath": "api/Account/LogIn",
+    "RelativePath": "api/Account/log-in",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -66,7 +82,7 @@
   {
     "ContainingType": "Hospital.Controllers.AccountController",
     "Method": "MakeDoctorAccount",
-    "RelativePath": "api/Account/MakeDoctorAccount",
+    "RelativePath": "api/Account/new-doctor-account",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -81,15 +97,15 @@
   },
   {
     "ContainingType": "Hospital.Controllers.AccountController",
-    "Method": "ModifiyInsensitiveData",
-    "RelativePath": "api/Account/ModifyInSensitiveData",
-    "HttpMethod": "PATCH",
+    "Method": "ChangePassword",
+    "RelativePath": "api/Account/password",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "InsensitiveDto",
-        "Type": "Microsoft.AspNetCore.JsonPatch.Operations.Operation[]",
+        "Name": "changePasswordDto",
+        "Type": "RepositoryPatternWithUOW.Core.DTOs.ChangePasswordDto",
         "IsRequired": true
       }
     ],
@@ -97,15 +113,36 @@
   },
   {
     "ContainingType": "Hospital.Controllers.AccountController",
-    "Method": "SendCode",
-    "RelativePath": "api/Account/SendCode",
+    "Method": "GetPatients",
+    "RelativePath": "api/Account/patients",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "sendCodeDto",
-        "Type": "RepositoryPatternWithUOW.Core.DTOs.SendCodeDto",
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Hospital.Controllers.AccountController",
+    "Method": "SearchForPatients",
+    "RelativePath": "api/Account/patients/{type-of-searching}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "type-of-searching",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "searchDto",
+        "Type": "RepositoryPatternWithUOW.Core.DTOs.SearchDto",
         "IsRequired": true
       }
     ],
@@ -114,7 +151,7 @@
   {
     "ContainingType": "Hospital.Controllers.AccountController",
     "Method": "SignOut",
-    "RelativePath": "api/Account/SignOut",
+    "RelativePath": "api/Account/sign-out",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -124,7 +161,7 @@
   {
     "ContainingType": "Hospital.Controllers.AccountController",
     "Method": "SignUp",
-    "RelativePath": "api/Account/SignUp",
+    "RelativePath": "api/Account/sign-up",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -140,7 +177,7 @@
   {
     "ContainingType": "Hospital.Controllers.AccountController",
     "Method": "UpdateTokens",
-    "RelativePath": "api/Account/UpdateTokens",
+    "RelativePath": "api/Account/tokens",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -149,24 +186,8 @@
   },
   {
     "ContainingType": "Hospital.Controllers.AccountController",
-    "Method": "ValidateCode",
-    "RelativePath": "api/Account/ValidateCode",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "validateCode",
-        "Type": "RepositoryPatternWithUOW.Core.DTOs.ValidateCodeDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Hospital.Controllers.AccountController",
     "Method": "VerifyPassword",
-    "RelativePath": "api/Account/VerifyPassword",
+    "RelativePath": "api/Account/verifying-password",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,

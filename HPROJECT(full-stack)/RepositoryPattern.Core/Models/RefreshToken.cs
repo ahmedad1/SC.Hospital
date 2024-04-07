@@ -13,7 +13,7 @@ namespace RepositoryPattern.Core.Models
         public string Token { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime ExpiresAt { get; set; }
-        public bool IsActive => ExpiresAt < DateTime.Now;
+        public bool IsActive => ExpiresAt > DateTime.Now;
         public int UserId { get; set; }
         public virtual User User { get; set; }
 

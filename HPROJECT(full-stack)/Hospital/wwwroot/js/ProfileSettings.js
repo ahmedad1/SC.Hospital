@@ -79,7 +79,7 @@ async function verifyingPassword(e){
         return
         }
         appendLoadingIcon(submitVerifying)
-        let resultOfVerifying=await postJSON(`${backendAccountApi}VerifyPassword`,passwordVerifyingInput.value)
+        let resultOfVerifying=await postJSON(`${backendAccountApi}verifying-password`,passwordVerifyingInput.value)
         
         if(resultOfVerifying.status==404){
         removeLoadingIcon(submitVerifying)
@@ -88,7 +88,7 @@ async function verifyingPassword(e){
         }
         else if(resultOfVerifying.status==401){
             await UpdateTokens()
-            resultOfVerifying=await postJSON(`${backendAccountApi}VerifyPassword`,passwordVerifyingInput.value)
+            resultOfVerifying=await postJSON(`${backendAccountApi}verifying-password`,passwordVerifyingInput.value)
             if(resultOfVerifying.status==404){
                 removeLoadingIcon(submitVerifying)
                 DisplayAlertModal('Wrong Password')
@@ -97,7 +97,7 @@ async function verifyingPassword(e){
         }
         
     
-        let result=await patchJSON(`${backendAccountApi}ModifyInSensitiveData`,listOfModels)
+        let result=await patchJSON(`${backendAccountApi}insensitive-data`,listOfModels)
         if(result.status!=401)
         removeLoadingIcon(submitVerifying)
         if(result.status==404){
@@ -112,7 +112,7 @@ async function verifyingPassword(e){
         }
         else if(result.status==401){
             await UpdateTokens();
-            result=await patchJSON(`${backendAccountApi}ModifyInSensitiveData`,listOfModels)
+            result=await patchJSON(`${backendAccountApi}insensitive-data`,listOfModels)
             removeLoadingIcon(submitVerifying)
             if(result.status==404){
                 return ;
@@ -137,7 +137,7 @@ passwordChangingForm.addEventListener("submit",async e=>{
     return
     }
     appendLoadingIcon(saveNewPasswordBtn)
-    let result=await postJSON(`${backendAccountApi}ChangePassword`,{"oldPassword":oldPassword.value,"newPassword":newPassword.value});
+    let result=await postJSON(`${backendAccountApi}password`,{"oldPassword":oldPassword.value,"newPassword":newPassword.value});
     if(result.status!=401)
     removeLoadingIcon(saveNewPasswordBtn)
     if(result.status==200)
@@ -149,7 +149,7 @@ passwordChangingForm.addEventListener("submit",async e=>{
     }
     else if(result.status==401){
         await UpdateTokens()
-        result=await postJSON(`${backendAccountApi}ChangePassword`,{"oldPassword":oldPassword.value,"newPassword":newPassword.value});
+        result=await postJSON(`${backendAccountApi}password`,{"oldPassword":oldPassword.value,"newPassword":newPassword.value});
         removeLoadingIcon(saveNewPasswordBtn)
         if(result.status==200)
         {

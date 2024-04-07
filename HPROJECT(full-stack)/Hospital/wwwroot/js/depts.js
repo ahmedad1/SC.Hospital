@@ -1,11 +1,14 @@
 import { checkForCookies, getCookie, getNavAfterLogin, signOut } from "./shared.js"
 
-onload=checkForCookies
+onload=async _=>{
+let result=await checkForCookies(false)
+if(result){
 let nav=document.querySelector('nav')
 nav.innerHTML=getNavAfterLogin(getCookie("firstName"))
 let signOutBtn=document.querySelector(".signout")
 signOutBtn.addEventListener("click",signOut)
-
+}
+}
 
 
 

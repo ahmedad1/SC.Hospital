@@ -72,14 +72,16 @@ export function deleteAllCookies(){
     setCookie("gender"," ",-5)
 
 }
-export async function signOut(){
+export async function signOut(isAllowedToAppendLoadingIcon=true){
+    if(isAllowedToAppendLoadingIcon){
     let signOutBtn=document.querySelector(".signout");
     appendLoadingIcon(signOutBtn);
-    let result=await DeleteRequest(`${backendAccountApi}SignOut`)
+    }
+    let result=await DeleteRequest(`${backendAccountApi}sign-out`)
     if(result.status==200)
     location.href=`${location.origin}/index.html`
 }
-export async function checkForCookies(){
+export async function checkForCookies(isAllowedToNavigate=true){
     
         if(!(getCookie("role")
         &&getCookie("userName")
@@ -91,17 +93,18 @@ export async function checkForCookies(){
         )
         ){
           
-         await signOut();
+         await signOut(false);
+         if(isAllowedToNavigate)
          location.href='/index.html'
        
-          
+          return false
       
         }
-      
+      return true
       
 }
 export async function UpdateTokens(){
-let result=await postJSON(`${backendAccountApi}UpdateTokens`)
+let result=await postJSON(`${backendAccountApi}tokens`)
 if(result.status==200)
 return result.status
 location.href="/"
@@ -141,7 +144,10 @@ export function getNavAfterLogin(name){
     <button class=" btn btn-outline-primary ml-lg-3 mt-3 mt-lg-0 signout">Sign out</button>
     </div>`
 }
+export function changeHrefOfHomeBreadCrumb(url){
+    document.querySelector(".breadcrumb-item a").href=url;
 
+}
 export function getNavAfterLoginAdmin(name){
     return `<a href="admin.html" class="navbar-brand text-primary">S.C Hospital</a><!--special care hospital-->
     <!-- <input type="text"placeholder=search class=" d-lg-none mr-4 "style=width:50%;outline:none;> -->

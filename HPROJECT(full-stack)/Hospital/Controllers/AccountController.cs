@@ -27,7 +27,7 @@ namespace Hospital.Controllers
             this.unitOfWork = unitOfWork;
         }
 
-        [HttpPost("SignUp")]
+        [HttpPost("sign-up")]
         public async Task<IActionResult> SignUp(SignUpDto signUpDto)
         {
             var result = await unitOfWork.UserRepository.SignUpAsync(signUpDto);
@@ -36,7 +36,7 @@ namespace Hospital.Controllers
             await unitOfWork.SaveChangesAsync();
             return Ok();
         }
-        [HttpPost("LogIn")]
+        [HttpPost("log-in")]
         public async Task<IActionResult> Login(LoginDto loginDto)
         {
             var result = await unitOfWork.UserRepository.LoginAsync(loginDto);
@@ -56,15 +56,7 @@ namespace Hospital.Controllers
 
             return Ok(result);
         }
-       
-
-
-
-
-
-
-
-        [HttpPost("SendCode")]
+        [HttpPost("code-in-email")]
         public async Task<IActionResult> SendCode([FromBody] SendCodeDto sendCodeDto)
         {
             var result = await unitOfWork.UserRepository.SendEmailVerificationAsync(sendCodeDto.Email, sendCodeDto.Reset);
@@ -73,7 +65,7 @@ namespace Hospital.Controllers
             await unitOfWork.SaveChangesAsync();
             return Ok();
         }
-        [HttpPost("ValidateCode")]
+        [HttpPost("confirmation-code")]
         public async Task<IActionResult> ValidateCode(ValidateCodeDto validateCode)
         {
             var result = await unitOfWork.UserRepository.ValidateConfirmationCodeAsync(validateCode.Email, validateCode.Code, validateCode.Reset);
@@ -90,7 +82,7 @@ namespace Hospital.Controllers
 
         }
         [Authorize]
-        [HttpPatch("ModifyInSensitiveData")]
+        [HttpPatch("insensitive-data")]
         public async Task<IActionResult> ModifiyInsensitiveData(JsonPatchDocument<User> InsensitiveDto)
         {
             var email = ExtractJwt().Payload[JwtRegisteredClaimNames.Email].ToString();
@@ -103,7 +95,7 @@ namespace Hospital.Controllers
             return Ok();
         }
         [Authorize]
-        [HttpPost("ChangePassword")]
+        [HttpPost("password")]
         public async Task<IActionResult> ChangePassword(ChangePasswordDto changePasswordDto)
         {
             string? idString = ExtractJwt().Payload["id"].ToString()!;
@@ -115,7 +107,7 @@ namespace Hospital.Controllers
             await unitOfWork.SaveChangesAsync();
             return Ok();
         }
-        [HttpPost("UpdateTokens")]
+        [HttpPost("tokens")]
         public async Task<IActionResult> UpdateTokens()
         {
             if (!Request.Cookies.TryGetValue(RefreshTokenCookieKey,out string? refToken)||!Request.Cookies.TryGetValue(UserNameCookieKey,out string? userName))
@@ -130,7 +122,7 @@ namespace Hospital.Controllers
             CookiesHandler.SetCookie(RefreshTokenCookieKey, result.RefreshToken, ExpirationOfRefreshToken, true, Response);
             return Ok();
         }
-        [HttpDelete("SignOut")]
+        [HttpDelete("sign-out")]
         public async Task<IActionResult> SignOut()
         {
             string? refToken = Request.Cookies[RefreshTokenCookieKey];
@@ -150,7 +142,7 @@ namespace Hospital.Controllers
             return Ok();
         }
         [Authorize(Roles = "Adm")]
-        [HttpPost("MakeDoctorAccount")]
+        [HttpPost("new-doctor-account")]
         public async Task<IActionResult> MakeDoctorAccount(MakeDoctorProfileDto makeDoctorProfileDto)
         {
             var result = await unitOfWork.UserRepository.MakeDoctorAccount(makeDoctorProfileDto);
@@ -160,8 +152,8 @@ namespace Hospital.Controllers
             return Ok();
         }
         [Authorize(Roles = "Adm")]
-        [HttpDelete("DeleteAccount/{UserName}")]
-        public async Task<IActionResult> DeleteAccount(string UserName)
+        [HttpDelete("{username}")]
+        public async Task<IActionResult> DeleteAccount([FromRoute(Name ="username")]string UserName)
         {
             var result = await unitOfWork.UserRepository.DeleteAccountAsync(UserName);
             if (result)
@@ -171,7 +163,7 @@ namespace Hospital.Controllers
         }
 
         [Authorize]
-        [HttpPost("VerifyPassword")]
+        [HttpPost("verifying-password")]
         public async Task<IActionResult>VerifyPassword([FromBody]string password)
         {
             string email = ExtractJwt().Payload["email"].ToString()!;
@@ -179,7 +171,7 @@ namespace Hospital.Controllers
             return result ? Ok() : NotFound();
         }
         [Authorize(Roles = "Adm")]
-        [HttpPost("GetPatients")]
+        [HttpPost("patients")]
         public async Task<IActionResult> GetPatients([FromBody]int page)
         {
             
@@ -188,10 +180,13 @@ namespace Hospital.Controllers
 
         }
         [Authorize(Roles ="Adm")]
-        [HttpPost("SearchForPatients")]
-        public IActionResult SearchForPatients(SearchDto searchDto)///next to do in front end -------------
+        [HttpPost("patients/{type-of-searching}")]
+        public IActionResult SearchForPatients([FromRoute(Name="type-of-searching")]string typeOfSeaching,SearchDto searchDto)///next to do in front end -------------
         {
-            switch (searchDto.Type)
+            if (!Enum.TryParse(typeOfSeaching, out TypeOfSearching result))
+                return BadRequest();
+
+            switch (result)
             {
                 case TypeOfSearching.FirstName:
                     return Ok(unitOfWork.UserRepository.SearchForPatients(x => x.FirstName == searchDto.Data,searchDto.page));

@@ -13,7 +13,7 @@ inpVerification.onpaste=function(e){
     e.preventDefault();
 }
 onload=async function(){
-    let result=await postJSON(`${backendAccountApi}SendCode`,{"email":getCookie("email")})
+    let result=await postJSON(`${backendAccountApi}code-in-email`,{"email":getCookie("email")})
     if(result.status!=200)
     DisplayAlertModal("Unable to send the message , Try Again","text-info")
 
@@ -24,7 +24,7 @@ form.onsubmit=async function(e){
     if(getCookie("email")==null)
     return
     appendLoadingIcon(verifyCodeBtn)
-    let result=await postJSON(`${backendAccountApi}ValidateCode`,{"email":getCookie("email"),"code":inpVerification.value})
+    let result=await postJSON(`${backendAccountApi}confirmation-code`,{"email":getCookie("email"),"code":inpVerification.value})
     removeLoadingIcon(verifyCodeBtn)
     if(result.status !=200){
     DisplayAlertModal("Invalid Code.... Try again")

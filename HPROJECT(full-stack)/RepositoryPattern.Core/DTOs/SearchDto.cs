@@ -13,7 +13,7 @@ namespace RepositoryPatternWithUOW.Core.DTOs
     {
         public string  Data { get; set; }
         [JsonConverter(typeof(JsonStringEnumConverter))]
-        public TypeOfSearching Type { get; set; }
+       
         public int page { get; set; }
     }
 }

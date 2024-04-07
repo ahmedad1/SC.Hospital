@@ -10,7 +10,7 @@ usernamespan.innerText=getCookie("firstName")
 signOutBtn.addEventListener("click",signOut)
 let fetchRenderPatients=async(replaceDoctor=false)=>{
     let data=[]
-    const result=await fetch(`${backendAccountApi}GetPatients`,{
+    const result=await fetch(`${backendAccountApi}patients`,{
         method:"POST",
         headers:{
         "content-type":"Application/Json"
@@ -23,7 +23,7 @@ let fetchRenderPatients=async(replaceDoctor=false)=>{
 if(result.status!=200){
  if(getCookie("role")=="Adm"){
      await UpdateTokens()
-     const result=await fetch(`${backendAccountApi}GetPatients`,{
+     const result=await fetch(`${backendAccountApi}patients`,{
         method:"POST",
         headers:{
         "content-type":"Application/Json"

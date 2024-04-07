@@ -48,30 +48,29 @@ namespace RepositoryPattern.EfCore.Repositories
                     Success = true,
                     EmailConfirmed = false,
                 };
-            
-
-            
-         
-        
+           
             var jwt=Tokens.Generate(user, JwtOptions,ExpirationOfJwt);
-            var refreshToken = Tokens.Generate();
             context.Attach(user);
             context.ChangeTracker.LazyLoadingEnabled = true;
+
+            if (user.RefreshToken.Count(x => x.IsActive) == 4)
+                user.RefreshToken.Clear();
+         
+            string refToken = Tokens.Generate();
+          
             user.RefreshToken.Add(new RefreshToken
             {
                 CreatedAt = DateTime.Now,
                 ExpiresAt = ExpirationOfRefreshToken,
-                Token = refreshToken,
+                Token = refToken,
 
             });
-        
-
-
+          
             return new()
             {
                Success = true,
                EmailConfirmed=true,
-               RefreshToken=refreshToken,
+               RefreshToken=refToken,
                Jwt=jwt
             };
         }
