@@ -1,4 +1,4 @@
-import { AddDoctorTable, AddPatientTable, UpdateTokens, appendLoadingIcon, backendAccountApi, checkForCookies, getCookie, signOut } from "./shared.js"
+import { AddDoctorTable, AddPatientTable, UpdateTokens, appendLoadingIcon, backendAccountApi, checkForCookies, fetchJSONAuth, getCookie, postJSON, signOut } from "./shared.js"
 
 let patientInSidebar=document.querySelector('.patient-sidebar')
 let doctorInSidebar=document.querySelector('.doctor-sidebar')
@@ -6,12 +6,16 @@ let section=document.querySelector("section")
 let selects=document.querySelectorAll("select")
 let usernamespan=document.querySelector('.usernamespan')
 let signOutBtn=document.querySelector(".signout")
+let searchForm=document.querySelector(".searchForm")
+let searchType=document.getElementById("searchType")
+let searchValue=document.querySelector(".searchValue")
 usernamespan.innerText=getCookie("firstName")
 signOutBtn.addEventListener("click",signOut)
+let addLoadingInSection=()=>  {  section.insertAdjacentHTML("beforeend","<h1 class='p-5 text-muted'><img src='images/loading.png'class='loading' alt=''class='ml-2'> Loading....</h1>")}
 let fetchRenderPatients=async(replaceDoctor=false)=>{
     let data=[]
     if(replaceDoctor)
-    section.insertAdjacentHTML("beforeend","<h1 class='p-5 text-muted'><img src='images/loading.png'class='loading' alt=''class='ml-2'> Loading....</h1>")
+    addLoadingInSection()
     const result=await fetch(`${backendAccountApi}patients`,{
         method:"POST",
         headers:{
@@ -40,7 +44,12 @@ else{
     data=await result.json()
 
 }
+
 AddPatientTable(section,data,replaceDoctor)
+console.log(data);
+if(data.length==0)
+return false
+return true
 }
 onload=async()=>{
     await checkForCookies()
@@ -65,16 +74,21 @@ window.addEventListener("scroll",async ()=>{
     if(patientInSidebar.classList.contains("active"))
     if(window.innerHeight+window.scrollY>=document.body.offsetHeight){ //reached end of scroll
         sessionStorage.setItem("page",+sessionStorage.getItem("page")+1)
-        await fetchRenderPatients()
+        const result=await fetchRenderPatients()
+        if(!result)
+        sessionStorage.setItem("page",+sessionStorage.getItem("page")-1)
+        
     }
 })
 patientInSidebar.addEventListener("click",_=>{
-    if(patientInSidebar.classList.contains("active"))
-    return
+    if(!patientInSidebar.classList.contains("active"))
+    {
+
     doctorInSidebar.classList.remove("active")
     doctorInSidebar.classList.add("bg-light")
     patientInSidebar.classList.add("active")
     patientInSidebar.classList.remove("bg-light")
+    }
     /*
      <th scope="col">Id</th>
                 <th scope="col">First Name</th>
@@ -88,15 +102,32 @@ patientInSidebar.addEventListener("click",_=>{
                 <th scope="col">Commit</th>
     
     */
+   sessionStorage.setItem("page",1)
     fetchRenderPatients(true)
     
 })
+
+
+searchForm.addEventListener("submit",async e=>{
+    e.preventDefault();
+    addLoadingInSection();
+    if(searchType.value=='EmailConfirmed'&&!isNaN(searchValue.value))
+    searchValue.value=searchValue.value=='0'?'false':'true'
+   let result=await fetchJSONAuth(`${backendAccountApi}patients/${searchType.value}`,{"data":searchValue.value,"page":1},"POST");
+   AddPatientTable(section,result,true)
+   
+})
+
 doctorInSidebar.addEventListener("click",_=>{
     if(doctorInSidebar.classList.contains("active"))
     return
+    sessionStorage.setItem("page",1)
     patientInSidebar.classList.remove("active")
     patientInSidebar.classList.add("bg-light")
     doctorInSidebar.classList.remove("bg-light")
     doctorInSidebar.classList.add("active")
     AddDoctorTable(section,[],true)
 })
+
+
+

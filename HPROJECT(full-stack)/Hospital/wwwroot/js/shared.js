@@ -45,6 +45,18 @@ export async function postJSON(url,body){
                 body:JSON.stringify(body)
                 });
 }
+export async function fetchJSONAuth(url,body,methodName){
+   const result= await fetch(url,{
+    method:methodName,
+    headers:{"content-type":"application/json"},
+    body:JSON.stringify(body)
+   })
+   if(result.status ==401){
+    await UpdateTokens()
+    return await fetchJSONAuth(url , body, methodName);
+   }
+   return await result.json()
+}
 export async function patchJSON(url,body){
     return await fetch(url,{
         method:"PATCH",

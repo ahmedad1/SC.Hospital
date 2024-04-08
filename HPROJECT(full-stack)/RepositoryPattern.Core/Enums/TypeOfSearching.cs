@@ -11,6 +11,7 @@ namespace RepositoryPatternWithUOW.Core.Enums
 
         FirstName,
         LastName,
+        FullName,
         UserName,
         Email,
         EmailConfirmed

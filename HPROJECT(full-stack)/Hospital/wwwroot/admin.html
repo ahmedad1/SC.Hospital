@@ -29,8 +29,18 @@
         <ul class="navbar-nav ml-auto ">
         </ul>
         <!-- <a href="#login" class="nav-link btn btn-outline-primary ml-lg-2 mt-sm-3 mt-lg-0  "style=max-width:78px>Login</a> -->
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <form class="form-inline my-2 my-lg-0 searchForm">
+            <select  id="searchType"class="form-control mr-2">
+                <option value="FirstName">FirstName</option>
+                <option value="LastName">LastName</option>
+                <option value="FullName">FullName</option>
+                <option value="UserName">UserName</option>
+                <option value="Email"selected>Email</option>
+                <option value="EmailConfirmed">EmailConfirmed</option>
+             
+
+            </select>
+            <input class="form-control mr-sm-2 searchValue" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
         <div class="nav-link d-flex p-0 mt-lg-0 mt-3"style="gap:5px">

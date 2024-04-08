@@ -189,16 +189,18 @@ namespace Hospital.Controllers
             switch (result)
             {
                 case TypeOfSearching.FirstName:
-                    return Ok(unitOfWork.UserRepository.SearchForPatients(x => x.FirstName == searchDto.Data,searchDto.page));
+                    return Ok(unitOfWork.UserRepository.SearchForPatients(x => x.FirstName .Contains(searchDto.Data),searchDto.page));
                 case TypeOfSearching.LastName:
-                    return Ok(unitOfWork.UserRepository.SearchForPatients(x => x.LastName == searchDto.Data,searchDto.page));
+                    return Ok(unitOfWork.UserRepository.SearchForPatients(x => x.LastName .Contains(searchDto.Data),searchDto.page));
+                case TypeOfSearching.FullName:
+                    return Ok(unitOfWork.UserRepository.SearchForPatients(x=>x.FirstName+" "+x.LastName==searchDto.Data,searchDto.page));
                 case TypeOfSearching.Email:
-                    return Ok(unitOfWork.UserRepository.SearchForPatients(x => x.Email == searchDto.Data,searchDto.page));
+                    return Ok(unitOfWork.UserRepository.SearchForPatients(x => x.Email.Contains(searchDto.Data),searchDto.page));
                 case TypeOfSearching.UserName:
-                    return Ok(unitOfWork.UserRepository.SearchForPatients(x => x.UserName == searchDto.Data,searchDto.page));
+                    return Ok(unitOfWork.UserRepository.SearchForPatients(x => x.UserName.Contains( searchDto.Data),searchDto.page));
                 case TypeOfSearching.EmailConfirmed:
                     return Ok(unitOfWork.UserRepository.SearchForPatients(x => x.EmailConfirmed.ToString() == searchDto.Data,searchDto.page));
-
+                
                 default: 
                     return BadRequest();
 
