@@ -60,6 +60,7 @@ selects.forEach(e=>{
     })
 })
 window.addEventListener("scroll",async ()=>{
+    if(patientInSidebar.classList.contains("active"))
     if(window.innerHeight+window.scrollY>=document.body.offsetHeight){ //reached end of scroll
         sessionStorage.setItem("page",+sessionStorage.getItem("page")+1)
         await fetchRenderPatients()
@@ -69,7 +70,9 @@ patientInSidebar.addEventListener("click",_=>{
     if(patientInSidebar.classList.contains("active"))
     return
     doctorInSidebar.classList.remove("active")
+    doctorInSidebar.classList.add("bg-light")
     patientInSidebar.classList.add("active")
+    patientInSidebar.classList.remove("bg-light")
     /*
      <th scope="col">Id</th>
                 <th scope="col">First Name</th>
@@ -90,6 +93,8 @@ doctorInSidebar.addEventListener("click",_=>{
     if(doctorInSidebar.classList.contains("active"))
     return
     patientInSidebar.classList.remove("active")
+    patientInSidebar.classList.add("bg-light")
+    doctorInSidebar.classList.remove("bg-light")
     doctorInSidebar.classList.add("active")
     AddDoctorTable(section,[],true)
 })

@@ -12,3 +12,12 @@ body,html{
 .input-cell{
     width: 5em;
 }
+#particles-js{
+height: 100vh;
+position: absolute;
+}
+@media(min-width:992px){
+    aside{
+        height:92.46vh !important
+    }
+}
