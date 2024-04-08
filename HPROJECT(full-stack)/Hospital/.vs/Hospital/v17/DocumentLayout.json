@@ -39,8 +39,7 @@
               "RelativeToolTip": "..\\RepositoryPattern.Core\\Enums\\TypeOfSearching.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-08T17:15:45.707Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-08T17:15:45.707Z"
             },
             {
               "$type": "Document",
@@ -52,8 +51,7 @@
               "RelativeToolTip": "..\\RepositoryPattern.Core\\Models\\RefreshToken.cs",
               "ViewState": "AQIAAAQAAAAAAAAAAAAlwA8AAAAgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-08T15:45:19.357Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-08T15:45:19.357Z"
             },
             {
               "$type": "Document",
@@ -77,8 +75,7 @@
               "RelativeToolTip": "..\\RepositoryPattern.EfCore\\Repositories\\UserRepositroy.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAEYBAAA3AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-08T15:18:35.8Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-08T15:18:35.8Z"
             },
             {
               "$type": "Document",
@@ -88,7 +85,7 @@
               "RelativeDocumentMoniker": "Controllers\\AccountController.cs",
               "ToolTip": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\Controllers\\AccountController.cs",
               "RelativeToolTip": "Controllers\\AccountController.cs",
-              "ViewState": "AQIAALcAAAAAAAAAAAA+wL8AAABqAAAA",
+              "ViewState": "AQIAAHwAAAAAAAAAAAAowL8AAABqAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-19T18:22:32.496Z",
               "EditorCaption": ""
