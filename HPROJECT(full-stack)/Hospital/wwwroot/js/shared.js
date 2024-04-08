@@ -107,7 +107,8 @@ export async function UpdateTokens(){
 let result=await postJSON(`${backendAccountApi}tokens`)
 if(result.status==200)
 return result.status
-location.href="/"
+deleteAllCookies()
+location.href="/index.html"
 }
 export function getTextFromHtml(str){
     let map={

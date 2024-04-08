@@ -1,4 +1,4 @@
-import { AddDoctorTable, AddPatientTable, UpdateTokens, backendAccountApi, checkForCookies, getCookie, signOut } from "./shared.js"
+import { AddDoctorTable, AddPatientTable, UpdateTokens, appendLoadingIcon, backendAccountApi, checkForCookies, getCookie, signOut } from "./shared.js"
 
 let patientInSidebar=document.querySelector('.patient-sidebar')
 let doctorInSidebar=document.querySelector('.doctor-sidebar')
@@ -10,6 +10,8 @@ usernamespan.innerText=getCookie("firstName")
 signOutBtn.addEventListener("click",signOut)
 let fetchRenderPatients=async(replaceDoctor=false)=>{
     let data=[]
+    if(replaceDoctor)
+    section.insertAdjacentHTML("beforeend","<h1 class='p-5 text-muted'><img src='images/loading.png'class='loading' alt=''class='ml-2'> Loading....</h1>")
     const result=await fetch(`${backendAccountApi}patients`,{
         method:"POST",
         headers:{
@@ -43,7 +45,7 @@ AddPatientTable(section,data,replaceDoctor)
 onload=async()=>{
     await checkForCookies()
     sessionStorage.setItem("page",1)
-    fetchRenderPatients()
+    fetchRenderPatients(true)
 }
 selects.forEach(e=>{
     e.addEventListener("change",event=>{

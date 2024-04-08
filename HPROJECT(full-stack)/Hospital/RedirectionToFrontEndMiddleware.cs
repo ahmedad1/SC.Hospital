@@ -9,6 +9,7 @@ namespace Hospital
 
         public async Task InvokeAsync(HttpContext context, IUnitOfWork unitOfWork)
         {
+            
             if (context.Request.Path=="/")
             {
                 

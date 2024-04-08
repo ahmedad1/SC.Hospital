@@ -183,7 +183,7 @@ namespace RepositoryPattern.EfCore.Repositories
            var refToken=await context.Set<RefreshToken>().Include(x=>x.User).AsNoTracking().FirstOrDefaultAsync(x => x.Token == updateTokensDto.RefreshToken);
             if (refToken is null )
                 return new() { Success = false };
-            else if(refToken.IsActive)
+            else if(!refToken.IsActive)
             {
                 context.Remove(refToken);
                 return new() { Success = false };    
