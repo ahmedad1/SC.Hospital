@@ -11,6 +11,9 @@ let searchType=document.getElementById("searchType")
 let searchValue=document.querySelector(".searchValue")
 usernamespan.innerText=getCookie("firstName")
 signOutBtn.addEventListener("click",signOut)
+let isSearchingGlobal=0;
+let searchingValueGlobal;
+let searchingTypeGlobal;
 let addLoadingInSection=()=>  {  section.insertAdjacentHTML("beforeend","<h1 class='p-5 text-muted'><img src='images/loading.png'class='loading' alt=''class='ml-2'> Loading....</h1>")}
 let fetchRenderPatients=async(replaceDoctor=false)=>{
     let data=[]
@@ -74,13 +77,21 @@ window.addEventListener("scroll",async ()=>{
     if(patientInSidebar.classList.contains("active"))
     if(window.innerHeight+window.scrollY>=document.body.offsetHeight){ //reached end of scroll
         sessionStorage.setItem("page",+sessionStorage.getItem("page")+1)
-        const result=await fetchRenderPatients()
+        let result;
+        if(!isSearchingGlobal)
+         result=await fetchRenderPatients()
+        else{
+           result= await searchHandler(sessionStorage.getItem("page"))
+        }
         if(!result)
         sessionStorage.setItem("page",+sessionStorage.getItem("page")-1)
         
     }
 })
 patientInSidebar.addEventListener("click",_=>{
+    isSearchingGlobal=0
+    searchingTypeGlobal=undefined
+    searchingValueGlobal=undefined
     if(!patientInSidebar.classList.contains("active"))
     {
 
@@ -107,20 +118,35 @@ patientInSidebar.addEventListener("click",_=>{
     
 })
 
+async function searchHandler(pageNum){
+    if(pageNum==1)
+    addLoadingInSection();
+    if(searchingTypeGlobal=='EmailConfirmed'&&!isNaN(searchingValueGlobal))
+    searchingValueGlobal=searchingValueGlobal=='0'?'false':'true'
+   let result=await fetchJSONAuth(`${backendAccountApi}patients/${searchingTypeGlobal}`,{"data":searchingValueGlobal,"page":pageNum},"POST");
+   
+   AddPatientTable(section,result,pageNum==1)
+   return result.length!=0
+   
 
+}
 searchForm.addEventListener("submit",async e=>{
     e.preventDefault();
-    addLoadingInSection();
-    if(searchType.value=='EmailConfirmed'&&!isNaN(searchValue.value))
-    searchValue.value=searchValue.value=='0'?'false':'true'
-   let result=await fetchJSONAuth(`${backendAccountApi}patients/${searchType.value}`,{"data":searchValue.value,"page":1},"POST");
-   AddPatientTable(section,result,true)
-   
-})
+    isSearchingGlobal=1
+    sessionStorage.setItem("page",1)
+    searchingValueGlobal=searchValue.value
+    searchingTypeGlobal=searchType.value
+    await searchHandler(1)
+   })
+
 
 doctorInSidebar.addEventListener("click",_=>{
+    isSearchingGlobal=0
+    searchingTypeGlobal=undefined
+    searchingValueGlobal=undefined
     if(doctorInSidebar.classList.contains("active"))
     return
+
     sessionStorage.setItem("page",1)
     patientInSidebar.classList.remove("active")
     patientInSidebar.classList.add("bg-light")
