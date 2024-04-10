@@ -2,14 +2,14 @@
   {
     "ContainingType": "Hospital.Controllers.AccountController",
     "Method": "DeleteAccount",
-    "RelativePath": "api/Account/{username}",
+    "RelativePath": "api/Account/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "username",
-        "Type": "System.String",
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
@@ -182,6 +182,22 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Hospital.Controllers.AccountController",
+    "Method": "UpdateUserData",
+    "RelativePath": "api/Account/user",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "user",
+        "Type": "RepositoryPatternWithUOW.Core.DTOs.UpdateUserDto",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {

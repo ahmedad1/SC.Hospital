@@ -152,13 +152,12 @@ namespace Hospital.Controllers
             return Ok();
         }
         [Authorize(Roles = "Adm")]
-        [HttpDelete("{username}")]
-        public async Task<IActionResult> DeleteAccount([FromRoute(Name ="username")]string UserName)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAccount([FromRoute(Name ="id")]int Id)
         {
-            var result = await unitOfWork.UserRepository.DeleteAccountAsync(UserName);
-            if (result)
+            var result = await unitOfWork.UserRepository.DeleteAccountAsync(Id);
+            if (!result)
                 return BadRequest();
-            await unitOfWork.SaveChangesAsync();
             return Ok();
         }
 
@@ -206,6 +205,15 @@ namespace Hospital.Controllers
 
             }
             
+        }
+
+
+        [Authorize(Roles = "Adm")]
+        [HttpPut("user")]
+        public async Task<IActionResult> UpdateUserData(UpdateUserDto user)
+        {
+            var result = await unitOfWork.UserRepository.UpdateUserData(user);
+            return result.Success ? Ok(result):BadRequest(result);
         }
     }
 }

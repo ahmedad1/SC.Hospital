@@ -21,3 +21,6 @@ position: absolute;
         height:92.46vh !important
     }
 }
+.item-aside{
+    border: 1px white solid !important;
+}

@@ -45,6 +45,7 @@ export async function postJSON(url,body){
                 body:JSON.stringify(body)
                 });
 }
+
 export async function fetchJSONAuth(url,body,methodName){
    const result= await fetch(url,{
     method:methodName,
@@ -55,7 +56,13 @@ export async function fetchJSONAuth(url,body,methodName){
     await UpdateTokens()
     return await fetchJSONAuth(url , body, methodName);
    }
-   return await result.json()
+   try{
+   const resultBody= await result.json()
+   return resultBody
+   }
+   catch{
+    return result.status;
+   }
 }
 export async function patchJSON(url,body){
     return await fetch(url,{
@@ -279,7 +286,7 @@ export function AddDoctorTable(section,json,changeFromPatient=false){
     <td><input class="input-cell"type="email" value="${i.email}"disabled></td>
     <td><select name="options" class="form-control">
         <option value="${i.gender=="Male"?"Male":"Female"}">${i.gender=="Male"?"Male":"Female"}</option>
-        <option value=${i.gender=="Male"?"Male":"Female"}>${i.gender=="Male"?"Male":"Female"}</option>
+        <option value=${i.gender=="Male"?"Female":"Male"}>${i.gender=="Male"?"Female":"Male"}</option>
     </select></td>
     <td><input class="input-cell"type="date" value="${getRequiredDateFormat(i.birthDate)}"disabled></td>
     <td><input class="input-cell"type="text" value="Mark"disabled>${i.emailConfirmed}</td>
@@ -289,7 +296,7 @@ export function AddDoctorTable(section,json,changeFromPatient=false){
         <option value="delete">Delete</option>
         <option value="update">Update</option>
     </select></td>
-    <td ><button class="btn btn-primary ">Save</button></td>
+    <td ><button class="btn btn-primary saveBtn">Save</button></td>
   </tr>
 
     `)
@@ -351,7 +358,7 @@ export function AddPatientTable(section,json,changeFromDoctor=false){
         <td><input class="input-cell"type="email" value="${i.email}"disabled></td>
         <td><select name="options" class="form-control"disabled style="height: 1.85em;padding:0">
             <option value="${i.gender=="Male"?"Male":"Female"}">${i.gender=="Male"?"Male":"Female"}</option>
-            <option value=${i.gender=="Male"?"Male":"Female"}>${i.gender=="Male"?"Male":"Female"}</option>
+            <option value=${i.gender=="Male"?"Female":"Male"}>${i.gender=="Male"?"Female":"Male"}</option>
         </select></td>
         <td><input class="input-cell"type="date" value="${getRequiredDateFormat(i.birthDate)}"disabled></td>
         <td><input class="input-cell"type="text" value="${i.emailConfirmed}"disabled></td>
@@ -359,7 +366,7 @@ export function AddPatientTable(section,json,changeFromDoctor=false){
          <option value="delete">Delete</option>
             <option value="update">Update</option>
         </select></td>
-        <td ><button class="btn btn-primary ">Save</button></td>
+        <td ><button class="btn btn-primary saveBtn">Save</button></td>
       </tr>
     
         `)
@@ -373,5 +380,72 @@ export function AddPatientTable(section,json,changeFromDoctor=false){
                 
             })
         })
+        const saveBtns=document.querySelectorAll(".saveBtn")
+        saveBtns.forEach(e=>{
+            e.addEventListener("click",async(event)=>{
+                const parentTr=event.target.parentElement.parentElement
+                const id=parentTr.children[0].innerText
+                let data=[];
+                for(let c of parentTr.children){
+                    if(c.children[0])
+                    data.push(c.children[0].value)
+                
+            }
+          
+                if(data[7]=="update"){
+                    appendLoadingIcon(e)
+                    if(!isNaN(data[6])){
+                        data[6]=data[6]=='0'?"false":"true"
+                    }
+                    let result =await fetchJSONAuth(`${backendAccountApi}user`,{
+                    "id":+id,
+                    "firstName":data[0],
+                    "lastName":data[1],
+                    "userName":data[2],
+                    "email":data[3],
+                    "gender":data[4],
+                    "birthDate":data[5],
+                    "EmailConfirmed":data[6]
+                },"PUT")
+                if(result.success){
+                    DisplayAlertModal("Updated Succesfully","text-success")
+
+                }
+                else if(result.newUserNameIsExist){
+                    DisplayAlertModal("UserName Is Already Exist","text-danger")
+                }
+                else if(result.newEmailIsExist){   
+                    DisplayAlertModal("Email Is Already Exist","text-danger")
+                }
+                else{
+                    DisplayAlertModal("Some of the inputs are not in the correct format or something went wrong")
+                }
+                removeLoadingIcon(e)
+
+                }
+            else if(data[7]=="delete"){
+                const confirmModal =document.getElementById("confirmDelete")
+                const modal=new bootstrap.Modal(confirmModal);
+                modal.show()
+                const confirmBtn=document.getElementById("confirmYes")
+                confirmBtn.addEventListener("click",async (eventConfirm)=>{
+                    appendLoadingIcon(eventConfirm.target)
+                    const result=await fetchJSONAuth(`https://localhost:7197/api/Account/${id}`,{},"DELETE")
+                    removeLoadingIcon(eventConfirm.target)
+                    
+                    if(result!=200)
+                    {
+                        DisplayAlertModal("Something went wrong","text-danger")
+
+                    }
+                    else{
+                        DisplayAlertModal("Deleted Successfully","text-success")
+                        parentTr.remove()
+                    }
+                })
+            }
+            })
+        })
+
     
 }

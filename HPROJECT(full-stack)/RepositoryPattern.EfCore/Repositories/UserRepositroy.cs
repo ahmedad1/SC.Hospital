@@ -262,11 +262,11 @@ namespace RepositoryPattern.EfCore.Repositories
                 return new() { Success = false };
             }
         }
-        public async Task<bool> DeleteAccountAsync(string username)
+        public async Task<bool> DeleteAccountAsync(int Id)
         {
             
-            var results=await context.Users.Where(x => x.UserName == username).ExecuteDeleteAsync();
-            if (results>0)
+            var result=await context.Users.Where(x => x.Id == Id).ExecuteDeleteAsync();
+            if (result>0)
             return true;
             return false;
 
@@ -332,6 +332,36 @@ namespace RepositoryPattern.EfCore.Repositories
         public async Task<Patient?> GetPatientBy(Expression<Func<Patient, bool>> expression)
         {
             return await context.Patients.FirstOrDefaultAsync(expression);
+        }
+        public async Task<UpdateUserDataResult> UpdateUserData(UpdateUserDto user)
+        {
+           try{
+                if(await context.Users.AnyAsync(x=>x.Id!=user.Id&&(x.UserName==user.UserName)))
+                {
+                    return new() { NewUserNameIsExist = true ,Success=false,NewEmailIsExist=false};
+
+                }
+                if(await context.Users.AnyAsync(x => x.Id != user.Id && (x.Email == user.Email)))
+                {
+                    return new() { NewUserNameIsExist = false, Success = false, NewEmailIsExist = true };
+
+                }
+
+                var result = await context.Users.Where(x => x.Id == user.Id).ExecuteUpdateAsync(u =>u
+                .SetProperty(p => p.EmailConfirmed, user.EmailConfirmed)
+                .SetProperty(p => p.BirthDate, user.BirthDate)
+                .SetProperty(p => p.Email, user.Email)
+                .SetProperty(p => p.FirstName, user.FirstName)
+                .SetProperty(p => p.Gender, user.Gender)
+                .SetProperty(p => p.LastName, user.LastName)
+                .SetProperty(p=>p.UserName,user.UserName));
+                return new() { Success=result!=0 , NewEmailIsExist=false,NewUserNameIsExist=false};
+            }
+            catch(Exception e){
+                await Console.Out.WriteLineAsync(e.Message);
+                return new() { Success =false, NewEmailIsExist = false, NewUserNameIsExist = false }; ;
+            }
+
         }
     }
 }

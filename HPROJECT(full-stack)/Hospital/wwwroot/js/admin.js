@@ -49,7 +49,6 @@ else{
 }
 
 AddPatientTable(section,data,replaceDoctor)
-console.log(data);
 if(data.length==0)
 return false
 return true

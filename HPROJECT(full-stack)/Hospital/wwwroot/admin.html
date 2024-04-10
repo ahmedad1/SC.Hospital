@@ -62,12 +62,12 @@
 <div class="row ">
     
     <aside class="aside-admin w-100 col-lg-1 col-12 pr-0 ">
-        <ul class=" list-unstyled bg-light h-100 pt-3 ">
-            <li class="nav-item">
+        <ul class=" list-unstyled bg-light h-100  ">
+            <li class="nav-item item-aside">
             <a href="#" class="  active patient-sidebar  list-group-item  list-group-item-action "style="border:none;border-radius:0">Patients</a>
 
             </li>
-            <li class="nav-item">
+            <li class="nav-item item-aside">
                 <a href="#" class="  doctor-sidebar  list-group-item list-group-item-action bg-light"style="border:none;border-radius:0">Doctors</a>
 
             </li>
@@ -106,7 +106,26 @@
 </div>
 
 
-     
+ <div class="modal fade" id="confirmDelete">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Alert</div>
+                <button class="close"data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body text-info">
+                Are you sure for deleteing this user
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary "id="confirmYes" data-dismiss="modal">confirm</button>
+                <button class="closemodal btn btn-secondary"data-dismiss="modal">close</button>
+            </div>
+        </div>
+
+    </div>
+
+
+ </div>    
 
     <script src="js/popper.min.js"></script>
     <script src="js/jquery-3.6.1.min.js"></script>
