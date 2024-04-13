@@ -6,6 +6,10 @@
     <meta name="discription"content="Find professional doctors or clinc for you ,Book Appointment with the doctor you want">
     <meta name="keywords" content="clinc, doctor, health">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <script type="module" src="js/shared.js"></script> -->
+    <script>
+      async function DR(t){return await fetch(t,{method:"DELETE"})}async function sO(){let t=location.origin+"/api/Account/";await DR(`${t}sign-out`)}async function cFC(){return!(!(gC("role")&&gC("userName")&&gC("firstName")&&gC("lastName")&&gC("gender")&&gC("birthDate")&&gC("email"))||"Pat"==gC("role")&&(location.pathname.startsWith("/doctor.html")||location.pathname.startsWith("/admin.html")))&&("Doc"!=gC("role")||!!location.pathname.startsWith("/doctor.html"))&&("Adm"!=gC("role")||!!location.pathname.startsWith("/admin.html"))||(await sO(!1),!1)}function gC(t){let a=document.cookie.split("; ");for(let n of a){let e=n.split("=");if(e[0]==t)return decodeURIComponent(e[1])}return null}!async function(){await cFC()}();
+      </script>
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/mystyle.css">
     <link rel="icon" type="image/x-icon"href="images/logo.png">
@@ -37,7 +41,32 @@
                 <a href="index.html#login" class="nav-link btn btn-outline-primary ml-lg-2 mt-sm-3 mt-lg-0  "style=max-width:78px>Login</a>
             </div>
         </nav>
-
+        <script>
+          function gTFH(a){let l={"<":"&lt;",">":"&gt;"};return a?.replace(/[<>]/gi,function(a){return l[a]})}function gNAL(a){return`<a href="user.html" class="navbar-brand text-primary">S.C Hospital</a><!--special care hospital-->
+           <!-- <input type="text"placeholder=search class=" d-lg-none mr-4 "style=width:50%;outline:none;> -->
+           <a href="#N"data-toggle=collapse class="navbar-toggler"><span class="navbar-toggler-icon"></span></a>
+           
+           <div class="collapse navbar-collapse" id="N">
+               <ul class="navbar-nav ml-auto ">
+                   <li class="nav-item"><a href="user.html" class="nav-link">Home</a></li>
+                   <li class="nav-item"><a href="user.html#serv" class="nav-link">Services</a></li>
+                   <li class="nav-item"><a href="user.html#contact" class="nav-link">Contact us</a></li>
+                   <li class="nav-item"><a href="user.html#about" class="nav-link">About us</a></li>
+                   <li class="nav-item"><a href="user.html#feed" class="nav-link">Feedback</a></li>
+                   <li class="nav-item"><a href="#appo" class="nav-link appoints">Appointments</a></li>
+                   <li class="nav-item"><a href="./changepassword.html" class="nav-link">Password</a></li>
+                   <!-- <li class="nav-item"><a href="#" class="nav-link btn btn-outline-primary text-primary rounded">Login</a></li>-->
+               
+               </ul>
+               <!-- <a href="#login" class="nav-link btn btn-outline-primary ml-lg-2 mt-sm-3 mt-lg-0  "style=max-width:78px>Login</a> -->
+              <div class="nav-link d-flex p-0 mt-lg-0 mt-3"style="gap:5px">
+               <img src="./images/user-solid.svg"class="ml-lg-2  mt-lg-0  "width=15 alt="">
+               <a href="ProfileSettings.html" class="text-muted usernamespan">${gTFH(a)}</a>
+              
+               </div> 
+           <button class=" btn btn-outline-primary ml-lg-3 mt-3 mt-lg-0 signout">Sign out</button>
+           </div>`}!async function(){gC("firstName")?document.querySelector("nav").innerHTML=gNAL(gC("firstName")):null}();
+         </script>
 
 
         <!-- breadcrumb -->

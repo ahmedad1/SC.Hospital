@@ -26,9 +26,10 @@ namespace RepositoryPattern.Core.Interfaces
         public Task<bool> DeleteAccountAsync(int Id);
         public Task<bool> VerifyPassword(string email, string password);
 
-        public Task<IEnumerable<UsersResult>?> GetPatients(int page);
-        public IEnumerable<UsersResult> SearchForPatients(Expression<Func<Patient, bool>> expression,int page);
+        public Task<IEnumerable<UsersResult>?> GetUsers<T>(int page)where T :User;
+        public IEnumerable<UsersResult> SearchForUsers<T>(Expression<Func<T, bool>> expression,int page) where T : User;
         public Task<Patient?> GetPatientBy(Expression<Func<Patient, bool>> expression);//for searching
         public Task<UpdateUserDataResult> UpdateUserData(UpdateUserDto user);
+
     }
 }

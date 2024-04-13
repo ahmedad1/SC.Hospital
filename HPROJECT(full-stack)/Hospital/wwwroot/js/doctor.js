@@ -1,11 +1,10 @@
-import { checkForCookies, getCookie, signOut } from "./shared.js"
+import { checkForCookies, getCookie, signOut } from "./shared.js";
 
-onload=checkForCookies
-let usernamespan=document.querySelector('.usernamespan')
-let signout=document.querySelector('.signout')
-usernamespan.innerText=getCookie("firstName")
-signout.addEventListener("click",signOut)
-
+onload = checkForCookies;
+let usernamespan = document.querySelector(".usernamespan");
+let signout = document.querySelector(".signout");
+usernamespan.innerText = getCookie("firstName");
+signout.addEventListener("click", signOut);
 
 // let send=null;
 // let usernamespan=document.querySelector('.usernamespan')
@@ -32,7 +31,7 @@ signout.addEventListener("click",signOut)
 // }
 // }
 // if (patients.length==0){
-//     tbody.innerHTML="" 
+//     tbody.innerHTML=""
 // }
 // else{
 //     let tables=document.querySelectorAll('table');
@@ -40,8 +39,8 @@ signout.addEventListener("click",signOut)
 //     for(j =0;j< tables.length;j++){
 //         if (tables[j].className.includes(patients[K].daybooked)){
 //             let numofp=tables[j].children[1].children.length
-           
-// let tr=`<tr><th scope="row">${numofp+1}</th> 
+
+// let tr=`<tr><th scope="row">${numofp+1}</th>
 // <td>${patients[K].bookername}</td>
 // <td>${patients[K].booker}</td>
 // <td>${patients[K].daybooked}</td>
@@ -77,7 +76,6 @@ signout.addEventListener("click",signOut)
 // patientdata=firstpart.concat(secondpart)
 // localStorage.doctorchoosed=JSON.stringify(patientdata)
 
-
 // break;
 
 // }
@@ -92,9 +90,7 @@ signout.addEventListener("click",signOut)
 //         break;
 //      }
 
-
 //     }
-
 
 // }
 
@@ -125,18 +121,12 @@ signout.addEventListener("click",signOut)
 // boole=0
 // break
 //     }
-//   }  
+//   }
 //   if(boole){
 //     alert("No one has booked you with this email")
 //     return
 //   }
 // }
-
-
-
-
-
-
 
 // let departmentofdoctor;
 // for (B of patientdata){
@@ -170,13 +160,12 @@ signout.addEventListener("click",signOut)
 //         required.requiredanalysis.push(analysisinp.value)
 //         analysiss.push(required)
 //     localStorage.analysis=JSON.stringify(analysiss)
-    
+
 //     }
-  
+
 // }
 
 // analysisinp.value=""
 // emailofpatient.value=""
-
 
 // }

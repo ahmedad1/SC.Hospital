@@ -309,7 +309,7 @@ namespace RepositoryPattern.EfCore.Repositories
             context.Remove(refToken);
             return true;
         }
-        public async Task<IEnumerable<UsersResult>?> GetPatients(int page)
+        public async Task<IEnumerable<UsersResult>?> GetUsers<T>(int page)where T:User
         {
 
             if (page <= 0)
@@ -317,17 +317,17 @@ namespace RepositoryPattern.EfCore.Repositories
             context.ChangeTracker.LazyLoadingEnabled = false;
             context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
             int pageSize = 20;
-            var result = await context.Patients.Skip(pageSize * (page - 1)).Take(pageSize).Select(x => new UsersResult(x.Id, x.FirstName, x.LastName, x.UserName, x.Email, x.Gender.ToString(), x.BirthDate, x.EmailConfirmed)).ToListAsync();
+            var result = await context.Set<T>().Skip(pageSize * (page - 1)).Take(pageSize).Select(x => new UsersResult(x.Id, x.FirstName, x.LastName, x.UserName, x.Email, x.Gender.ToString(), x.BirthDate, x.EmailConfirmed, typeof(T) == typeof(Doctor )? (x as Doctor)!.Department.DepartmentName : null)).ToListAsync();
      
             return result;
         }
-        public IEnumerable<UsersResult> SearchForPatients(Expression<Func<Patient, bool>> expression,int page)
+        public IEnumerable<UsersResult> SearchForUsers<T>(Expression<Func<T, bool>> expression,int page) where T :User
         {
             if(page<=0)
                 return Enumerable.Empty<UsersResult>();
             context.ChangeTracker.LazyLoadingEnabled = false;
             int pageSize=20;
-            return context.Patients.Where(expression).Skip(pageSize*(page-1)).Take(pageSize).Select(x => new UsersResult(x.Id, x.FirstName, x.LastName, x.UserName, x.Email, x.Gender.ToString(), x.BirthDate, x.EmailConfirmed)).AsNoTracking();
+            return context.Set<T>().Where(expression).Skip(pageSize*(page-1)).Take(pageSize).Select(x => new UsersResult(x.Id, x.FirstName, x.LastName, x.UserName, x.Email, x.Gender.ToString(), x.BirthDate, x.EmailConfirmed, typeof(T) == typeof(Doctor) ? (x as Doctor)!.Department.DepartmentName : null)).AsNoTracking();
         }
         public async Task<Patient?> GetPatientBy(Expression<Func<Patient, bool>> expression)
         {
@@ -363,5 +363,6 @@ namespace RepositoryPattern.EfCore.Repositories
             }
 
         }
+       
     }
 }

@@ -1,16 +1,22 @@
-import { checkForCookies, getCookie, getNavAfterLogin, signOut } from "./shared.js"
 
-onload=async _=>{
-let result=await checkForCookies(false)
-if(result){
-let nav=document.querySelector('nav')
-nav.innerHTML=getNavAfterLogin(getCookie("firstName"))
-let signOutBtn=document.querySelector(".signout")
-signOutBtn.addEventListener("click",signOut)
+
+import { checkForCookies, signOut } from "./shared.js";
+let signOutBtn = document.querySelector(".signout");
+signOutBtn?.addEventListener("click", signOut);
+onload=async()=>{
+    let result=await checkForCookies(false)
+    if(result)
+    document.querySelector("a[href='index.html#sign']").parentElement.remove()
 }
-}
-
-
+// window.addEventListener("DOMContentLoaded", async (_) => {
+//   let result = await checkForCookies(false);
+//   if (result) {
+//     let nav = document.querySelector("nav");
+//     nav.innerHTML = getNavAfterLogin(getCookie("firstName"));
+//     let signOutBtn = document.querySelector(".signout");
+//     signOutBtn.addEventListener("click", signOut);
+//   }
+// });
 
 // let send=JSON.parse(localStorage.send)
 // let nav=document.querySelector('nav')
@@ -28,7 +34,6 @@ signOutBtn.addEventListener("click",signOut)
 //   neurologydata=doctordata.neurology
 
 // }
-
 
 // onload=()=>{
 //   storedatainvar();
@@ -53,7 +58,7 @@ signOutBtn.addEventListener("click",signOut)
 //   if(matched[0]==matched2[0]){
 //     if (m1!=m2){
 //       if (+matched[1]+15>=60){
-        
+
 //         matched[0]=`${+matched[0]+1}`
 //         if (+matched[0]==13)
 //           matched[0]=`1`
@@ -61,20 +66,19 @@ signOutBtn.addEventListener("click",signOut)
 //         if (+matched[0]==12&&+matched[1]<15)
 //         m1=m1.toUpperCase()=='Am'.toUpperCase()?'Pm':'Am'
 //         return matched[0]+':'+matched[1]+m1;
-
 
 //       }
 //       else{
 //         matched[1]=`${+matched[1]+15}`
 //         return matched[0]+':'+matched[1]+m1;
 //       }
-      
+
 //     }
 //     if (+matched[1]+15>= +matched2[1])
 //     return -1;
 //     else{
 //       if (+matched[1]+15>=60){
-        
+
 //         matched[0]=`${+matched[0]+1}`
 //         if (+matched[0]==13)
 //           matched[0]=`1`
@@ -82,7 +86,6 @@ signOutBtn.addEventListener("click",signOut)
 //         if (+matched[0]==12&&+matched[1]<15)
 //         m1=m1.toUpperCase()=='Am'.toUpperCase()?'Pm':'Am'
 //         return matched[0]+':'+matched[1]+m1;
-
 
 //       }
 //       else{
@@ -98,11 +101,11 @@ signOutBtn.addEventListener("click",signOut)
 //   if (+matched[1]+15>=60){
 //     x=+matched[0]+1
 //     y=+matched[1]+15-60;
-    
+
 //   }
 //   if (/*+matched[1]+15>+matched2[1]&&*/x!=null){
 //     if (x>matched2[0]||x==matched2[0]&&y>=matched2[1]){
-      
+
 //       return -1;
 //     }
 //     else{
@@ -111,13 +114,12 @@ signOutBtn.addEventListener("click",signOut)
 //       matched[0]=`1`
 //       matched[1]=`${+matched[1]+15-60}`
 //       if (+matched[0]==12&&+matched[1]<15){
-     
+
 //         m1=m1.toUpperCase()=='Am'.toUpperCase()?'Pm':'Am'
 //       }
 //       return matched[0]+':'+matched[1]+m1;
 //     }
-    
-  
+
 //   }
 //   else{
 //     matched[1]=`${+matched[1]+15}`
@@ -139,7 +141,6 @@ signOutBtn.addEventListener("click",signOut)
 //   return matched[0] + ':'+ matched[1] + m1;}
 // }
 
-
 //   }
 
 // else return -1
@@ -147,7 +148,7 @@ signOutBtn.addEventListener("click",signOut)
 
 // if (send !=null){
 
-//     nav.innerHTML=` 
+//     nav.innerHTML=`
 //     `
 //     section.innerHTML=`  <!-- Footer -->
 //     <footer class="text-center text-white" style="background-color: #0a4275;">
@@ -156,13 +157,13 @@ signOutBtn.addEventListener("click",signOut)
 //         <!-- Section: CTA -->
 //         <section class="">
 //           <p class="d-flex justify-content-center align-items-center">
-         
+
 //           </p>
 //         </section>
 //         <!-- Section: CTA -->
 //       </div>
 //       <!-- Grid container -->
-  
+
 //       <!-- Copyright -->
 //       <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
 //         © 2022 Copyright:
@@ -183,7 +184,6 @@ signOutBtn.addEventListener("click",signOut)
 //     location.href='index.html'
 
 // }
-
 
 // }
 
@@ -208,35 +208,35 @@ signOutBtn.addEventListener("click",signOut)
 //     <a href="user.html" class="navbar-brand text-primary">S.C Hospital</a><!--special care hospital-->
 //     <!-- <input type="text"placeholder=search class=" d-lg-none mr-4 "style=width:50%;outline:none;> -->
 //     <a href="#N"data-toggle=collapse class="navbar-toggler"><span class="navbar-toggler-icon"></span></a>
-    
+
 //     <div class="collapse navbar-collapse" id="N">
 //         <ul class="navbar-nav ml-auto ">
 //             <li class="nav-item"><a href="user.html" class="nav-link">Home</a></li>
 //             <!-- <li class="nav-item"><a href="#" class="nav-link btn btn-outline-primary text-primary rounded">Login</a></li>-->
-        
+
 //         </ul>
 //         <!-- <a href="#login" class="nav-link btn btn-outline-primary ml-lg-2 mt-sm-3 mt-lg-0  "style=max-width:78px>Login</a> -->
 //        <div class="nav-link d-flex p-0 mt-lg-0 mt-3"style="gap:5px">
 //         <img src="./images/user-solid.svg"class="ml-lg-2  mt-lg-0  "width=15 alt="">
 //         <span class="text-muted usernamespan"style=>${send.name}</span>
-       
-//     </div> 
+
+//     </div>
 //     <a href="#" class=" btn btn-outline-primary ml-3 signout appsign">Sign out</a>
 //     </div>
 //     </nav>
 //     <table class="table sat" id="table">
- 
+
 //     <thead>
 //       <tr>
 //             <th scope="col">Doctor</th>
 //             <th scope="col">Day</th>
 //             <th scope="col">Time</th>
 //             <th scope="col">Department</th>
-           
+
 //           </tr>
 //         </thead>
 //         <tbody>
-         
+
 //         </tbody>
 //       </table>
 //     `
@@ -246,11 +246,9 @@ signOutBtn.addEventListener("click",signOut)
 //      location.href='index.html'
 //     }
 //     for(Q=0;Q<daytime.length;Q++){
-     
-  
 
 // X=daytime[Q].doctorname
-// messages=` 
+// messages=`
 // <tr id="a">
 // <td> ${X}</td>
 // <td>${daytime[Q].daybooked}</td>
@@ -260,24 +258,22 @@ signOutBtn.addEventListener("click",signOut)
 
 // document.querySelector('tbody').innerHTML+=messages
 
-  
 // }
 
 //   // }
 // // }
-
 
 // }
 // }
 // for (i of bookbtns){
 
 //   i.onclick=(e)=>{
-    
+
 //     if (send==null){
 //       alert("You must log in First")
 //     return
 //     }
-    
+
 //     e.preventDefault()
 // let nameofdoc= e.target.parentElement.parentElement.children[0].children[0].innerText
 // let day= e.target.parentElement.parentElement.children[1].children[6].children[0].children[1].children
@@ -324,7 +320,6 @@ signOutBtn.addEventListener("click",signOut)
 //   }
 //   if (lastele.length!=0){
 //     lastele=lastele[lastele.length-1].timebooked
-  
 
 //     let avail=e.target.parentElement.parentElement.children[1].children[2]
 //     let fromto=avail.innerText.match(/\d+|(p|a)m/ig)
@@ -344,11 +339,8 @@ signOutBtn.addEventListener("click",signOut)
 //     let fromto=avail.innerText.match(/\d+|(p|a)m/ig)
 //     let time=fromto[0]+':'+fromto[1]+fromto[2]
 //     doctorchoosed.push({bookername:send.name,doctorname:j.name,doctoremail:j.email,daybooked:k.value ,department:"dental",booker:send.email,bookerbday:send.birthday,timebooked:time})
-    
+
 //   }
-
-
-
 
 // }
 // {
@@ -365,7 +357,7 @@ signOutBtn.addEventListener("click",signOut)
 // else alert ("You must choose a day")
 
 //     }
-//   } 
+//   }
 //   }
 // }
 
@@ -403,7 +395,7 @@ signOutBtn.addEventListener("click",signOut)
 //               doctorchoosed.push({bookername:send.name,doctorname:j.name,doctoremail:j.email,daybooked:k.value ,department:"ophthalmology",booker:send.email,bookerbday:send.birthday,timebooked:time})
 //         }
 //         else{
-        
+
 //           // let lastele=objs[objs.length-1].timebooked
 //           //********************************************** */
 //           let lastele=[];
@@ -414,8 +406,7 @@ signOutBtn.addEventListener("click",signOut)
 //           }
 //           if (lastele.length!=0){
 //             lastele=lastele[lastele.length-1].timebooked
-          
-        
+
 //             let avail=e.target.parentElement.parentElement.children[1].children[2]
 //             let fromto=avail.innerText.match(/\d+|(p|a)m/ig)
 //             let time=fromto[3]+':'+fromto[4]+fromto[5]
@@ -426,7 +417,7 @@ signOutBtn.addEventListener("click",signOut)
 //           }
 //           else{
 //             doctorchoosed.push({bookername:send.name,doctorname:j.name,doctoremail:j.email,daybooked:k.value ,department:"ophthalmology",booker:send.email,bookerbday:send.birthday,timebooked:inc})
-        
+
 //           }
 //           }
 //           else{
@@ -434,15 +425,12 @@ signOutBtn.addEventListener("click",signOut)
 //             let fromto=avail.innerText.match(/\d+|(p|a)m/ig)
 //             let time=fromto[0]+':'+fromto[1]+fromto[2]
 //             doctorchoosed.push({bookername:send.name,doctorname:j.name,doctoremail:j.email,daybooked:k.value ,department:"ophthalmology",booker:send.email,bookerbday:send.birthday,timebooked:time})
-            
+
 //           }
-        
-        
-        
-        
+
 //         }
 //         {
-        
+
 //         }
 //             }
 //        localStorage.doctorchoosed=JSON.stringify(doctorchoosed)
@@ -451,9 +439,9 @@ signOutBtn.addEventListener("click",signOut)
 //        else alert("You have already booked this doctor")
 //   }
 //   else alert ("You must choose a day")
-  
+
 //       }
-//     } 
+//     }
 //     }
 //   }
 
@@ -491,7 +479,7 @@ signOutBtn.addEventListener("click",signOut)
 //               doctorchoosed.push({bookername:send.name,doctorname:j.name,doctoremail:j.email,daybooked:k.value ,department:"internal",booker:send.email,bookerbday:send.birthday,timebooked:time})
 //         }
 //         else{
-        
+
 //           // let lastele=objs[objs.length-1].timebooked
 //           //********************************************** */
 //           let lastele=[];
@@ -502,8 +490,7 @@ signOutBtn.addEventListener("click",signOut)
 //           }
 //           if (lastele.length!=0){
 //             lastele=lastele[lastele.length-1].timebooked
-          
-        
+
 //             let avail=e.target.parentElement.parentElement.children[1].children[2]
 //             let fromto=avail.innerText.match(/\d+|(p|a)m/ig)
 //             let time=fromto[3]+':'+fromto[4]+fromto[5]
@@ -514,7 +501,7 @@ signOutBtn.addEventListener("click",signOut)
 //           }
 //           else{
 //             doctorchoosed.push({bookername:send.name,doctorname:j.name,doctoremail:j.email,daybooked:k.value ,department:"internal",booker:send.email,bookerbday:send.birthday,timebooked:inc})
-        
+
 //           }
 //           }
 //           else{
@@ -522,15 +509,12 @@ signOutBtn.addEventListener("click",signOut)
 //             let fromto=avail.innerText.match(/\d+|(p|a)m/ig)
 //             let time=fromto[0]+':'+fromto[1]+fromto[2]
 //             doctorchoosed.push({bookername:send.name,doctorname:j.name,doctoremail:j.email,daybooked:k.value ,department:"internal",booker:send.email,bookerbday:send.birthday,timebooked:time})
-            
+
 //           }
-        
-        
-        
-        
+
 //         }
 //         {
-        
+
 //         }
 //             }
 //        localStorage.doctorchoosed=JSON.stringify(doctorchoosed)
@@ -539,9 +523,9 @@ signOutBtn.addEventListener("click",signOut)
 //     else  alert("You have already booked this doctor")
 //   }
 //   else alert ("You must choose a day")
-  
+
 //       }
-//     } 
+//     }
 //     }
 //   }
 
@@ -578,7 +562,7 @@ signOutBtn.addEventListener("click",signOut)
 //               doctorchoosed.push({bookername:send.name,doctorname:j.name,doctoremail:j.email,daybooked:k.value ,department:"orthopedic",booker:send.email,bookerbday:send.birthday,timebooked:time})
 //         }
 //         else{
-        
+
 //           // let lastele=objs[objs.length-1].timebooked
 //           //********************************************** */
 //           let lastele=[];
@@ -589,8 +573,7 @@ signOutBtn.addEventListener("click",signOut)
 //           }
 //           if (lastele.length!=0){
 //             lastele=lastele[lastele.length-1].timebooked
-          
-        
+
 //             let avail=e.target.parentElement.parentElement.children[1].children[2]
 //             let fromto=avail.innerText.match(/\d+|(p|a)m/ig)
 //             let time=fromto[3]+':'+fromto[4]+fromto[5]
@@ -601,7 +584,7 @@ signOutBtn.addEventListener("click",signOut)
 //           }
 //           else{
 //             doctorchoosed.push({bookername:send.name,doctorname:j.name,doctoremail:j.email,daybooked:k.value ,department:"orthopedic",booker:send.email,bookerbday:send.birthday,timebooked:inc})
-        
+
 //           }
 //           }
 //           else{
@@ -609,15 +592,12 @@ signOutBtn.addEventListener("click",signOut)
 //             let fromto=avail.innerText.match(/\d+|(p|a)m/ig)
 //             let time=fromto[0]+':'+fromto[1]+fromto[2]
 //             doctorchoosed.push({bookername:send.name,doctorname:j.name,doctoremail:j.email,daybooked:k.value ,department:"orthopedic",booker:send.email,bookerbday:send.birthday,timebooked:time})
-            
+
 //           }
-        
-        
-        
-        
+
 //         }
 //         {
-        
+
 //         }
 //             }
 //        localStorage.doctorchoosed=JSON.stringify(doctorchoosed)
@@ -626,9 +606,9 @@ signOutBtn.addEventListener("click",signOut)
 //       else alert("You have already booked this doctor")
 //   }
 //   else alert ("You must choose a day")
-  
+
 //       }
-//     } 
+//     }
 //     }
 //   }
 
@@ -665,7 +645,7 @@ signOutBtn.addEventListener("click",signOut)
 //               doctorchoosed.push({bookername:send.name,doctorname:j.name,doctoremail:j.email,daybooked:k.value ,department:"neurology",booker:send.email,bookerbday:send.birthday,timebooked:time})
 //         }
 //         else{
-        
+
 //           // let lastele=objs[objs.length-1].timebooked
 //           //********************************************** */
 //           let lastele=[];
@@ -676,8 +656,7 @@ signOutBtn.addEventListener("click",signOut)
 //           }
 //           if (lastele.length!=0){
 //             lastele=lastele[lastele.length-1].timebooked
-          
-        
+
 //             let avail=e.target.parentElement.parentElement.children[1].children[2]
 //             let fromto=avail.innerText.match(/\d+|(p|a)m/ig)
 //             let time=fromto[3]+':'+fromto[4]+fromto[5]
@@ -688,7 +667,7 @@ signOutBtn.addEventListener("click",signOut)
 //           }
 //           else{
 //             doctorchoosed.push({bookername:send.name,doctorname:j.name,doctoremail:j.email,daybooked:k.value ,department:"neurology",booker:send.email,bookerbday:send.birthday,timebooked:inc})
-        
+
 //           }
 //           }
 //           else{
@@ -696,15 +675,12 @@ signOutBtn.addEventListener("click",signOut)
 //             let fromto=avail.innerText.match(/\d+|(p|a)m/ig)
 //             let time=fromto[0]+':'+fromto[1]+fromto[2]
 //             doctorchoosed.push({bookername:send.name,doctorname:j.name,doctoremail:j.email,daybooked:k.value ,department:"neurology",booker:send.email,bookerbday:send.birthday,timebooked:time})
-            
+
 //           }
-        
-        
-        
-        
+
 //         }
 //         {
-        
+
 //         }
 //             }
 //        localStorage.doctorchoosed=JSON.stringify(doctorchoosed)
@@ -713,16 +689,13 @@ signOutBtn.addEventListener("click",signOut)
 //     else alert("You have already booked this doctor")
 //   }
 //   else alert ("You must choose a day")
-  
+
 //       }
-//     } 
+//     }
 //     }
 //   }
 
 // }
-
-
-
 
 // }
 // }

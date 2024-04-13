@@ -174,7 +174,15 @@ namespace Hospital.Controllers
         public async Task<IActionResult> GetPatients([FromBody]int page)
         {
             
-            var result =await unitOfWork.UserRepository.GetPatients(page);
+            var result =await unitOfWork.UserRepository.GetUsers<Patient>(page);
+            return Ok(result);
+
+        }
+        [Authorize(Roles ="Adm")]
+        [HttpPost("doctors")]
+        public async Task<IActionResult>GetDoctors([FromBody]int page)
+        {
+            var result = await unitOfWork.UserRepository.GetUsers<Doctor>(page);
             return Ok(result);
 
         }
@@ -184,21 +192,21 @@ namespace Hospital.Controllers
         {
             if (!Enum.TryParse(typeOfSeaching, out TypeOfSearching result))
                 return BadRequest();
-
+            
             switch (result)
             {
                 case TypeOfSearching.FirstName:
-                    return Ok(unitOfWork.UserRepository.SearchForPatients(x => x.FirstName .Contains(searchDto.Data),searchDto.page));
+                    return Ok(unitOfWork.UserRepository.SearchForUsers<Patient>(x => x.FirstName .Contains(searchDto.Data),searchDto.page));
                 case TypeOfSearching.LastName:
-                    return Ok(unitOfWork.UserRepository.SearchForPatients(x => x.LastName .Contains(searchDto.Data),searchDto.page));
+                    return Ok(unitOfWork.UserRepository.SearchForUsers<Patient>(x => x.LastName .Contains(searchDto.Data),searchDto.page));
                 case TypeOfSearching.FullName:
-                    return Ok(unitOfWork.UserRepository.SearchForPatients(x=>x.FirstName+" "+x.LastName==searchDto.Data,searchDto.page));
+                    return Ok(unitOfWork.UserRepository.SearchForUsers<Patient>(x=>x.FirstName+" "+x.LastName==searchDto.Data,searchDto.page));
                 case TypeOfSearching.Email:
-                    return Ok(unitOfWork.UserRepository.SearchForPatients(x => x.Email.Contains(searchDto.Data),searchDto.page));
+                    return Ok(unitOfWork.UserRepository.SearchForUsers<Patient>(x => x.Email.Contains(searchDto.Data),searchDto.page));
                 case TypeOfSearching.UserName:
-                    return Ok(unitOfWork.UserRepository.SearchForPatients(x => x.UserName.Contains( searchDto.Data),searchDto.page));
+                    return Ok(unitOfWork.UserRepository.SearchForUsers<Patient>(x => x.UserName.Contains( searchDto.Data),searchDto.page));
                 case TypeOfSearching.EmailConfirmed:
-                    return Ok(unitOfWork.UserRepository.SearchForPatients(x => x.EmailConfirmed.ToString() == searchDto.Data,searchDto.page));
+                    return Ok(unitOfWork.UserRepository.SearchForUsers<Patient>(x => x.EmailConfirmed.ToString() == searchDto.Data,searchDto.page));
                 
                 default: 
                     return BadRequest();
@@ -206,7 +214,34 @@ namespace Hospital.Controllers
             }
             
         }
+        [Authorize(Roles ="Adm")]
+        [HttpPost("doctors/{type-of-searching}")]
+        public IActionResult SearchForDoctors([FromRoute(Name = "type-of-searching")] string typeOfSeaching, SearchDto searchDto)
+        {
+            if (!Enum.TryParse(typeOfSeaching, out TypeOfSearching result))
+                return BadRequest();
 
+            switch (result)
+            {
+                case TypeOfSearching.FirstName:
+                    return Ok(unitOfWork.UserRepository.SearchForUsers<Doctor>(x => x.FirstName.Contains(searchDto.Data), searchDto.page));
+                case TypeOfSearching.LastName:
+                    return Ok(unitOfWork.UserRepository.SearchForUsers<Doctor>(x => x.LastName.Contains(searchDto.Data), searchDto.page));
+                case TypeOfSearching.FullName:
+                    return Ok(unitOfWork.UserRepository.SearchForUsers<Doctor>(x => x.FirstName + " " + x.LastName == searchDto.Data, searchDto.page));
+                case TypeOfSearching.Email:
+                    return Ok(unitOfWork.UserRepository.SearchForUsers<Doctor>(x => x.Email.Contains(searchDto.Data), searchDto.page));
+                case TypeOfSearching.UserName:
+                    return Ok(unitOfWork.UserRepository.SearchForUsers<Doctor>(x => x.UserName.Contains(searchDto.Data), searchDto.page));
+                case TypeOfSearching.EmailConfirmed:
+                    return Ok(unitOfWork.UserRepository.SearchForUsers<Doctor>(x => x.EmailConfirmed.ToString() == searchDto.Data, searchDto.page));
+
+                default:
+                    return BadRequest();
+
+            }
+
+        }
 
         [Authorize(Roles = "Adm")]
         [HttpPut("user")]

@@ -25,6 +25,8 @@ namespace RepositoryPatternWithUOW.EfCore.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.HasSequence("UserSequence");
+
             modelBuilder.Entity("RepositoryPattern.Core.Models.DoctorPatient", b =>
                 {
                     b.Property<int>("DoctorId")
@@ -81,17 +83,13 @@ namespace RepositoryPatternWithUOW.EfCore.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasDefaultValueSql("NEXT VALUE FOR [UserSequence]");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseSequence(b.Property<int>("Id"));
 
                     b.Property<DateOnly>("BirthDate")
                         .HasColumnType("date");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasMaxLength(3)
-                        .HasColumnType("varchar");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -130,11 +128,9 @@ namespace RepositoryPatternWithUOW.EfCore.Migrations
                     b.HasIndex("UserName")
                         .IsUnique();
 
-                    b.ToTable("Users");
+                    b.ToTable((string)null);
 
-                    b.HasDiscriminator<string>("Discriminator").HasValue("User");
-
-                    b.UseTphMappingStrategy();
+                    b.UseTpcMappingStrategy();
                 });
 
             modelBuilder.Entity("RepositoryPattern.Core.Models.UserConnections", b =>
@@ -235,26 +231,27 @@ namespace RepositoryPatternWithUOW.EfCore.Migrations
                         .HasColumnType("int");
 
                     b.Property<byte[]>("ProfilePicture")
-                        .IsRequired()
                         .HasColumnType("varbinary(max)");
+
+                    SqlServerPropertyBuilderExtensions.IsSparse(b.Property<byte[]>("ProfilePicture"));
 
                     b.HasIndex("DepartmentId");
 
-                    b.HasDiscriminator().HasValue("Doc");
+                    b.ToTable("Doctors");
                 });
 
             modelBuilder.Entity("RepositoryPattern.Core.Models.Patient", b =>
                 {
                     b.HasBaseType("RepositoryPattern.Core.Models.User");
 
-                    b.HasDiscriminator().HasValue("Pat");
+                    b.ToTable("Patients");
                 });
 
             modelBuilder.Entity("RepositoryPatternWithUOW.Core.Models.Admin", b =>
                 {
                     b.HasBaseType("RepositoryPattern.Core.Models.User");
 
-                    b.HasDiscriminator().HasValue("Adm");
+                    b.ToTable("Admin");
                 });
 
             modelBuilder.Entity("RepositoryPattern.Core.Models.DoctorPatient", b =>
@@ -262,7 +259,7 @@ namespace RepositoryPatternWithUOW.EfCore.Migrations
                     b.HasOne("RepositoryPattern.Core.Models.Doctor", "Doctor")
                         .WithMany("DoctorPatient")
                         .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("RepositoryPattern.Core.Models.Patient", "Patient")

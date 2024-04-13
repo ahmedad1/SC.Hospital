@@ -49,6 +49,43 @@
   },
   {
     "ContainingType": "Hospital.Controllers.AccountController",
+    "Method": "GetDoctors",
+    "RelativePath": "api/Account/doctors",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Hospital.Controllers.AccountController",
+    "Method": "SearchForDoctors",
+    "RelativePath": "api/Account/doctors/{type-of-searching}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "type-of-searching",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "searchDto",
+        "Type": "RepositoryPatternWithUOW.Core.DTOs.SearchDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Hospital.Controllers.AccountController",
     "Method": "ModifiyInsensitiveData",
     "RelativePath": "api/Account/insensitive-data",
     "HttpMethod": "PATCH",

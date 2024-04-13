@@ -4,7 +4,7 @@ using RepositoryPatternWithUOW.Core.Enums;
 
 namespace RepositoryPattern.Core.Models
 {
-    public  class User
+    public abstract class User
     {
         public int Id { get; set; } 
         public string FirstName { get; set; }
@@ -14,7 +14,7 @@ namespace RepositoryPattern.Core.Models
         public string Password { get; set; }
         public Gender Gender { get; set; }
         public DateOnly BirthDate { get; set; }
-        public string Discriminator { get; set; }
+     
         public bool EmailConfirmed { get; set; }
         public virtual ICollection<UserConnections> UserConnections { get; set; }
         public virtual ICollection<Group> Groups { get; set; }

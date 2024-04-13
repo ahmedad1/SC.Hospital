@@ -245,6 +245,10 @@
       "PackagePath": "staticwebassets\\js\\changepassword.js"
     },
     {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\js\\checkingInDepts.js",
+      "PackagePath": "staticwebassets\\js\\checkingInDepts.js"
+    },
+    {
       "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\js\\depts.js",
       "PackagePath": "staticwebassets\\js\\depts.js"
     },
