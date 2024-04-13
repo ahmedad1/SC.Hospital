@@ -110,9 +110,9 @@ export async function checkForCookies(isAllowedToNavigate = true) {
       getCookie("birthDate") &&
       getCookie("email")
     )||
-    (getCookie("role")=="Pat"&&(location.pathname.startsWith("/doctor.html")||location.pathname.startsWith("/admin.html")))||
-    (getCookie("role")=="Doc"&&!location.pathname.startsWith("/doctor.html"))||
-    (getCookie("role")=="Adm"&&!location.pathname.startsWith("/admin.html"))
+    (getCookie("role")=="Pat"&&(location.pathname.startsWith("/doctor.html")||location.pathname.startsWith("/admin.html")||location.pathname.startsWith("/add-doctor.html")))||
+    (getCookie("role")=="Doc"&&!(location.pathname.startsWith("/doctor.html")||location.pathname.startsWith("/ProfileSettings.html")))||
+    (getCookie("role")=="Adm"&&!(location.pathname.startsWith("/admin.html")||location.pathname.startsWith("/add-doctor.html")||location.pathname.startsWith("/ProfileSettings.html")))
     
   ) {
     await signOut(false,isAllowedToNavigate);
@@ -252,7 +252,7 @@ export function AddDoctorTable(section, json, changeFromPatient = false) {
     section.insertAdjacentHTML(
       "beforeend",
       `
-    <button class="btn btn-info form-control">Add Doctor</button>
+    <a href="../add-doctor.html"target=_blank class="btn btn-info form-control">Add Doctor</a>
        
         <table class="table ">
             

@@ -149,7 +149,7 @@ searchForm.addEventListener("submit", async (e) => {
 async function fetchRenderDoctors(replacePatient) {
   let doctors = await fetchJSONAuth(
     `${backendAccountApi}doctors`,
-    { page: +sessionStorage.getItem("page") },
+     +sessionStorage.getItem("page") ,
     "POST"
   );
   if (typeof doctors !== "number") {
