@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "byrIzi7mlK+NHXE/GydIFQYGYTd5TPanjDaiQQSvjIs=",
+  "Hash": "T13BV2blxrhk58qDDXYdD6Xy/8CnqpOcMRK8w96GIvk=",
   "Source": "Hospital",
   "BasePath": "_content/Hospital",
   "Mode": "Default",
@@ -16,6 +16,25 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\add-doctor.html",
+      "SourceId": "Hospital",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\",
+      "BasePath": "_content/Hospital",
+      "RelativePath": "add-doctor.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\add-doctor.html"
+    },
     {
       "Identity": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\admin.html",
       "SourceId": "Hospital",
@@ -1022,6 +1041,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\internal.html"
+    },
+    {
+      "Identity": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\js\\add-doctor.js",
+      "SourceId": "Hospital",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\",
+      "BasePath": "_content/Hospital",
+      "RelativePath": "js/add-doctor.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\add-doctor.js"
     },
     {
       "Identity": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\js\\admin.js",

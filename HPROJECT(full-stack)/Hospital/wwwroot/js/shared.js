@@ -444,6 +444,7 @@ export function AddPatientTable(section, json, changeFromDoctor = false) {
             gender: data[4],
             birthDate: data[5],
             EmailConfirmed: data[6],
+            role:"patients"
           },
           "PUT"
         );
@@ -467,7 +468,7 @@ export function AddPatientTable(section, json, changeFromDoctor = false) {
         confirmBtn.addEventListener("click", async (eventConfirm) => {
           appendLoadingIcon(eventConfirm.target);
           const result = await fetchJSONAuth(
-            `https://localhost:7197/api/Account/${id}`,
+            `https://localhost:7197/api/Account/patients/${id}`,
             {},
             "DELETE"
           );

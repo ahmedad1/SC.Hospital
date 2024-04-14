@@ -11,6 +11,7 @@ using RepositoryPattern.Core.Models;
 using RepositoryPatternWithUOW.Core.DTOs;
 using RepositoryPatternWithUOW.Core.Enums;
 using RepositoryPatternWithUOW.Core.Interfaces;
+using RepositoryPatternWithUOW.Core.ReturnedModels;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using static RepositoryPatternWithUOW.Core.CookiesGlobal;
@@ -152,10 +153,14 @@ namespace Hospital.Controllers
             return Ok();
         }
         [Authorize(Roles = "Adm")]
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAccount([FromRoute(Name ="id")]int Id)
+        [HttpDelete("{role}/{id}")]
+        public async Task<IActionResult> DeleteAccount([FromRoute(Name ="id")]int id,[FromRoute]Role role)
         {
-            var result = await unitOfWork.UserRepository.DeleteAccountAsync(Id);
+            bool result;
+            if(role==Role.Patients)
+            result=await unitOfWork.UserRepository.DeleteAccountAsync<Patient>(id);
+            else
+            result=await unitOfWork.UserRepository.DeleteAccountAsync<Doctor>(id);
             if (!result)
                 return BadRequest();
             return Ok();
@@ -247,7 +252,13 @@ namespace Hospital.Controllers
         [HttpPut("user")]
         public async Task<IActionResult> UpdateUserData(UpdateUserDto user)
         {
-            var result = await unitOfWork.UserRepository.UpdateUserData(user);
+            UpdateUserDataResult result;
+
+            if(user.Role==Role.Patients)
+            result = await unitOfWork.UserRepository.UpdateUserData<Patient>(user);
+            else
+            result = await unitOfWork.UserRepository.UpdateUserData<Doctor>(user);
+
             return result.Success ? Ok(result):BadRequest(result);
         }
     }

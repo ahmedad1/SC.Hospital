@@ -14,6 +14,7 @@ using RepositoryPattern.EfCore.OptionPattenModels;
 using RepositoryPattern.EfCore.Repositories;
 using RepositoryPatternWithUOW.Core.Interfaces;
 using RepositoryPatternWithUOW.EfCore;
+using RepositoryPatternWithUOW.EfCore.MapToModel;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,7 +32,8 @@ var jwtOptions=builder.Configuration.GetSection("Jwt").Get<TokenOptionsModel>();
 builder.Services.AddSingleton(jwtOptions!);
 builder.Services.Configure<MailOptionsModel>(builder.Configuration.GetSection("MailSettings"));
 
-builder.Services.AddSingleton<MapToUser>();
+builder.Services.AddScoped<MapToUser>();
+builder.Services.AddScoped<MapToDepartment>();
 builder.Services.AddTransient<IMailService,MailService>();  
 builder.Services.AddAuthentication().AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
 {

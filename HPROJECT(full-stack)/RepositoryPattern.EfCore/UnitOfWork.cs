@@ -5,6 +5,8 @@ using RepositoryPattern.EfCore.MapToModel;
 using RepositoryPattern.EfCore.OptionPattenModels;
 using RepositoryPattern.EfCore.Repositories;
 using RepositoryPatternWithUOW.Core.Interfaces;
+using RepositoryPatternWithUOW.EfCore.MapToModel;
+using RepositoryPatternWithUOW.EfCore.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,13 +18,14 @@ namespace RepositoryPatternWithUOW.EfCore
     public class UnitOfWork : IUnitOfWork
     {
         AppDbContext context;
-        
+
         public IUserRepository UserRepository { get; }
-        public UnitOfWork(AppDbContext context,MapToUser mapper,TokenOptionsModel tokenOptionsModel,IMailService mailService)
+        public IDepartmentRepository DepartmentRepository { get;}
+        public UnitOfWork(AppDbContext context,MapToUser mapToUser,MapToDepartment mapToDept,TokenOptionsModel tokenOptionsModel,IMailService mailService)
         {
             this.context=context;
-            UserRepository = new UserRepositroy(context,mapper,tokenOptionsModel,mailService);
-
+            UserRepository = new UserRepositroy(context,mapToUser,tokenOptionsModel,mailService);
+            DepartmentRepository = new DepartmentRepository(context,mapToDept);
         }
         public async Task SaveChangesAsync()
         {

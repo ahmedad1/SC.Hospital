@@ -2,7 +2,7 @@
   {
     "ContainingType": "Hospital.Controllers.AccountController",
     "Method": "DeleteAccount",
-    "RelativePath": "api/Account/{id}",
+    "RelativePath": "api/Account/{role}/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -10,6 +10,11 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "role",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],
@@ -251,6 +256,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Hospital.Controllers.DepartmentsController",
+    "Method": "GetAllDepartments",
+    "RelativePath": "api/Departments/no-verbos",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   }
 ]

@@ -26,5 +26,7 @@ namespace RepositoryPatternWithUOW.Core.DTOs
         public required string Email { get; set; }
        
         public bool EmailConfirmed { get; set; }
+        [JsonConverter(typeof(JsonStringEnumConverter))]
+        public Role Role { get; set; }
     }
 }

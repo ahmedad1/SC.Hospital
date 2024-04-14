@@ -11,6 +11,7 @@ using RepositoryPattern.EfCore.OptionPattenModels;
 using RepositoryPattern.EfCore.TokensHandler;
 using RepositoryPatternWithUOW.Core.DTOs;
 using RepositoryPatternWithUOW.Core.Enums;
+using RepositoryPatternWithUOW.Core.Models;
 using RepositoryPatternWithUOW.Core.ReturnedModels;
 using System.Linq.Expressions;
 using static RepositoryPatternWithUOW.Core.CookiesGlobal;
@@ -146,8 +147,9 @@ namespace RepositoryPattern.EfCore.Repositories
         }
         public async Task<bool> MakeDoctorAccount(MakeDoctorProfileDto createDoctorProfileDto)
         {
-            if (await context.Users.AnyAsync(x => x.Email == createDoctorProfileDto.Email || x.UserName == createDoctorProfileDto.UserName))
+            if (await context.Users.AnyAsync(x => x.Email == createDoctorProfileDto.Email || x.UserName == createDoctorProfileDto.UserName)||!await context.Set<Department>().AnyAsync(x=>x.Id==createDoctorProfileDto.DepartmentId))
                 return false;
+
 
                 Doctor doctor = mapToUser.MapToDoctor(createDoctorProfileDto);
                 doctor.EmailConfirmed = true;
@@ -155,6 +157,7 @@ namespace RepositoryPattern.EfCore.Repositories
                 await context.Doctors.AddAsync(doctor);
                 return true;
         }
+       
         public async Task<SignUpResult> SignUpAsync(SignUpDto signUpDto)
         {
             if (await context.Users.AnyAsync(x => x.Email == signUpDto.Email))
@@ -262,10 +265,10 @@ namespace RepositoryPattern.EfCore.Repositories
                 return new() { Success = false };
             }
         }
-        public async Task<bool> DeleteAccountAsync(int Id)
+        public async Task<bool> DeleteAccountAsync<T>(int Id)where T:User
         {
             
-            var result=await context.Users.Where(x => x.Id == Id).ExecuteDeleteAsync();
+            var result=await context.Set<T>().Where(x => x.Id == Id).ExecuteDeleteAsync();
             if (result>0)
             return true;
             return false;
@@ -333,7 +336,7 @@ namespace RepositoryPattern.EfCore.Repositories
         {
             return await context.Patients.FirstOrDefaultAsync(expression);
         }
-        public async Task<UpdateUserDataResult> UpdateUserData(UpdateUserDto user)
+        public async Task<UpdateUserDataResult> UpdateUserData<T>(UpdateUserDto user)where T:User
         {
            try{
                 if(await context.Users.AnyAsync(x=>x.Id!=user.Id&&(x.UserName==user.UserName)))
@@ -346,8 +349,7 @@ namespace RepositoryPattern.EfCore.Repositories
                     return new() { NewUserNameIsExist = false, Success = false, NewEmailIsExist = true };
 
                 }
-
-                var result = await context.Users.Where(x => x.Id == user.Id).ExecuteUpdateAsync(u =>u
+                var result = await context.Set<T>().Where(x => x.Id == user.Id).ExecuteUpdateAsync(u =>u
                 .SetProperty(p => p.EmailConfirmed, user.EmailConfirmed)
                 .SetProperty(p => p.BirthDate, user.BirthDate)
                 .SetProperty(p => p.Email, user.Email)

@@ -23,13 +23,13 @@ namespace RepositoryPattern.Core.Interfaces
         public Task<bool> ChangePassword(ChangePasswordDto changePasswordDto, int id);
 
         public Task<ModifyInsensitveDataResult> ModifyInSensitiveDataAsync(JsonPatchDocument<User> modifyInsensitiveData, string email);
-        public Task<bool> DeleteAccountAsync(int Id);
+        public Task<bool> DeleteAccountAsync<T>(int Id)where T:User;
         public Task<bool> VerifyPassword(string email, string password);
 
         public Task<IEnumerable<UsersResult>?> GetUsers<T>(int page)where T :User;
         public IEnumerable<UsersResult> SearchForUsers<T>(Expression<Func<T, bool>> expression,int page) where T : User;
         public Task<Patient?> GetPatientBy(Expression<Func<Patient, bool>> expression);//for searching
-        public Task<UpdateUserDataResult> UpdateUserData(UpdateUserDto user);
+        public Task<UpdateUserDataResult> UpdateUserData<T>(UpdateUserDto user) where T:User;
 
     }
 }
