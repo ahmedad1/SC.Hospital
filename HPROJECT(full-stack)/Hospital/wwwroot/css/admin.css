@@ -12,6 +12,9 @@ body,html{
 .input-cell{
     width: 5em;
 }
+.input-cell-depts{
+    width: 10em;
+}
 #particles-js{
 height: 100vh;
 position: absolute;

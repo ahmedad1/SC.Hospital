@@ -18,14 +18,23 @@ namespace Hospital.Controllers
             
             return Ok(await unitOfWork.DepartmentRepository.GetAllAsync(false));
         }
+        [HttpGet("verbos")]
+        public async Task<IActionResult> GetAllDepartmentsVerbos()
+        {
+            
+            return Ok(await unitOfWork.DepartmentRepository.GetAllAsync(true));
+
+        }
         [Authorize(Roles ="Adm")]
         [HttpPost]
-        public async Task<IActionResult>Add(DepartmentDto deptDto)
+        public async Task<IActionResult>Add([FromForm]DepartmentDto deptDto)
         {
            
                 await unitOfWork.DepartmentRepository.AddAsync(deptDto);
+                await unitOfWork.SaveChangesAsync(); 
                 return Ok();
         
         }
+        
     }
 }

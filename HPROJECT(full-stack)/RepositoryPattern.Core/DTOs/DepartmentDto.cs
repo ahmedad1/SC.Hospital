@@ -14,6 +14,6 @@ namespace RepositoryPatternWithUOW.Core.DTOs
         public string DepartmentName { get; set; }
         public string Description { get; set; }
         public IFormFile BackgroundCardImage { get; set; }
-        public virtual ICollection<Doctor> Doctors { get; set; }
+  
     }
 }

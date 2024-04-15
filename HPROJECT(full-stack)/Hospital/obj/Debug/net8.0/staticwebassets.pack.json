@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\ProfileSettings.html"
     },
     {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\add-department.html",
+      "PackagePath": "staticwebassets\\add-department.html"
+    },
+    {
       "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\add-doctor.html",
       "PackagePath": "staticwebassets\\add-doctor.html"
     },
@@ -223,6 +227,10 @@
     {
       "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\js\\ProfileSettings.js",
       "PackagePath": "staticwebassets\\js\\ProfileSettings.js"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\js\\add-department.js",
+      "PackagePath": "staticwebassets\\js\\add-department.js"
     },
     {
       "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\js\\add-doctor.js",

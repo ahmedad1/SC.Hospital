@@ -260,8 +260,44 @@
   },
   {
     "ContainingType": "Hospital.Controllers.DepartmentsController",
-    "Method": "GetAllDepartments",
+    "Method": "Add",
+    "RelativePath": "api/Departments",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "DepartmentName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "BackgroundCardImage",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Hospital.Controllers.DepartmentsController",
+    "Method": "GetAllDepartmentsNoVerbos",
     "RelativePath": "api/Departments/no-verbos",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Hospital.Controllers.DepartmentsController",
+    "Method": "GetAllDepartmentsVerbos",
+    "RelativePath": "api/Departments/verbos",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

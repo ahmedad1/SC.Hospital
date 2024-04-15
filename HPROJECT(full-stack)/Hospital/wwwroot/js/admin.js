@@ -1,9 +1,11 @@
 import {
+  AddDepartmentTable,
   AddDoctorTable,
   AddPatientTable,
   UpdateTokens,
   appendLoadingIcon,
   backendAccountApi,
+  backendDepartmentApi,
   checkForCookies,
   fetchJSONAuth,
   getCookie,
@@ -13,6 +15,7 @@ import {
 
 let patientInSidebar = document.querySelector(".patient-sidebar");
 let doctorInSidebar = document.querySelector(".doctor-sidebar");
+let departmentSidebar=document.querySelector(".department-sidebar")
 let section = document.querySelector("section");
 let selects = document.querySelectorAll("select");
 let usernamespan = document.querySelector(".usernamespan");
@@ -96,7 +99,7 @@ window.addEventListener("scroll", async () => {
         sessionStorage.setItem("page", +sessionStorage.getItem("page") - 1);
     }
 });
-patientInSidebar.addEventListener("click", (_) => {
+patientInSidebar.addEventListener("click",async (_) => {
   isSearchingGlobal = 0;
   searchingTypeGlobal = undefined;
   searchingValueGlobal = undefined;
@@ -104,6 +107,8 @@ patientInSidebar.addEventListener("click", (_) => {
     currentSection = "patient";
     doctorInSidebar.classList.remove("active");
     doctorInSidebar.classList.add("bg-light");
+    departmentSidebar.classList.remove("active");
+    departmentSidebar.classList.add("bg-light");
     patientInSidebar.classList.add("active");
     patientInSidebar.classList.remove("bg-light");
   }
@@ -121,7 +126,7 @@ patientInSidebar.addEventListener("click", (_) => {
     
     */
   sessionStorage.setItem("page", 1);
-  fetchRenderPatients(true);
+  await fetchRenderPatients(true);
 });
 
 async function searchHandler(pageNum) {
@@ -158,6 +163,28 @@ async function fetchRenderDoctors(replacePatient) {
   }
   return false;
 }
+async function fetchRenderDepartments(replaceOther){
+  let departments=await ((await fetch(`${backendDepartmentApi}verbos`)).json())
+  AddDepartmentTable(section,departments,replaceOther)
+  return true;
+}
+departmentSidebar.addEventListener("click",async _=>{
+  isSearchingGlobal = 0;
+  searchingTypeGlobal = undefined;
+  searchingValueGlobal = undefined;
+  if (!departmentSidebar.classList.contains("active")) {
+    patientInSidebar.classList.remove("active");
+    patientInSidebar.classList.add("bg-light");
+    doctorInSidebar.classList.remove("active");
+    doctorInSidebar.classList.add("bg-light");
+    departmentSidebar.classList.remove("bg-light");
+    departmentSidebar.classList.add("active");
+    currentSection = "department";
+  }
+  sessionStorage.setItem("page", 1);
+
+  await fetchRenderDepartments(true);
+})
 doctorInSidebar.addEventListener("click", async (_) => {
   isSearchingGlobal = 0;
   searchingTypeGlobal = undefined;
@@ -165,6 +192,8 @@ doctorInSidebar.addEventListener("click", async (_) => {
   if (!doctorInSidebar.classList.contains("active")) {
     patientInSidebar.classList.remove("active");
     patientInSidebar.classList.add("bg-light");
+    departmentSidebar.classList.remove("active");
+    departmentSidebar.classList.add("bg-light");
     doctorInSidebar.classList.remove("bg-light");
     doctorInSidebar.classList.add("active");
     currentSection = "doctor";
@@ -173,4 +202,5 @@ doctorInSidebar.addEventListener("click", async (_) => {
   sessionStorage.setItem("page", 1);
 
   await fetchRenderDoctors(true);
+
 });

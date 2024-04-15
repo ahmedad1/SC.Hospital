@@ -1,5 +1,6 @@
 const backendOrigin = location.origin;
 export const backendAccountApi = backendOrigin + "/api/Account/";
+export const backendDepartmentApi=backendOrigin+"/api/Departments/"
 const loadingIcon =
   '<img src="images/loading.png"class="loading" alt=""class="ml-2">';
 
@@ -246,8 +247,8 @@ let toggleDisableInput = (event) => {
   }
 };
 
-export function AddDoctorTable(section, json, changeFromPatient = false) {
-  if (changeFromPatient) {
+export function AddDoctorTable(section, json, changeFromOther = false) {
+  if (changeFromOther) {
     section.innerHTML = "";
     section.insertAdjacentHTML(
       "beforeend",
@@ -333,8 +334,8 @@ export function AddDoctorTable(section, json, changeFromPatient = false) {
     });
   });
 }
-export function AddPatientTable(section, json, changeFromDoctor = false) {
-  if (changeFromDoctor) {
+export function AddPatientTable(section, json, changeFromOther = false) {
+  if (changeFromOther) {
     section.innerHTML = "";
     section.insertAdjacentHTML(
       "beforeend",
@@ -484,4 +485,190 @@ export function AddPatientTable(section, json, changeFromDoctor = false) {
       }
     });
   });
+}
+
+function base64ToBlob(img,extention="jpeg"){
+  let decodedImage=atob(img)
+  let array=new Array(decodedImage.length)
+  for(let i =0;i<decodedImage.length;i++){
+    array[i]=decodedImage.charCodeAt(i)
+  }
+  let uint8Array=new Uint8Array(array);
+  return new Blob([uint8Array],{type:"image/"+extention})
+}
+
+export function AddDepartmentTable(section, json, changeFromOther){
+  if (changeFromOther) {
+    section.innerHTML = "";
+      /*
+  
+  public int Id { get; set; }
+  public string DepartmentName { get; set; }
+  public string Description { get; set; }
+  public byte[] BackgroundCardImage { get; set; }
+  */
+    section.insertAdjacentHTML(
+      "beforeend",
+      `
+       
+    <a href="../add-department.html"target=_blank class="btn btn-info form-control">Add Deparment</a>
+           
+            <table class="table ">
+                
+                <thead class="bg-primary text-light">
+                    
+                  <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Department Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Card Image</th>
+                    <th scope="col">Options</th>
+                    <th scope="col">Commit</th>
+                   
+                  </tr>
+                </thead>
+                <tbody>
+                 
+                  
+                </tbody>
+             
+                </table>
+        
+        `
+    );
+  }
+  if (json.length == 0) return;
+  let tbody = document.querySelector("tbody");
+
+  for (let i of json)
+  {
+  
+    let url=URL.createObjectURL(base64ToBlob(i.backgroundCardImage,"png"))
+    console.log(url);
+    tbody.insertAdjacentHTML(
+      "beforeend",
+      `
+        <tr>
+        <th scope="row">${i.id}</th>
+        <td><input class="input-cell-depts"type="text" value="${
+          i.departmentName
+        }"disabled></td>
+        <td><input class="input-cell-depts"type="text" value="${
+          i.description
+        }"disabled></td>
+        <td><img width="100" src=${url} class="card-image" /><input type=file class="d-none file-dept-image"/></td>
+        <td><select name="options" class="form-control manip">
+         <option value="delete">Delete</option>
+            <option value="update">Update</option>
+        </select></td>
+        <td ><button class="btn btn-primary saveBtn">Save</button></td>
+      </tr>
+    
+        `
+    );
+  
+  }
+  let cardImages=document.querySelectorAll(".card-image")
+  cardImages.forEach(e=>{
+    e.addEventListener("click",event=>{
+      if(event.target.parentElement.parentElement.children[1].children[0].disabled!=true){
+       let input=event.target.parentElement.children[1]
+       input.click();
+       input.onchange=function(e){//to be contiued
+        let fileReader=new FileReader()
+        fileReader.readAsDataURL(this.files[0])
+        fileReader.onload=function(eF){
+        e.target.parentElement.children[0].src=eF.target.result
+        }
+      }
+      }
+      else{
+        return
+      }
+    })
+  })
+  let manips = document.querySelectorAll(".manip");
+  manips.forEach((e) => {
+    e.addEventListener("change", (event) => {
+      toggleDisableInput(event);
+    });
+  });
+  const saveBtns = document.querySelectorAll(".saveBtn");
+  saveBtns.forEach((e) => {
+    e.addEventListener("click", async (event) => {
+      const parentTr = event.target.parentElement.parentElement;
+      const id = parentTr.children[0].innerText;
+      let data = [];
+      for (let c of parentTr.children) {
+        if (c.children[0]) data.push(c.children[0].value);
+      }
+
+      if (data[7] == "update") {
+        appendLoadingIcon(e);
+        if (!isNaN(data[6])) {
+          data[6] = data[6] == "0" ? "false" : "true";
+        }
+        let result = await fetchJSONAuth(
+          `${backendAccountApi}user`,
+          {
+            id: +id,
+            firstName: data[0],
+            lastName: data[1],
+            userName: data[2],
+            email: data[3],
+            gender: data[4],
+            birthDate: data[5],
+            EmailConfirmed: data[6],
+            role:"patients"
+          },
+          "PUT"
+        );
+        if (result.success) {
+          DisplayAlertModal("Updated Succesfully", "text-success");
+        } else if (result.newUserNameIsExist) {
+          DisplayAlertModal("UserName Is Already Exist", "text-danger");
+        } else if (result.newEmailIsExist) {
+          DisplayAlertModal("Email Is Already Exist", "text-danger");
+        } else {
+          DisplayAlertModal(
+            "Some of the inputs are not in the correct format or something went wrong"
+          );
+        }
+        removeLoadingIcon(e);
+      } else if (data[7] == "delete") {
+        const confirmModal = document.getElementById("confirmDelete");
+        const modal = new bootstrap.Modal(confirmModal);
+        modal.show();
+        const confirmBtn = document.getElementById("confirmYes");
+        confirmBtn.addEventListener("click", async (eventConfirm) => {
+          appendLoadingIcon(eventConfirm.target);
+          const result = await fetchJSONAuth(
+            `${backendAccountApi}/patients/${id}`,
+            {},
+            "DELETE"
+          );
+          removeLoadingIcon(eventConfirm.target);
+
+          if (result != 200) {
+            DisplayAlertModal("Something went wrong", "text-danger");
+          } else {
+            DisplayAlertModal("Deleted Successfully", "text-success");
+            parentTr.remove();
+          }
+        });
+      }
+    });
+  });
+}
+
+export async function postMultiPart(url, formData,methodName){
+  let result=await fetch(url,{
+    method:methodName,
+    body:formData
+  })
+  if(result.status==401){
+    await UpdateTokens();
+    return await postMultiPart(url,formData,methodName);
+  }
+  return result;
 }
