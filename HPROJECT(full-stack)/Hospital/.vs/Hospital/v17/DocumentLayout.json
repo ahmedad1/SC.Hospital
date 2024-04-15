@@ -101,7 +101,7 @@
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAADEAAAAAAAAAAAAAACMAAAAuAAAA",
+              "ViewState": "AQIAADEAAAAAAAAAAAAAADoAAAAmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-14T11:04:21.327Z",
               "EditorCaption": ""
@@ -152,8 +152,7 @@
               "RelativeToolTip": "..\\RepositoryPattern.EfCore\\Repositories\\DepartmentRepository.cs",
               "ViewState": "AQIAABQAAAAAAAAAAAAnwB4AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-14T10:42:49.213Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-14T10:42:49.213Z"
             },
             {
               "$type": "Document",

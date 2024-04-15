@@ -249,6 +249,9 @@ let toggleDisableInput = (event) => {
 
 export function AddDoctorTable(section, json, changeFromOther = false) {
   if (changeFromOther) {
+    document.querySelector(".searchBtn").classList.remove("d-none")
+    document.querySelector(".searchValue").classList.remove("d-none")
+    document.getElementById("searchType").classList.remove("d-none")
     section.innerHTML = "";
     section.insertAdjacentHTML(
       "beforeend",
@@ -336,6 +339,9 @@ export function AddDoctorTable(section, json, changeFromOther = false) {
 }
 export function AddPatientTable(section, json, changeFromOther = false) {
   if (changeFromOther) {
+    document.querySelector(".searchBtn").classList.remove("d-none")
+    document.querySelector(".searchValue").classList.remove("d-none")
+    document.getElementById("searchType").classList.remove("d-none")
     section.innerHTML = "";
     section.insertAdjacentHTML(
       "beforeend",
@@ -499,6 +505,9 @@ function base64ToBlob(img,extention="jpeg"){
 
 export function AddDepartmentTable(section, json, changeFromOther){
   if (changeFromOther) {
+    document.querySelector(".searchBtn").classList.add("d-none")
+    document.querySelector(".searchValue").classList.add("d-none")
+    document.getElementById("searchType").classList.add("d-none")
     section.innerHTML = "";
       /*
   
@@ -544,7 +553,7 @@ export function AddDepartmentTable(section, json, changeFromOther){
   {
   
     let url=URL.createObjectURL(base64ToBlob(i.backgroundCardImage,"png"))
-    console.log(url);
+
     tbody.insertAdjacentHTML(
       "beforeend",
       `
@@ -568,18 +577,17 @@ export function AddDepartmentTable(section, json, changeFromOther){
     );
   
   }
+  URL.revokeObjectURL(url)
   let cardImages=document.querySelectorAll(".card-image")
   cardImages.forEach(e=>{
     e.addEventListener("click",event=>{
       if(event.target.parentElement.parentElement.children[1].children[0].disabled!=true){
        let input=event.target.parentElement.children[1]
        input.click();
-       input.onchange=function(e){//to be contiued
-        let fileReader=new FileReader()
-        fileReader.readAsDataURL(this.files[0])
-        fileReader.onload=function(eF){
-        e.target.parentElement.children[0].src=eF.target.result
-        }
+       input.onchange=function(e){
+        let imageUrl=URL.createObjectURL(e.target.files[0])
+        e.target.parentElement.children[0].src=imageUrl;
+        URL.revokeObjectURL(imageUrl)
       }
       }
       else{
