@@ -493,16 +493,17 @@ export function AddPatientTable(section, json, changeFromOther = false) {
   });
 }
 
-function base64ToBlob(img,extention="jpeg"){
-  let decodedImage=atob(img)
-  let array=new Array(decodedImage.length)
-  for(let i =0;i<decodedImage.length;i++){
-    array[i]=decodedImage.charCodeAt(i)
-  }
-  let uint8Array=new Uint8Array(array);
-  return new Blob([uint8Array],{type:"image/"+extention})
-}
 
+function base64ToBlob(img,extension="jpeg"){
+  let decodedImage=atob(img)
+  let uint8Array=new Uint8Array(decodedImage.length)
+  for(let i =0;i<decodedImage.length;i++){
+    uint8Array[i]=decodedImage.charCodeAt(i)
+  }
+  
+  return new Blob([uint8Array],{type:"image/"+extension})
+
+}
 export function AddDepartmentTable(section, json, changeFromOther){
   if (changeFromOther) {
     document.querySelector(".searchBtn").classList.add("d-none")
@@ -576,8 +577,8 @@ export function AddDepartmentTable(section, json, changeFromOther){
         `
     );
   
+   
   }
-  URL.revokeObjectURL(url)
   let cardImages=document.querySelectorAll(".card-image")
   cardImages.forEach(e=>{
     e.addEventListener("click",event=>{
