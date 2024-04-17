@@ -30,7 +30,7 @@
               "RelativeDocumentMoniker": "Controllers\\DepartmentsController.cs",
               "ToolTip": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\Controllers\\DepartmentsController.cs",
               "RelativeToolTip": "Controllers\\DepartmentsController.cs",
-              "ViewState": "AQIAACAAAAAAAAAAAAAiwCsAAAAJAAAA",
+              "ViewState": "AQIAACMAAAAAAAAAAAAiwCwAAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-17T20:04:35.705Z",
               "EditorCaption": ""
@@ -45,7 +45,8 @@
               "RelativeToolTip": "..\\RepositoryPattern.Core\\Interfaces\\IDepartmentRepository.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAqAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-17T20:01:10.978Z"
+              "WhenOpened": "2024-04-17T20:01:10.978Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",

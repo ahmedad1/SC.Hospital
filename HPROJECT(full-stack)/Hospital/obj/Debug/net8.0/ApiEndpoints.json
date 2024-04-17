@@ -302,7 +302,7 @@
   },
   {
     "ContainingType": "Hospital.Controllers.DepartmentsController",
-    "Method": "Delete",
+    "Method": "Update",
     "RelativePath": "api/Departments/{id}",
     "HttpMethod": "PUT",
     "IsController": true,

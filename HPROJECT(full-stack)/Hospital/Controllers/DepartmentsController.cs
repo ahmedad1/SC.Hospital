@@ -44,7 +44,7 @@ namespace Hospital.Controllers
         }
         [Authorize(Roles ="Adm")]
         [HttpPut("{id}")]
-        public async Task<IActionResult> Delete(int id,DepartmentDto deptDto)
+        public async Task<IActionResult> Update(int id,DepartmentDto deptDto)
         {
             var result=await unitOfWork.DepartmentRepository.UpdateAsync(deptDto, id);
             return result? Ok() : NotFound();
