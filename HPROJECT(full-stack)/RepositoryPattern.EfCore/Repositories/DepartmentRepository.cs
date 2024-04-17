@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace RepositoryPatternWithUOW.EfCore.Repositories
 {
-    public class DepartmentRepository(AppDbContext context,MapToDepartment mapper) : IDepartmentRepository
+    public class DepartmentRepository(AppDbContext context, MapToDepartment mapper) : IDepartmentRepository
     {
         private async Task<byte[]> GetFileAsBinary(IFormFile file)
         {
@@ -23,20 +23,29 @@ namespace RepositoryPatternWithUOW.EfCore.Repositories
         }
         public async Task AddAsync(DepartmentDto department)
         {
-            var dept=mapper.MapToDept(department);
-            dept.BackgroundCardImage =await GetFileAsBinary(department.BackgroundCardImage);
+            var dept = mapper.MapToDept(department);
+            dept.BackgroundCardImage = await GetFileAsBinary(department.BackgroundCardImage);
             await context.Set<Department>().AddAsync(dept);
-            
+
         }
 
         public async Task<IEnumerable<object>> GetAllAsync(bool includeAllProps)
         {
-            context.ChangeTracker.LazyLoadingEnabled =false;
+            context.ChangeTracker.LazyLoadingEnabled = false;
             if (includeAllProps)
                 return await context.Set<Department>().AsNoTracking().ToListAsync();
-            return await context.Set<Department>().AsNoTracking().Select(x => new {x.Id,x.DepartmentName}).ToListAsync();
-           
-        }
+            return await context.Set<Department>().AsNoTracking().Select(x => new { x.Id, x.DepartmentName }).ToListAsync();
 
+        }
+        public async Task<bool> DeleteAsync(int id)
+        {
+            return (await context.Set<Department>().Where(x => x.Id == id).ExecuteDeleteAsync()) != 0;
+        }
+        public async Task<bool> UpdateAsync(DepartmentDto department,int id)
+        {
+            var bgImage = await GetFileAsBinary(department.BackgroundCardImage);
+           return await context.Set<Department>().Where(x=>x.Id==id).ExecuteUpdateAsync(x => x.SetProperty(p => p.BackgroundCardImage, bgImage).SetProperty(p => p.DepartmentName, department.DepartmentName).SetProperty(p => p.Description, department.Description))
+            != 0;
+        }
     }
 }

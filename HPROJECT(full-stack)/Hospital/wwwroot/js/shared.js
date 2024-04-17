@@ -475,7 +475,7 @@ export function AddPatientTable(section, json, changeFromOther = false) {
         confirmBtn.addEventListener("click", async (eventConfirm) => {
           appendLoadingIcon(eventConfirm.target);
           const result = await fetchJSONAuth(
-            `https://localhost:7197/api/Account/patients/${id}`,
+            `${backendAccountApi}patients/${id}`,
             {},
             "DELETE"
           );
@@ -588,7 +588,7 @@ export function AddDepartmentTable(section, json, changeFromOther){
        input.onchange=function(e){
         let imageUrl=URL.createObjectURL(e.target.files[0])
         e.target.parentElement.children[0].src=imageUrl;
-        URL.revokeObjectURL(imageUrl)
+  
       }
       }
       else{
@@ -609,42 +609,42 @@ export function AddDepartmentTable(section, json, changeFromOther){
       const id = parentTr.children[0].innerText;
       let data = [];
       for (let c of parentTr.children) {
-        if (c.children[0]) data.push(c.children[0].value);
+       
+        if (c.children[0]) {
+          if(c.children[0].nodeName!="IMG")
+          data.push(c.children[0].value)
+          else if(c.children[0].nodeName=="IMG"){
+            let result;
+            if(!c.children[1].files[0])
+              result=await ((await fetch(c.children[0].src)).blob())
+            else
+            result=c.children[1].files[0]
+            data.push(result)
+         
+       
+          }
+        }
       }
-
-      if (data[7] == "update") {
+      console.log(data);
+      if (data[3] == "update") {
         appendLoadingIcon(e);
-        if (!isNaN(data[6])) {
-          data[6] = data[6] == "0" ? "false" : "true";
-        }
-        let result = await fetchJSONAuth(
-          `${backendAccountApi}user`,
-          {
-            id: +id,
-            firstName: data[0],
-            lastName: data[1],
-            userName: data[2],
-            email: data[3],
-            gender: data[4],
-            birthDate: data[5],
-            EmailConfirmed: data[6],
-            role:"patients"
-          },
-          "PUT"
+      let formData=new FormData();
+      formData.append("departmentName",data[0])
+      formData.append("description",data[1])
+      formData.append("backgroundCardImage",data[2])
+      appendLoadingIcon(e)
+        let result = await fetchMultiPartAuth(
+          `${backendDepartmentApi}${id}`,formData,"PUT"
+          
         );
-        if (result.success) {
-          DisplayAlertModal("Updated Succesfully", "text-success");
-        } else if (result.newUserNameIsExist) {
-          DisplayAlertModal("UserName Is Already Exist", "text-danger");
-        } else if (result.newEmailIsExist) {
-          DisplayAlertModal("Email Is Already Exist", "text-danger");
-        } else {
-          DisplayAlertModal(
-            "Some of the inputs are not in the correct format or something went wrong"
-          );
-        }
         removeLoadingIcon(e);
-      } else if (data[7] == "delete") {
+       if(result.status==200){
+        DisplayAlertModal("Updated Successfully","text-success")
+       }
+       else{
+        DisplayAlertModal("Something went wrong","text-danger")
+       }
+      } else if (data[3] == "delete") {
         const confirmModal = document.getElementById("confirmDelete");
         const modal = new bootstrap.Modal(confirmModal);
         modal.show();
@@ -652,7 +652,7 @@ export function AddDepartmentTable(section, json, changeFromOther){
         confirmBtn.addEventListener("click", async (eventConfirm) => {
           appendLoadingIcon(eventConfirm.target);
           const result = await fetchJSONAuth(
-            `${backendAccountApi}/patients/${id}`,
+            `${backendDepartmentApi}${id}`,
             {},
             "DELETE"
           );
@@ -670,14 +670,14 @@ export function AddDepartmentTable(section, json, changeFromOther){
   });
 }
 
-export async function postMultiPart(url, formData,methodName){
+export async function fetchMultiPartAuth(url, formData,methodName){
   let result=await fetch(url,{
     method:methodName,
     body:formData
   })
   if(result.status==401){
     await UpdateTokens();
-    return await postMultiPart(url,formData,methodName);
+    return await fetchMultiPartAuth(url,formData,methodName);
   }
   return result;
 }

@@ -15,7 +15,7 @@ import {
 
 let patientInSidebar = document.querySelector(".patient-sidebar");
 let doctorInSidebar = document.querySelector(".doctor-sidebar");
-let departmentSidebar=document.querySelector(".department-sidebar")
+let departmentSidebar = document.querySelector(".department-sidebar");
 let section = document.querySelector("section");
 let selects = document.querySelectorAll("select");
 let usernamespan = document.querySelector(".usernamespan");
@@ -65,11 +65,10 @@ let fetchRenderPatients = async (replaceDoctor = false) => {
   if (data.length == 0) return false;
   return true;
 };
-window.addEventListener("DOMContentLoaded",async function(){
+window.addEventListener("DOMContentLoaded", async function () {
   await checkForCookies();
-})
-onload = async() => {
-  
+});
+onload = async () => {
   sessionStorage.setItem("page", 1);
   await fetchRenderPatients(true);
 };
@@ -99,7 +98,7 @@ window.addEventListener("scroll", async () => {
         sessionStorage.setItem("page", +sessionStorage.getItem("page") - 1);
     }
 });
-patientInSidebar.addEventListener("click",async (_) => {
+patientInSidebar.addEventListener("click", async (_) => {
   isSearchingGlobal = 0;
   searchingTypeGlobal = undefined;
   searchingValueGlobal = undefined;
@@ -154,7 +153,7 @@ searchForm.addEventListener("submit", async (e) => {
 async function fetchRenderDoctors(replacePatient) {
   let doctors = await fetchJSONAuth(
     `${backendAccountApi}doctors`,
-     +sessionStorage.getItem("page") ,
+    +sessionStorage.getItem("page"),
     "POST"
   );
   if (typeof doctors !== "number") {
@@ -163,12 +162,12 @@ async function fetchRenderDoctors(replacePatient) {
   }
   return false;
 }
-async function fetchRenderDepartments(replaceOther){
-  let departments=await ((await fetch(`${backendDepartmentApi}verbos`)).json())
-  AddDepartmentTable(section,departments,replaceOther)
+async function fetchRenderDepartments(replaceOther) {
+  let departments = await (await fetch(`${backendDepartmentApi}verbos`)).json();
+  AddDepartmentTable(section, departments, replaceOther);
   return true;
 }
-departmentSidebar.addEventListener("click",async _=>{
+departmentSidebar.addEventListener("click", async (_) => {
   isSearchingGlobal = 0;
   searchingTypeGlobal = undefined;
   searchingValueGlobal = undefined;
@@ -184,7 +183,7 @@ departmentSidebar.addEventListener("click",async _=>{
   sessionStorage.setItem("page", 1);
 
   await fetchRenderDepartments(true);
-})
+});
 doctorInSidebar.addEventListener("click", async (_) => {
   isSearchingGlobal = 0;
   searchingTypeGlobal = undefined;
@@ -202,5 +201,4 @@ doctorInSidebar.addEventListener("click", async (_) => {
   sessionStorage.setItem("page", 1);
 
   await fetchRenderDoctors(true);
-
 });

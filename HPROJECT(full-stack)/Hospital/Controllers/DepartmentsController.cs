@@ -35,6 +35,22 @@ namespace Hospital.Controllers
                 return Ok();
         
         }
-        
+        [Authorize(Roles ="Adm")]
+        [HttpDelete("{id}")]
+        public async Task<IActionResult>Delete(int id)
+        {
+            var result = await unitOfWork.DepartmentRepository.DeleteAsync(id);
+            return result? Ok() : NotFound();
+        }
+        [Authorize(Roles ="Adm")]
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Delete(int id,DepartmentDto deptDto)
+        {
+            var result=await unitOfWork.DepartmentRepository.UpdateAsync(deptDto, id);
+            return result? Ok() : NotFound();
+
+        }
+
+
     }
 }

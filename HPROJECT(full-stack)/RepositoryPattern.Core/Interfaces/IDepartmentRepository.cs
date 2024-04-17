@@ -12,6 +12,8 @@ namespace RepositoryPatternWithUOW.Core.Interfaces
     {
         public Task<IEnumerable<object>> GetAllAsync(bool includeAllProps);
         public Task AddAsync(DepartmentDto department);
+        public Task<bool> DeleteAsync(int id);
+        public Task<bool> UpdateAsync(DepartmentDto department,int id);
      
     }
 }

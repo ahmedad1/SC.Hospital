@@ -1,4 +1,4 @@
-import { DisplayAlertModal, backendDepartmentApi, fetchJSONAuth, postMultiPart } from "./shared.js";
+import { DisplayAlertModal, backendDepartmentApi, fetchJSONAuth, fetchMultiPartAuth } from "./shared.js";
 
 const departmentName = document.getElementById("departmentName");
 const departmentDiscription = document.getElementById("discription");
@@ -12,7 +12,7 @@ departmentForm.addEventListener("submit", async (e) => {
   formData.append("departmentName", departmentName.value);
   formData.append("description", departmentDiscription.value);
   formData.append("backgroundCardImage", departmentCardImage.files[0]);
-  let result = await postMultiPart(`${backendDepartmentApi}`, formData, "POST");
+  let result = await fetchMultiPartAuth(`${backendDepartmentApi}`, formData, "POST");
   if(result.status==200){
   DisplayAlertModal("Added Successfully","text-success")
   departmentForm.reset()
