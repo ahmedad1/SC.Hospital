@@ -19,7 +19,7 @@ namespace RepositoryPattern.Core.Interfaces
         public Task<bool> SignOutAsync(string refreshToken,string email);
         public Task<bool> DeleteRefreshTokenAsync(string refreshToken);
 
-        public Task<bool> MakeDoctorAccount(MakeDoctorProfileDto createDoctorProfileDto);
+        public Task<SignUpResult> MakeDoctorAccount(MakeDoctorProfileDto createDoctorProfileDto);
         public Task<bool> ChangePassword(ChangePasswordDto changePasswordDto, int id);
 
         public Task<ModifyInsensitveDataResult> ModifyInSensitiveDataAsync(JsonPatchDocument<User> modifyInsensitiveData, string email);

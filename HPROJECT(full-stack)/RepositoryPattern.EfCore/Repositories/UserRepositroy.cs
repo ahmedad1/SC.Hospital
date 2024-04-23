@@ -107,7 +107,6 @@ namespace RepositoryPattern.EfCore.Repositories
                                    and we have sent to you a verification code which is : <b>{verificationNum}</b> ";
                 subject = "Email Confirmation";
             }
-            await mailService.Send(email, subject,bodyOfMessage);
             user.VerificationCode = new()
             {
                 Code = verificationNum,
@@ -115,6 +114,9 @@ namespace RepositoryPattern.EfCore.Repositories
 
             };
             context.Update(user);
+            Task t1= mailService.Send(email, subject,bodyOfMessage);
+            Task t2 = context.SaveChangesAsync();
+            await Task.WhenAll(t1, t2);
             return true;
         }
         public async Task<bool> ValidateConfirmationCodeAsync(string email , string code, bool? IsForRestPassword=false)
@@ -145,17 +147,19 @@ namespace RepositoryPattern.EfCore.Repositories
 
             
         }
-        public async Task<bool> MakeDoctorAccount(MakeDoctorProfileDto createDoctorProfileDto)
+        public async Task<SignUpResult> MakeDoctorAccount(MakeDoctorProfileDto createDoctorProfileDto)
         {
-            if (await context.Users.AnyAsync(x => x.Email == createDoctorProfileDto.Email || x.UserName == createDoctorProfileDto.UserName)||!await context.Set<Department>().AnyAsync(x=>x.Id==createDoctorProfileDto.DepartmentId))
-                return false;
-
+            if(await context.Users.AnyAsync(x=>x.UserName== createDoctorProfileDto.UserName ))
+                return new() { Success=false,AlreadyExistField=nameof(AlreadyExistField.UserName)};
+            if (await context.Users.AnyAsync(x => x.Email == createDoctorProfileDto.Email ))
+                return new() { Success=false, AlreadyExistField=nameof(AlreadyExistField.Email)};
 
                 Doctor doctor = mapToUser.MapToDoctor(createDoctorProfileDto);
                 doctor.EmailConfirmed = true;
                 doctor.Password = BCrypt.Net.BCrypt.EnhancedHashPassword(doctor.Password);
+          
                 await context.Doctors.AddAsync(doctor);
-                return true;
+                return new() { Success=true};
         }
        
         public async Task<SignUpResult> SignUpAsync(SignUpDto signUpDto)
@@ -277,22 +281,7 @@ namespace RepositoryPattern.EfCore.Repositories
            
 
         }
-        public async Task<bool>AddSchedulesForDoctor(SchedulesDto schedulesDto)//try catch
-        {
-            context.ChangeTracker.LazyLoadingEnabled = false;
-            var doctor =await context.Doctors.AsNoTracking().Include(x=>x.SchedualsOfDoctor).FirstOrDefaultAsync(x => x.UserName == schedulesDto.userName);
-            if(doctor is null ) 
-                return false;
-            
-                doctor.SchedualsOfDoctor.Clear();
-                for (int i = 0; i < schedulesDto.Schedules.Count(); i++)
-                {
-                    doctor.SchedualsOfDoctor.Add(new() { Schedule = schedulesDto.Schedules[i] });
-                }
-            
-           
-            return true;
-        }
+    
 
         public async Task<bool> VerifyPassword(string email, string password)
         {
@@ -317,20 +306,33 @@ namespace RepositoryPattern.EfCore.Repositories
 
             if (page <= 0)
                 return Enumerable.Empty<UsersResult>();
+           
             context.ChangeTracker.LazyLoadingEnabled = false;
             context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
             int pageSize = 20;
-            var result = await context.Set<T>().Skip(pageSize * (page - 1)).Take(pageSize).Select(x => new UsersResult(x.Id, x.FirstName, x.LastName, x.UserName, x.Email, x.Gender.ToString(), x.BirthDate, x.EmailConfirmed, typeof(T) == typeof(Doctor )? (x as Doctor)!.Department.DepartmentName : null)).ToListAsync();
-     
+            IEnumerable<UsersResult> result;
+            if (typeof(T) == typeof(Patient))
+                result = await context.Set<Patient>().Skip(pageSize * (page - 1)).Take(pageSize).Select(x => new UsersResult(x.Id, x.FirstName, x.LastName, x.UserName, x.Email, x.Gender.ToString(), x.BirthDate, x.EmailConfirmed,null,null,null,null)).ToListAsync();
+            else
+            {
+                result= await context.Set<Doctor>().Skip(pageSize * (page - 1)).Take(pageSize).Select(x => new UsersResult(x.Id, x.FirstName, x.LastName, x.UserName, x.Email, x.Gender.ToString(), x.BirthDate, x.EmailConfirmed,x.Department.DepartmentName,x.StartTime,x.EndTime,x.DaysOfTheWork.ToString())).ToListAsync();
+            }
             return result;
         }
         public IEnumerable<UsersResult> SearchForUsers<T>(Expression<Func<T, bool>> expression,int page) where T :User
         {
             if(page<=0)
                 return Enumerable.Empty<UsersResult>();
+     
             context.ChangeTracker.LazyLoadingEnabled = false;
             int pageSize=20;
-            return context.Set<T>().Where(expression).Skip(pageSize*(page-1)).Take(pageSize).Select(x => new UsersResult(x.Id, x.FirstName, x.LastName, x.UserName, x.Email, x.Gender.ToString(), x.BirthDate, x.EmailConfirmed, typeof(T) == typeof(Doctor) ? (x as Doctor)!.Department.DepartmentName : null)).AsNoTracking();
+            var result = context.Set<T>().Where(expression).Skip(pageSize * (page - 1)).Take(pageSize);
+            if (typeof (T) == typeof (Patient))
+            return result.Select(x => new UsersResult(x.Id, x.FirstName, x.LastName, x.UserName, x.Email, x.Gender.ToString(), x.BirthDate, x.EmailConfirmed, null,null,null,null)).AsNoTracking();
+            else
+            return result.Select(x => new UsersResult(x.Id, x.FirstName, x.LastName, x.UserName, x.Email, x.Gender.ToString(), x.BirthDate, x.EmailConfirmed, (x as Doctor)!.Department.DepartmentName, (x as Doctor)!.StartTime, (x as Doctor)!.EndTime, (x as Doctor)!.DaysOfTheWork.ToString())).AsNoTracking();
+            
+
         }
         public async Task<Patient?> GetPatientBy(Expression<Func<Patient, bool>> expression)
         {

@@ -1,36 +1,43 @@
 ﻿
+using Newtonsoft.Json;
 using RepositoryPatternWithUOW.Core.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.Json.Serialization;
+
 using System.Threading.Tasks;
 
 namespace RepositoryPatternWithUOW.Core.ReturnedModels
 {
     public record UsersResult
     {
-        public UsersResult(int Id,
-                           string FirstName,
-                           string LastName,
-                           string UserName,
-                           string Email,
-                           string Gender,
-                           DateOnly BirthDate,
-                           bool EmailConfirmed,
-                           string? DepartmentName
-                              )
+        public UsersResult(int id,
+                           string firstName,
+                           string lastName,
+                           string userName,
+                           string email,
+                           string gender,
+                           DateOnly birthDate,
+                           bool emailConfirmed,
+                           string? departmentName
+,
+                           TimeSpan? startTime,
+                           TimeSpan? endTime,
+                           string? daysOfWork)
         {
-            this.Id = Id;
-            this.FirstName = FirstName;
-            this.LastName = LastName;
-            this.UserName = UserName;
-            this.Email = Email;
-            this.Gender = Gender;
-            this.BirthDate = BirthDate;
-            this.EmailConfirmed = EmailConfirmed;
-            this.DepartmentName = DepartmentName;
+            Id = id;
+            FirstName = firstName;
+            LastName = lastName;
+            UserName = userName;
+            Email = email;
+            Gender = gender;
+            BirthDate = birthDate;
+            EmailConfirmed = emailConfirmed;
+            DepartmentName = departmentName;
+            StartTime = startTime;
+            EndTime = endTime;
+            DaysOfWork = daysOfWork;
         }
 
         public int Id { get; }
@@ -41,7 +48,9 @@ namespace RepositoryPatternWithUOW.Core.ReturnedModels
         public string Gender { get; }
         public DateOnly BirthDate { get; }
         public bool EmailConfirmed { get; }
-        [JsonIgnore(Condition =JsonIgnoreCondition.WhenWritingNull)]
         public string? DepartmentName { get; }
+        public TimeSpan? StartTime { get; set; }
+        public TimeSpan? EndTime { get; set; }
+        public string? DaysOfWork { get; set; }
     }
 }

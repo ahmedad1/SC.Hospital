@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using RepositoryPattern.Core.Interfaces;
 using RepositoryPattern.Core.Models;
 using RepositoryPattern.EfCore;
@@ -12,6 +13,7 @@ using RepositoryPattern.EfCore.MailService;
 using RepositoryPattern.EfCore.MapToModel;
 using RepositoryPattern.EfCore.OptionPattenModels;
 using RepositoryPattern.EfCore.Repositories;
+using RepositoryPatternWithUOW.Core;
 using RepositoryPatternWithUOW.Core.Interfaces;
 using RepositoryPatternWithUOW.EfCore;
 using RepositoryPatternWithUOW.EfCore.MapToModel;
@@ -21,7 +23,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers().AddNewtonsoftJson();
+builder.Services.AddControllers().AddNewtonsoftJson(x=>x.SerializerSettings.NullValueHandling=NullValueHandling.Ignore);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

@@ -1,6 +1,6 @@
 const backendOrigin = location.origin;
 export const backendAccountApi = backendOrigin + "/api/Account/";
-export const backendDepartmentApi=backendOrigin+"/api/Departments/"
+export const backendDepartmentApi = backendOrigin + "/api/Departments/";
 const loadingIcon =
   '<img src="images/loading.png"class="loading" alt=""class="ml-2">';
 
@@ -67,6 +67,14 @@ export async function fetchJSONAuth(url, body, methodName) {
     return result.status;
   }
 }
+export async function GetAuth(url) {
+  const result = await fetch(url, { method: "GET" });
+  if (result.status == 401) {
+    await UpdateTokens();
+    return await GetAuth(url);
+  }
+  return await result.json();
+}
 export async function patchJSON(url, body) {
   return await fetch(url, {
     method: "PATCH",
@@ -90,15 +98,17 @@ export function deleteAllCookies() {
   setCookie("birthDate", " ", -5);
   setCookie("gender", " ", -5);
 }
-export async function signOut(isAllowedToAppendLoadingIcon = true,isAllowedToNavigate=true) {
+export async function signOut(
+  isAllowedToAppendLoadingIcon = true,
+  isAllowedToNavigate = true
+) {
   if (isAllowedToAppendLoadingIcon) {
     let signOutBtn = document.querySelector(".signout");
     appendLoadingIcon(signOutBtn);
   }
- await DeleteRequest(`${backendAccountApi}sign-out`);
-  deleteAllCookies()
-  if(isAllowedToNavigate)
-  location.href = `${location.origin}/index.html`;
+  await DeleteRequest(`${backendAccountApi}sign-out`);
+  deleteAllCookies();
+  if (isAllowedToNavigate) location.href = `${location.origin}/index.html`;
 }
 export async function checkForCookies(isAllowedToNavigate = true) {
   if (
@@ -110,13 +120,24 @@ export async function checkForCookies(isAllowedToNavigate = true) {
       getCookie("gender") &&
       getCookie("birthDate") &&
       getCookie("email")
-    )||
-    (getCookie("role")=="Pat"&&(location.pathname.startsWith("/doctor.html")||location.pathname.startsWith("/admin.html")||location.pathname.startsWith("/add-doctor.html")))||
-    (getCookie("role")=="Doc"&&!(location.pathname.startsWith("/doctor.html")||location.pathname.startsWith("/ProfileSettings.html")))||
-    (getCookie("role")=="Adm"&&!(location.pathname.startsWith("/admin.html")||location.pathname.startsWith("/add-doctor.html")||location.pathname.startsWith("/ProfileSettings.html")))
-    
+    ) ||
+    (getCookie("role") == "Pat" &&
+      (location.pathname.startsWith("/doctor.html") ||
+        location.pathname.startsWith("/admin.html") ||
+        location.pathname.startsWith("/add-doctor.html"))) ||
+    (getCookie("role") == "Doc" &&
+      !(
+        location.pathname.startsWith("/doctor.html") ||
+        location.pathname.startsWith("/ProfileSettings.html")
+      )) ||
+    (getCookie("role") == "Adm" &&
+      !(
+        location.pathname.startsWith("/admin.html") ||
+        location.pathname.startsWith("/add-doctor.html") ||
+        location.pathname.startsWith("/ProfileSettings.html")
+      ))
   ) {
-    await signOut(false,isAllowedToNavigate);
+    await signOut(false, isAllowedToNavigate);
     if (isAllowedToNavigate) location.href = "/index.html";
 
     return false;
@@ -249,9 +270,9 @@ let toggleDisableInput = (event) => {
 
 export function AddDoctorTable(section, json, changeFromOther = false) {
   if (changeFromOther) {
-    document.querySelector(".searchBtn").classList.remove("d-none")
-    document.querySelector(".searchValue").classList.remove("d-none")
-    document.getElementById("searchType").classList.remove("d-none")
+    document.querySelector(".searchBtn").classList.remove("d-none");
+    document.querySelector(".searchValue").classList.remove("d-none");
+    document.getElementById("searchType").classList.remove("d-none");
     section.innerHTML = "";
     section.insertAdjacentHTML(
       "beforeend",
@@ -272,11 +293,13 @@ export function AddDoctorTable(section, json, changeFromOther = false) {
                 <th scope="col">BirthDate</th>
                 <th scope="col">EmailConfirmed</th>
                 <th scope="col">Department</th>
-                <th scope="col">Schedule</th>
+                <th scope="col">StartTime</th>
+                <th scope="col">EndTime</th>
+                <th scope="col">Days</th>
                 <th scope="col">Options</th>
                 <th scope="col">Commit</th>
-               
-              </tr>
+                
+                </tr>
             </thead>
             <tbody>
              
@@ -290,7 +313,9 @@ export function AddDoctorTable(section, json, changeFromOther = false) {
   }
   if (json.length == 0) return;
   let tbody = document.querySelector("tbody");
-  for (let i of json)
+
+  for (let i of json){
+    let _daysOfWork=i.daysOfWork.split(",").map(e=>e.trim())
     tbody.insertAdjacentHTML(
       "beforeend",
       `
@@ -302,7 +327,7 @@ export function AddDoctorTable(section, json, changeFromOther = false) {
     <td><input class="input-cell"type="text" value="${i.lastName}"disabled></td>
     <td><input class="input-cell"type="text" value="${i.userName}"disabled></td>
     <td><input class="input-cell"type="email" value="${i.email}"disabled></td>
-    <td><select name="options" class="form-control">
+    <td><select name="options" class="form-control"disabled>
         <option value="${i.gender == "Male" ? "Male" : "Female"}">${
         i.gender == "Male" ? "Male" : "Female"
       }</option>
@@ -313,13 +338,29 @@ export function AddDoctorTable(section, json, changeFromOther = false) {
     <td><input class="input-cell"type="date" value="${getRequiredDateFormat(
       i.birthDate
     )}"disabled></td>
-    <td><input class="input-cell"type="text" value="Mark"disabled>${
+    <td><input class="input-cell"type="text" value="${
       i.emailConfirmed
-    }</td>
-    <td><input class="input-cell"type="text" value="Mark"disabled>${
+    }"disabled></td>
+    <td><input class="input-cell"type="text" value="${
       i.departmentName
-    }</td>
-    <td><a class="input-cell"type="text" href="#">Schedule</a></td>
+    }"disabled></td>
+    <td><input class="input-cell"type="time" value="${
+      i.startTime
+    }"disabled></td>
+    <td>
+    <input class="input-cell"type="time" value="${i.endTime}"disabled>
+    </td>
+    <td>
+    <select id="days" class="form-control" multiple disabled style="padding:0">
+                        <option value="1"${_daysOfWork.includes("Sat")?"selected":""}>Saturday</option>
+                        <option value="2"${_daysOfWork.includes("Sun")?"selected":""}>Sunday</option>
+                        <option value="4"${_daysOfWork.includes("Mon")?"selected":""}>Monday</option>
+                        <option value="8"${_daysOfWork.includes("Tue")?"selected":""}>Tuesday</option>
+                        <option value="16"${_daysOfWork.includes("Wed")?"selected":""}>Wednesday</option>
+                        <option value="32"${_daysOfWork.includes("Thu")?"selected":""}>Thursday</option>
+                        <option value="64"${_daysOfWork.includes("Fri")?"selected":""}>Friday</option>
+      </select>
+    </td>
     <td><select name="options" class="form-control manip">
         <option value="delete">Delete</option>
         <option value="update">Update</option>
@@ -329,7 +370,7 @@ export function AddDoctorTable(section, json, changeFromOther = false) {
 
     `
     );
-
+  }
   let manips = document.querySelectorAll(".manip");
   manips.forEach((e) => {
     e.addEventListener("change", (event) => {
@@ -339,9 +380,9 @@ export function AddDoctorTable(section, json, changeFromOther = false) {
 }
 export function AddPatientTable(section, json, changeFromOther = false) {
   if (changeFromOther) {
-    document.querySelector(".searchBtn").classList.remove("d-none")
-    document.querySelector(".searchValue").classList.remove("d-none")
-    document.getElementById("searchType").classList.remove("d-none")
+    document.querySelector(".searchBtn").classList.remove("d-none");
+    document.querySelector(".searchValue").classList.remove("d-none");
+    document.getElementById("searchType").classList.remove("d-none");
     section.innerHTML = "";
     section.insertAdjacentHTML(
       "beforeend",
@@ -451,7 +492,7 @@ export function AddPatientTable(section, json, changeFromOther = false) {
             gender: data[4],
             birthDate: data[5],
             EmailConfirmed: data[6],
-            role:"patients"
+            role: "patients",
           },
           "PUT"
         );
@@ -493,24 +534,22 @@ export function AddPatientTable(section, json, changeFromOther = false) {
   });
 }
 
-
-function base64ToBlob(img,extension="jpeg"){
-  let decodedImage=atob(img)
-  let uint8Array=new Uint8Array(decodedImage.length)
-  for(let i =0;i<decodedImage.length;i++){
-    uint8Array[i]=decodedImage.charCodeAt(i)
+function base64ToBlob(img, extension = "jpeg") {
+  let decodedImage = atob(img);
+  let uint8Array = new Uint8Array(decodedImage.length);
+  for (let i = 0; i < decodedImage.length; i++) {
+    uint8Array[i] = decodedImage.charCodeAt(i);
   }
-  
-  return new Blob([uint8Array],{type:"image/"+extension})
 
+  return new Blob([uint8Array], { type: "image/" + extension });
 }
-export function AddDepartmentTable(section, json, changeFromOther){
+export function AddDepartmentTable(section, json, changeFromOther) {
   if (changeFromOther) {
-    document.querySelector(".searchBtn").classList.add("d-none")
-    document.querySelector(".searchValue").classList.add("d-none")
-    document.getElementById("searchType").classList.add("d-none")
+    document.querySelector(".searchBtn").classList.add("d-none");
+    document.querySelector(".searchValue").classList.add("d-none");
+    document.getElementById("searchType").classList.add("d-none");
     section.innerHTML = "";
-      /*
+    /*
   
   public int Id { get; set; }
   public string DepartmentName { get; set; }
@@ -550,22 +589,16 @@ export function AddDepartmentTable(section, json, changeFromOther){
   if (json.length == 0) return;
   let tbody = document.querySelector("tbody");
 
-  for (let i of json)
-  {
-  
-    let url=URL.createObjectURL(base64ToBlob(i.backgroundCardImage,"png"))
+  for (let i of json) {
+    let url = URL.createObjectURL(base64ToBlob(i.backgroundCardImage, "png"));
 
     tbody.insertAdjacentHTML(
       "beforeend",
       `
         <tr>
         <th scope="row">${i.id}</th>
-        <td><input class="input-cell-depts"type="text" value="${
-          i.departmentName
-        }"disabled></td>
-        <td><input class="input-cell-depts"type="text" value="${
-          i.description
-        }"disabled></td>
+        <td><input class="input-cell-depts"type="text" value="${i.departmentName}"disabled></td>
+        <td><input class="input-cell-depts"type="text" value="${i.description}"disabled></td>
         <td><img width="100" src=${url} class="card-image" /><input type=file class="d-none file-dept-image"/></td>
         <td><select name="options" class="form-control manip">
          <option value="delete">Delete</option>
@@ -576,26 +609,25 @@ export function AddDepartmentTable(section, json, changeFromOther){
     
         `
     );
-  
-   
   }
-  let cardImages=document.querySelectorAll(".card-image")
-  cardImages.forEach(e=>{
-    e.addEventListener("click",event=>{
-      if(event.target.parentElement.parentElement.children[1].children[0].disabled!=true){
-       let input=event.target.parentElement.children[1]
-       input.click();
-       input.onchange=function(e){
-        let imageUrl=URL.createObjectURL(e.target.files[0])
-        e.target.parentElement.children[0].src=imageUrl;
-  
+  let cardImages = document.querySelectorAll(".card-image");
+  cardImages.forEach((e) => {
+    e.addEventListener("click", (event) => {
+      if (
+        event.target.parentElement.parentElement.children[1].children[0]
+          .disabled != true
+      ) {
+        let input = event.target.parentElement.children[1];
+        input.click();
+        input.onchange = function (e) {
+          let imageUrl = URL.createObjectURL(e.target.files[0]);
+          e.target.parentElement.children[0].src = imageUrl;
+        };
+      } else {
+        return;
       }
-      }
-      else{
-        return
-      }
-    })
-  })
+    });
+  });
   let manips = document.querySelectorAll(".manip");
   manips.forEach((e) => {
     e.addEventListener("change", (event) => {
@@ -609,41 +641,36 @@ export function AddDepartmentTable(section, json, changeFromOther){
       const id = parentTr.children[0].innerText;
       let data = [];
       for (let c of parentTr.children) {
-       
         if (c.children[0]) {
-          if(c.children[0].nodeName!="IMG")
-          data.push(c.children[0].value)
-          else if(c.children[0].nodeName=="IMG"){
+          if (c.children[0].nodeName != "IMG") data.push(c.children[0].value);
+          else if (c.children[0].nodeName == "IMG") {
             let result;
-            if(!c.children[1].files[0])
-              result=await ((await fetch(c.children[0].src)).blob())
-            else
-            result=c.children[1].files[0]
-            data.push(result)
-         
-       
+            if (!c.children[1].files[0])
+              result = await (await fetch(c.children[0].src)).blob();
+            else result = c.children[1].files[0];
+            data.push(result);
           }
         }
       }
       console.log(data);
       if (data[3] == "update") {
         appendLoadingIcon(e);
-      let formData=new FormData();
-      formData.append("departmentName",data[0])
-      formData.append("description",data[1])
-      formData.append("backgroundCardImage",data[2])
-      appendLoadingIcon(e)
+        let formData = new FormData();
+        formData.append("departmentName", data[0]);
+        formData.append("description", data[1]);
+        formData.append("backgroundCardImage", data[2]);
+        appendLoadingIcon(e);
         let result = await fetchMultiPartAuth(
-          `${backendDepartmentApi}${id}`,formData,"PUT"
-          
+          `${backendDepartmentApi}${id}`,
+          formData,
+          "PUT"
         );
         removeLoadingIcon(e);
-       if(result.status==200){
-        DisplayAlertModal("Updated Successfully","text-success")
-       }
-       else{
-        DisplayAlertModal("Something went wrong","text-danger")
-       }
+        if (result.status == 200) {
+          DisplayAlertModal("Updated Successfully", "text-success");
+        } else {
+          DisplayAlertModal("Something went wrong", "text-danger");
+        }
       } else if (data[3] == "delete") {
         const confirmModal = document.getElementById("confirmDelete");
         const modal = new bootstrap.Modal(confirmModal);
@@ -670,14 +697,14 @@ export function AddDepartmentTable(section, json, changeFromOther){
   });
 }
 
-export async function fetchMultiPartAuth(url, formData,methodName){
-  let result=await fetch(url,{
-    method:methodName,
-    body:formData
-  })
-  if(result.status==401){
+export async function fetchMultiPartAuth(url, formData, methodName) {
+  let result = await fetch(url, {
+    method: methodName,
+    body: formData,
+  });
+  if (result.status == 401) {
     await UpdateTokens();
-    return await fetchMultiPartAuth(url,formData,methodName);
+    return await fetchMultiPartAuth(url, formData, methodName);
   }
   return result;
 }

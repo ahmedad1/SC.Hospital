@@ -63,7 +63,6 @@ namespace Hospital.Controllers
             var result = await unitOfWork.UserRepository.SendEmailVerificationAsync(sendCodeDto.Email, sendCodeDto.Reset);
             if (!result)
                 return NotFound();
-            await unitOfWork.SaveChangesAsync();
             return Ok();
         }
         [HttpPost("confirmation-code")]
@@ -147,10 +146,10 @@ namespace Hospital.Controllers
         public async Task<IActionResult> MakeDoctorAccount(MakeDoctorProfileDto makeDoctorProfileDto)
         {
             var result = await unitOfWork.UserRepository.MakeDoctorAccount(makeDoctorProfileDto);
-            if (!result)
-                return BadRequest();
+            if (!result.Success)
+                return BadRequest(result);
             await unitOfWork.SaveChangesAsync();
-            return Ok();
+            return Ok(result);
         }
         [Authorize(Roles = "Adm")]
         [HttpDelete("{role}/{id}")]
