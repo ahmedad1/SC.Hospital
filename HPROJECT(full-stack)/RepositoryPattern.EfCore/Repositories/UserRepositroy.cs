@@ -17,19 +17,12 @@ using System.Linq.Expressions;
 using static RepositoryPatternWithUOW.Core.CookiesGlobal;
 namespace RepositoryPattern.EfCore.Repositories
 {
-    public class UserRepositroy : IUserRepository
+    public class UserRepositroy(AppDbContext context, MapToUser mapToUser, TokenOptionsModel JwtOptions, IMailService mailService) : IUserRepository
     {
-        AppDbContext context;
-        MapToUser mapToUser;
-        TokenOptionsModel JwtOptions;
-        IMailService mailService;
-        public UserRepositroy(AppDbContext context, MapToUser mapToUser,TokenOptionsModel JwtOptions ,IMailService mailService)
-        {
-            this.context = context;
-            this.mapToUser = mapToUser;
-            this.JwtOptions = JwtOptions;
-            this.mailService = mailService;
-        }
+        AppDbContext context = context;
+        MapToUser mapToUser = mapToUser;
+        TokenOptionsModel JwtOptions = JwtOptions;
+        IMailService mailService = mailService;
 
         public async Task<LoginResult> LoginAsync(LoginDto obj)
         {
@@ -78,16 +71,13 @@ namespace RepositoryPattern.EfCore.Repositories
         public async Task<bool> SendEmailVerificationAsync(string email,bool? IsForRestPassword=false)
         {
             context.ChangeTracker.LazyLoadingEnabled=false;
-            var user =await context.Users.AsNoTracking().Include(x=>x.VerificationCode).FirstOrDefaultAsync(x => x.Email == email);
+            var user =await context.Users.AsNoTracking().Include(x=>x.IdentityTokenVerification).Include(x=>x.VerificationCode).FirstOrDefaultAsync(x => x.Email == email);
             if (user is null)
                 return false;
             if (user.VerificationCode is not null && user.VerificationCode.ExpiresAt < DateTime.Now.AddSeconds(7))
                 context.Remove(user.VerificationCode);
             else if (user.VerificationCode is not null)
                 return true;
-            
-            
-
             
             string bodyOfMessage;
             int verificationNum=new Random().Next(10000,9999999);
@@ -114,9 +104,25 @@ namespace RepositoryPattern.EfCore.Repositories
 
             };
             context.Update(user);
+            string token;
+            DateTime expOfIdentityToken;
+            if(user.IdentityTokenVerification is null)
+            {
+                token = Tokens.Generate();
+                expOfIdentityToken = DateTime.Now.AddMinutes(25);
+                user.IdentityTokenVerification = new() { ExpiresAt = expOfIdentityToken, Token = token };
+            }
+            else
+            {
+                expOfIdentityToken= user.IdentityTokenVerification.ExpiresAt;
+                token = user.IdentityTokenVerification.Token;
+                
+            }
+
             Task t1= mailService.Send(email, subject,bodyOfMessage);
             Task t2 = context.SaveChangesAsync();
             await Task.WhenAll(t1, t2);
+
             return true;
         }
         public async Task<bool> ValidateConfirmationCodeAsync(string email , string code, bool? IsForRestPassword=false)
@@ -126,8 +132,7 @@ namespace RepositoryPattern.EfCore.Repositories
             if (user is null ||user.VerificationCode is null)
                 return false;
           
-            
-            
+ 
             if(user.VerificationCode.ExpiresAt<DateTime.Now)
             {   
                 context.Remove(user.VerificationCode);
@@ -135,9 +140,9 @@ namespace RepositoryPattern.EfCore.Repositories
             }
             context.Remove(user.VerificationCode);
             if (IsForRestPassword is not null and true)
-                return true;
-            
-            
+                return true;//make identity token
+
+         
             user.EmailConfirmed = true;
           
             context.Update(user);
@@ -199,7 +204,7 @@ namespace RepositoryPattern.EfCore.Repositories
          
             var newJwt = Tokens.Generate(refToken.User, JwtOptions,ExpirationOfJwt);
             var newRefToken = Tokens.Generate();
-            context.Remove(refToken);
+            await context.Set<RefreshToken>().Where(x => x.Token == refToken.Token).ExecuteDeleteAsync();
 
             await context.AddAsync(new RefreshToken() { CreatedAt=DateTime.Now,ExpiresAt=ExpirationOfRefreshToken,Token=newRefToken,UserId=refToken.UserId});
             return new()
@@ -235,7 +240,7 @@ namespace RepositoryPattern.EfCore.Repositories
             context.Update(user);
             return true;
         }
-        public async Task<ModifyInsensitveDataResult> ModifyInSensitiveDataAsync(JsonPatchDocument<User> modifyInsensitiveData,string email)
+        public async Task<ModifyInsensitveDataResult> ModifyInSensitiveDataAsync(JsonPatchDocument<User> modifyInsensitiveData,string password,int id)
         {
             try
             {
@@ -250,7 +255,11 @@ namespace RepositoryPattern.EfCore.Repositories
                     return new() { Success = false };
                 }
                 context.ChangeTracker.LazyLoadingEnabled = false;
-                var user = await context.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Email == email);
+                var user = await context.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+                if (!BCrypt.Net.BCrypt.EnhancedVerify(password, user.Password))
+                {
+                    return new() { Success = false, WrongPassword = true };
+                }
                 if (user is null)
                     return new() { Success = false };
                 modifyInsensitiveData.ApplyTo(user);
@@ -282,7 +291,10 @@ namespace RepositoryPattern.EfCore.Repositories
 
         }
     
-
+       public async Task<DoctorResult?>GetDoctor(int id)
+        {
+            return await context.Set<Doctor>().Where(x => x.Id == id).Select(x => new DoctorResult(id, x.FirstName, x.LastName, x.UserName, x.Email, x.EmailConfirmed, x.BirthDate.ToString(), x.Gender.ToString(), x.Department.ToString())).FirstOrDefaultAsync();
+        }
         public async Task<bool> VerifyPassword(string email, string password)
         {
             context.ChangeTracker.LazyLoadingEnabled = false;
@@ -301,6 +313,11 @@ namespace RepositoryPattern.EfCore.Repositories
             context.Remove(refToken);
             return true;
         }
+        public async Task<UserProfileSettings?> GetUser(int id)
+        {
+            return await context.Users.Where(x => x.Id == id).Select(x => new UserProfileSettings(x.FirstName, x.LastName, x.UserName, x.Email, x is Patient ? "Pat" : x is Doctor ? "Doc" : "Adm", x.BirthDate.ToString(), x.Gender.ToString())).FirstOrDefaultAsync();
+        }
+
         public async Task<IEnumerable<UsersResult>?> GetUsers<T>(int page)where T:User
         {
 
@@ -315,7 +332,7 @@ namespace RepositoryPattern.EfCore.Repositories
                 result = await context.Set<Patient>().Skip(pageSize * (page - 1)).Take(pageSize).Select(x => new UsersResult(x.Id, x.FirstName, x.LastName, x.UserName, x.Email, x.Gender.ToString(), x.BirthDate, x.EmailConfirmed,null,null,null,null)).ToListAsync();
             else
             {
-                result= await context.Set<Doctor>().Skip(pageSize * (page - 1)).Take(pageSize).Select(x => new UsersResult(x.Id, x.FirstName, x.LastName, x.UserName, x.Email, x.Gender.ToString(), x.BirthDate, x.EmailConfirmed,x.Department.DepartmentName,x.StartTime,x.EndTime,x.DaysOfTheWork.ToString())).ToListAsync();
+                result= await context.Set<Doctor>().Skip(pageSize * (page - 1)).Take(pageSize).Select(x => new UsersResult(x.Id, x.FirstName, x.LastName, x.UserName, x.Email, x.Gender.ToString(), x.BirthDate, x.EmailConfirmed,x.Department.ToString(),x.StartTime,x.EndTime,x.DaysOfTheWork.ToString())).ToListAsync();
             }
             return result;
         }
@@ -330,7 +347,7 @@ namespace RepositoryPattern.EfCore.Repositories
             if (typeof (T) == typeof (Patient))
             return result.Select(x => new UsersResult(x.Id, x.FirstName, x.LastName, x.UserName, x.Email, x.Gender.ToString(), x.BirthDate, x.EmailConfirmed, null,null,null,null)).AsNoTracking();
             else
-            return result.Select(x => new UsersResult(x.Id, x.FirstName, x.LastName, x.UserName, x.Email, x.Gender.ToString(), x.BirthDate, x.EmailConfirmed, (x as Doctor)!.Department.DepartmentName, (x as Doctor)!.StartTime, (x as Doctor)!.EndTime, (x as Doctor)!.DaysOfTheWork.ToString())).AsNoTracking();
+            return result.Select(x => new UsersResult(x.Id, x.FirstName, x.LastName, x.UserName, x.Email, x.Gender.ToString(), x.BirthDate, x.EmailConfirmed, (x as Doctor)!.Department.ToString(), (x as Doctor)!.StartTime, (x as Doctor)!.EndTime, (x as Doctor)!.DaysOfTheWork.ToString())).AsNoTracking();
             
 
         }

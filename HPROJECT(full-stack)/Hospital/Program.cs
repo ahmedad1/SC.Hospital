@@ -6,17 +6,12 @@ using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
-using RepositoryPattern.Core.Interfaces;
-using RepositoryPattern.Core.Models;
 using RepositoryPattern.EfCore;
 using RepositoryPattern.EfCore.MailService;
 using RepositoryPattern.EfCore.MapToModel;
 using RepositoryPattern.EfCore.OptionPattenModels;
-using RepositoryPattern.EfCore.Repositories;
-using RepositoryPatternWithUOW.Core;
 using RepositoryPatternWithUOW.Core.Interfaces;
 using RepositoryPatternWithUOW.EfCore;
-using RepositoryPatternWithUOW.EfCore.MapToModel;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -35,7 +30,7 @@ builder.Services.AddSingleton(jwtOptions!);
 builder.Services.Configure<MailOptionsModel>(builder.Configuration.GetSection("MailSettings"));
 
 builder.Services.AddScoped<MapToUser>();
-builder.Services.AddScoped<MapToDepartment>();
+builder.Services.AddCors();
 builder.Services.AddTransient<IMailService,MailService>();  
 builder.Services.AddAuthentication().AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
 {
@@ -80,9 +75,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseResponseCompression();
-app.UseMiddleware<RedirectionToFrontEndMiddleware>();
-app.UseHttpsRedirection();
 
+app.UseHttpsRedirection();
+app.UseCors(x => x.WithOrigins("http://localhost:3000").AllowCredentials().AllowAnyHeader().AllowAnyMethod());
 app.UseAuthorization();
 app.UseStaticFiles();
 app.MapControllers();

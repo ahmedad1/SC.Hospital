@@ -11,10 +11,10 @@ namespace Hospital
         public static void SetCookie(string key, string value, DateTime exp, bool httpOnly,HttpResponse response)
         {
             var cookieOpts = new CookieOptions();
-            cookieOpts.Expires = exp;
+            cookieOpts.Expires = exp.ToUniversalTime();
             cookieOpts.Secure = true;
             cookieOpts.HttpOnly = httpOnly;
-            cookieOpts.SameSite = SameSiteMode.Strict;
+            cookieOpts.SameSite = SameSiteMode.None;
             response.Cookies.Append(key, value, cookieOpts);
 
 

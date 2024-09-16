@@ -10,7 +10,6 @@ namespace RepositoryPatternWithUOW.Core.Interfaces
     public interface IUnitOfWork
     {
         public IUserRepository UserRepository { get; }
-        public IDepartmentRepository DepartmentRepository { get; }
         public Task SaveChangesAsync();
     }
 }

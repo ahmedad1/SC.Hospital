@@ -212,6 +212,27 @@ namespace RepositoryPatternWithUOW.EfCore.Migrations
                     b.ToTable("Department");
                 });
 
+            modelBuilder.Entity("RepositoryPatternWithUOW.Core.Models.IdentityTokenVerification", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Token")
+                        .HasMaxLength(44)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(44)");
+
+                    b.Property<DateTime>("ExpiresAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("UserId", "Token");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("IdentityTokenVerification");
+                });
+
             modelBuilder.Entity("RepositoryPattern.Core.Models.Doctor", b =>
                 {
                     b.HasBaseType("RepositoryPattern.Core.Models.User");
@@ -319,6 +340,17 @@ namespace RepositoryPatternWithUOW.EfCore.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("RepositoryPatternWithUOW.Core.Models.IdentityTokenVerification", b =>
+                {
+                    b.HasOne("RepositoryPattern.Core.Models.User", "User")
+                        .WithOne("IdentityTokenVerification")
+                        .HasForeignKey("RepositoryPatternWithUOW.Core.Models.IdentityTokenVerification", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("RepositoryPattern.Core.Models.Doctor", b =>
                 {
                     b.HasOne("RepositoryPatternWithUOW.Core.Models.Department", "Department")
@@ -332,6 +364,9 @@ namespace RepositoryPatternWithUOW.EfCore.Migrations
 
             modelBuilder.Entity("RepositoryPattern.Core.Models.User", b =>
                 {
+                    b.Navigation("IdentityTokenVerification")
+                        .IsRequired();
+
                     b.Navigation("RefreshToken");
 
                     b.Navigation("UserConnections");

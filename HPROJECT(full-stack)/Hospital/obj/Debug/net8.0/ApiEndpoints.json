@@ -1,6 +1,16 @@
 [
   {
     "ContainingType": "Hospital.Controllers.AccountController",
+    "Method": "GetUser",
+    "RelativePath": "api/Account",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Hospital.Controllers.AccountController",
     "Method": "DeleteAccount",
     "RelativePath": "api/Account/{role}/{id}",
     "HttpMethod": "DELETE",
@@ -56,14 +66,14 @@
     "ContainingType": "Hospital.Controllers.AccountController",
     "Method": "GetDoctors",
     "RelativePath": "api/Account/doctors",
-    "HttpMethod": "POST",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "page",
         "Type": "System.Int32",
-        "IsRequired": true
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -72,7 +82,7 @@
     "ContainingType": "Hospital.Controllers.AccountController",
     "Method": "SearchForDoctors",
     "RelativePath": "api/Account/doctors/{type-of-searching}",
-    "HttpMethod": "POST",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -98,8 +108,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "InsensitiveDto",
-        "Type": "Microsoft.AspNetCore.JsonPatch.Operations.Operation[]",
+        "Name": "modifyInsensitveDataPatch",
+        "Type": "RepositoryPatternWithUOW.Core.DTOs.ModifyInsensitveDataPatch",
         "IsRequired": true
       }
     ],
@@ -157,14 +167,14 @@
     "ContainingType": "Hospital.Controllers.AccountController",
     "Method": "GetPatients",
     "RelativePath": "api/Account/patients",
-    "HttpMethod": "POST",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "page",
         "Type": "System.Int32",
-        "IsRequired": true
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -173,7 +183,7 @@
     "ContainingType": "Hospital.Controllers.AccountController",
     "Method": "SearchForPatients",
     "RelativePath": "api/Account/patients/{type-of-searching}",
-    "HttpMethod": "POST",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [

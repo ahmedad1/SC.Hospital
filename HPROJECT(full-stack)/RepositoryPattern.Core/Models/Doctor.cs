@@ -12,7 +12,7 @@ namespace RepositoryPattern.Core.Models
         public TimeSpan StartTime { get; set; }
         public TimeSpan EndTime { get; set; }
         public Days DaysOfTheWork { get; set; }
-        public virtual Department Department { get; set; }
+        public Department Department { get; set; }
         public virtual ICollection<Patient> Patients { get; set; }
         public virtual ICollection<DoctorPatient> DoctorPatient { get; set; } 
 

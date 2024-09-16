@@ -9,6 +9,7 @@ namespace RepositoryPatternWithUOW.Core.ReturnedModels
     public class ModifyInsensitveDataResult
     {
         public bool Success { get; set; }
+        public bool WrongPassword { get; set; }
         public bool HasRepeatedUserName { get; set; } = false;
     }
 }

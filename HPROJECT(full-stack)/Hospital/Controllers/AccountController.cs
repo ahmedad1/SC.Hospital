@@ -55,7 +55,18 @@ namespace Hospital.Controllers
             CookiesHandler.SetCookiesInResponse(payload, result, Response);
 
 
-            return Ok(result);
+            return Ok();
+        }
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> GetUser()
+        {
+            var id = User.Claims.FirstOrDefault(x => x.Type == "id");
+            if (id is null)
+                return BadRequest();
+
+            var result = await unitOfWork.UserRepository.GetUser(int.Parse(id.Value));
+            return result is null ? BadRequest() : Ok(result);
         }
         [HttpPost("code-in-email")]
         public async Task<IActionResult> SendCode([FromBody] SendCodeDto sendCodeDto)
@@ -63,15 +74,18 @@ namespace Hospital.Controllers
             var result = await unitOfWork.UserRepository.SendEmailVerificationAsync(sendCodeDto.Email, sendCodeDto.Reset);
             if (!result)
                 return NotFound();
+            
             return Ok();
         }
         [HttpPost("confirmation-code")]
         public async Task<IActionResult> ValidateCode(ValidateCodeDto validateCode)
         {
+          
             var result = await unitOfWork.UserRepository.ValidateConfirmationCodeAsync(validateCode.Email, validateCode.Code, validateCode.Reset);
             await unitOfWork.SaveChangesAsync();
             if (!result)
                 return BadRequest();
+            CookiesHandler.SetCookie(IdentityTokenVerificationKey,"",DateTime.Now.AddDays(-5),true,Response);
             return Ok();
 
         }
@@ -83,14 +97,15 @@ namespace Hospital.Controllers
         }
         [Authorize]
         [HttpPatch("insensitive-data")]
-        public async Task<IActionResult> ModifiyInsensitiveData(JsonPatchDocument<User> InsensitiveDto)
+        public async Task<IActionResult> ModifiyInsensitiveData(ModifyInsensitveDataPatch modifyInsensitveDataPatch)
         {
-            var email = ExtractJwt().Payload[JwtRegisteredClaimNames.Email].ToString();
-            var result = await unitOfWork.UserRepository.ModifyInSensitiveDataAsync(InsensitiveDto, email!);
-            if (!result.Success && result.HasRepeatedUserName)
+            var id = User.Claims.FirstOrDefault(x => x.Type == "id");
+            if (id is null)
                 return BadRequest();
-            else if (!result.Success && !result.HasRepeatedUserName)
-                return NotFound();
+            var result = await unitOfWork.UserRepository.ModifyInSensitiveDataAsync(modifyInsensitveDataPatch.User,modifyInsensitveDataPatch.Password, int.Parse(id.Value));
+            if (!result.Success)
+                return BadRequest(result);
+            
             await unitOfWork.SaveChangesAsync();
             return Ok();
         }
@@ -153,10 +168,12 @@ namespace Hospital.Controllers
         }
         [Authorize(Roles = "Adm")]
         [HttpDelete("{role}/{id}")]
-        public async Task<IActionResult> DeleteAccount([FromRoute(Name ="id")]int id,[FromRoute]Role role)
+        public async Task<IActionResult> DeleteAccount([FromRoute(Name ="id")]int id,[FromRoute]string role)
         {
+            if (!Enum.TryParse(role,true, out Role val))
+                return BadRequest();
             bool result;
-            if(role==Role.Patients)
+            if(val==Role.Patients)
             result=await unitOfWork.UserRepository.DeleteAccountAsync<Patient>(id);
             else
             result=await unitOfWork.UserRepository.DeleteAccountAsync<Doctor>(id);
@@ -164,7 +181,7 @@ namespace Hospital.Controllers
                 return BadRequest();
             return Ok();
         }
-
+        
         [Authorize]
         [HttpPost("verifying-password")]
         public async Task<IActionResult>VerifyPassword([FromBody]string password)
@@ -174,8 +191,8 @@ namespace Hospital.Controllers
             return result ? Ok() : NotFound();
         }
         [Authorize(Roles = "Adm")]
-        [HttpPost("patients")]
-        public async Task<IActionResult> GetPatients([FromBody]int page)
+        [HttpGet("patients")]
+        public async Task<IActionResult> GetPatients([FromQuery]int page)
         {
             
             var result =await unitOfWork.UserRepository.GetUsers<Patient>(page);
@@ -183,15 +200,15 @@ namespace Hospital.Controllers
 
         }
         [Authorize(Roles ="Adm")]
-        [HttpPost("doctors")]
-        public async Task<IActionResult>GetDoctors([FromBody]int page)
+        [HttpGet("doctors")]
+        public async Task<IActionResult>GetDoctors([FromQuery]int page)
         {
             var result = await unitOfWork.UserRepository.GetUsers<Doctor>(page);
             return Ok(result);
 
         }
         [Authorize(Roles ="Adm")]
-        [HttpPost("patients/{type-of-searching}")]
+        [HttpGet("patients/{type-of-searching}")]
         public IActionResult SearchForPatients([FromRoute(Name="type-of-searching")]string typeOfSeaching,SearchDto searchDto)///next to do in front end -------------
         {
             if (!Enum.TryParse(typeOfSeaching, out TypeOfSearching result))
@@ -219,7 +236,7 @@ namespace Hospital.Controllers
             
         }
         [Authorize(Roles ="Adm")]
-        [HttpPost("doctors/{type-of-searching}")]
+        [HttpGet("doctors/{type-of-searching}")]
         public IActionResult SearchForDoctors([FromRoute(Name = "type-of-searching")] string typeOfSeaching, SearchDto searchDto)
         {
             if (!Enum.TryParse(typeOfSeaching, out TypeOfSearching result))
@@ -245,6 +262,28 @@ namespace Hospital.Controllers
 
             }
 
+        }
+        [Authorize(Roles ="Adm")]
+        [HttpGet("{role}/{id}")]
+        public async Task<IActionResult>GetUserForAdmin(string role,int id)
+        {
+            if (!Enum.TryParse(role, true, out Role val))
+                return BadRequest();
+            if (val == Role.Patients)
+            {
+                var result = await unitOfWork.UserRepository.GetUser(id);
+
+                if (result == null)
+                    return BadRequest();
+                return Ok(result);
+            }
+            else
+            {
+                var result = await unitOfWork.UserRepository.GetDoctor(id);
+                if (result == null)
+                    return BadRequest();
+                return Ok(result);
+            }
         }
 
         [Authorize(Roles = "Adm")]

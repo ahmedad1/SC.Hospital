@@ -37,7 +37,6 @@ namespace RepositoryPattern.EfCore
             builder.Entity<Group>().Property(x => x.GroupsName).HasMaxLength(255);
 
             builder.Entity<Doctor>().HasMany(x => x.Patients).WithMany(x => x.Doctors).UsingEntity<DoctorPatient>();
-            builder.Entity<Doctor>().HasOne(x => x.Department).WithMany(x => x.Doctors).HasForeignKey(x => x.DepartmentId);
             builder.Entity<Doctor>().Property(x => x.ProfilePicture).IsSparse();
             builder.Entity<Doctor>().Property(x => x.DaysOfTheWork).HasConversion(x => (byte)x, x => (Days)x);
 
@@ -69,8 +68,14 @@ namespace RepositoryPattern.EfCore
             builder.Entity<RefreshToken>().HasKey(x => new { x.UserId, x.Token });
             builder.Entity<RefreshToken>().Property(x => x.Token).HasMaxLength(44).HasColumnType("varchar");
 
+            builder.Entity<IdentityTokenVerification>().HasOne(x => x.User).WithOne(x=>x.IdentityTokenVerification).HasForeignKey<IdentityTokenVerification>(x=>x.UserId);
+            builder.Entity<IdentityTokenVerification>().HasKey(x => new {x.UserId, x.Token });
+            builder.Entity<IdentityTokenVerification>().Property(x => x.Token).HasMaxLength(44).IsUnicode(false);
 
-            
+            /*
+               insert into dbo.Admin (FirstName,LastName,Username,Email,Password,Gender,BirthDate,EmailConfirmed)
+               values('Admin','Admin','schospital.admin','admin@schospital.com','password','Male','1989-02-05',1)
+            */
 
             //builder.Entity<Admin>().HasData([new Admin () {BirthDate=DateOnly.FromDateTime(DateTime.Now.AddYears(-25)),Email="schospital.admin@gmail.com",EmailConfirmed=true,FirstName="Admin",Gender=Gender.Male,LastName="Admin",Password=}]);
 

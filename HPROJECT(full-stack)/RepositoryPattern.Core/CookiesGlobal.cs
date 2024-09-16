@@ -13,6 +13,7 @@
         public static string GenderCookieKey  => "gender";
         public static string BirthDateCookieKey  => "birthDate";
         public static string RoleCookieKey => "role";
+        public static string IdentityTokenVerificationKey => "IdentityToken";
 
 
 
