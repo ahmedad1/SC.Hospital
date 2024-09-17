@@ -15,6 +15,7 @@ using RepositoryPatternWithUOW.Core.DTOs;
 using RepositoryPatternWithUOW.Core.Enums;
 using RepositoryPatternWithUOW.Core.Models;
 using RepositoryPatternWithUOW.Core.ReturnedModels;
+using System.Collections.Frozen;
 using System.Linq.Expressions;
 using static RepositoryPatternWithUOW.Core.CookiesGlobal;
 namespace RepositoryPattern.EfCore.Repositories
@@ -264,6 +265,94 @@ namespace RepositoryPattern.EfCore.Repositories
             user.Password = BCrypt.Net.BCrypt.EnhancedHashPassword(changePasswordDto.NewPassword);
             context.Update(user);
             return true;
+        }
+        public async Task<PatientResult?> GetPatient(int id)
+        {
+
+            return await context.Set<Patient>().Where(x => x.Id == id).Select(x => new PatientResult(id, x.FirstName, x.LastName, x.UserName, x.Email, x.EmailConfirmed, x.BirthDate.ToString(), x.Gender.ToString())).FirstOrDefaultAsync();
+        }
+
+        public async Task<UpdateUserDataResult> UpdateDoctor(JsonPatchDocument<Doctor>document,int doctorId)
+        {
+            List<string> allowed = ["firstName","lastname","username","email","password","gender","birthdate","department","EmailConfirmed"];
+            if (!document.Operations.Exists(x => allowed.Exists(e => e.Equals(x.path, StringComparison.OrdinalIgnoreCase))))
+               return new() { Success = false };
+            
+            try {
+                var doctor =await context.Doctors.FindAsync(doctorId);
+                if (doctor is null) return new() { Success = false };
+                document.ApplyTo(doctor);
+                if (document.Operations.Exists(x => x.path.Equals("password", StringComparison.OrdinalIgnoreCase)))
+                    doctor.Password = BCrypt.Net.BCrypt.EnhancedHashPassword(doctor.Password);
+                if(document.Operations.Exists(x => x.path.Equals("userName", StringComparison.OrdinalIgnoreCase)))
+                {
+                    if(await context.Users.AnyAsync(x=>x.UserName==doctor.UserName))
+                        return new (){Success=false,NewUserNameIsExist=true}; ;
+                }
+                if(document.Operations.Exists(x => x.path.Equals("email", StringComparison.OrdinalIgnoreCase)))
+                {
+
+                    if (await context.Users.AnyAsync(x => x.Email == doctor.Email))
+                        return new() { Success = false, NewEmailIsExist = true }; 
+                }
+                return new() { NewEmailIsExist = false ,Success=true,NewUserNameIsExist=false};
+            
+            }
+            catch {
+                return new() { Success=false};
+            }
+        }
+        public async Task<UpdateUserDataResult> UpdatePatient(JsonPatchDocument<Patient> document, int patientId)
+        {
+            List<string> allowed = ["firstName", "lastname", "username", "email", "password", "gender", "birthdate", "EmailConfirmed"];
+            if (!document.Operations.Exists(x => allowed.Exists(e => e.Equals(x.path, StringComparison.OrdinalIgnoreCase))))
+                return new() { Success = false };
+
+            try
+            {
+                var patient = await context.Patients.FindAsync(patientId);
+                if (patient is null) return new() { Success = false };
+                document.ApplyTo(patient);
+                if (document.Operations.Exists(x => x.path.Equals("password", StringComparison.OrdinalIgnoreCase)))
+                    patient.Password = BCrypt.Net.BCrypt.EnhancedHashPassword(patient.Password);
+                if (document.Operations.Exists(x => x.path.Equals("userName", StringComparison.OrdinalIgnoreCase)))
+                {
+                    if (await context.Users.AnyAsync(x => x.UserName == patient.UserName))
+                        return new() { Success = false, NewUserNameIsExist = true }; ;
+                }
+                if (document.Operations.Exists(x => x.path.Equals("email", StringComparison.OrdinalIgnoreCase)))
+                {
+
+                    if (await context.Users.AnyAsync(x => x.Email == patient.Email))
+                        return new() { Success = false, NewEmailIsExist = true };
+                }
+                return new() { NewEmailIsExist = false, Success = true, NewUserNameIsExist = false };
+
+            }
+            catch
+            {
+                return new() { Success = false };
+            }
+        }
+        public async Task<bool>UpdateDoctorProfilePicture(IFormFile? newImage,int doctorId)
+        {
+            var doctor = await context.Doctors.FindAsync(doctorId);
+            if (doctor is null)
+                return false;
+            if(doctor.ProfilePicture is not null)
+            {
+                string path = Path.Combine(webHostEnvironment.WebRootPath, doctor.ProfilePicture);
+                if (File.Exists(path))
+                    File.Delete(path);
+            }
+            if (newImage is not null)
+            {
+                var newFile =await SaveFile(newImage);
+                doctor.ProfilePicture = newFile;
+
+            }
+            return true;
+
         }
         public async Task<ModifyInsensitveDataResult> ModifyInSensitiveDataAsync(JsonPatchDocument<User> modifyInsensitiveData,string password,int id)
         {

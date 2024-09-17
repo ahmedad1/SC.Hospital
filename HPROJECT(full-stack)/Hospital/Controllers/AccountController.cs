@@ -283,14 +283,14 @@ namespace Hospital.Controllers
 
         }
         [Authorize(Roles ="Adm")]
-        [HttpGet("{role}/{id}")]
-        public async Task<IActionResult>GetUserForAdmin(string role,int id)
+        [HttpGet("{id}")]
+        public async Task<IActionResult>GetUserForAdmin([FromQuery]string role,int id)
         {
             if (!Enum.TryParse(role, true, out Role val))
                 return BadRequest();
             if (val == Role.Patients)
             {
-                var result = await unitOfWork.UserRepository.GetUser(id);
+                var result = await unitOfWork.UserRepository.GetPatient(id);
 
                 if (result == null)
                     return BadRequest();
@@ -306,17 +306,31 @@ namespace Hospital.Controllers
         }
 
         [Authorize(Roles = "Adm")]
-        [HttpPut("user")]
-        public async Task<IActionResult> UpdateUserData(UpdateUserDto user)
+        [HttpPatch("doctor/{id}")]
+        public async Task<IActionResult> UpdateDoctorData(JsonPatchDocument<Doctor>doctorDocument,int id)
         {
-            UpdateUserDataResult result;
-
-            if(user.Role==Role.Patients)
-            result = await unitOfWork.UserRepository.UpdateUserData<Patient>(user);
-            else
-            result = await unitOfWork.UserRepository.UpdateUserData<Doctor>(user);
-
-            return result.Success ? Ok(result):BadRequest(result);
+            var result = await unitOfWork.UserRepository.UpdateDoctor(doctorDocument, id);
+            if (result.Success)
+                await unitOfWork.SaveChangesAsync();
+            return result.Success ? Ok() : BadRequest(result) ;
+        }
+        [Authorize(Roles ="Adm")]
+        [HttpPatch("patient/{id}")]
+        public async Task<IActionResult> UpdatePatientData(JsonPatchDocument<Patient> patientDocument,int id)
+        {
+            var result = await unitOfWork.UserRepository.UpdatePatient(patientDocument, id);
+            if (result.Success)
+                await unitOfWork.SaveChangesAsync();
+            return result.Success ? Ok() : BadRequest(result);
+        }
+        [Authorize(Roles = "Adm")]
+        [HttpPut("{id}/profile-picture")]
+        public async Task<IActionResult> UpdateProfilePictureOfDoctor([FromForm] IFormFile? image, int id)
+        {
+            var result = await unitOfWork.UserRepository.UpdateDoctorProfilePicture(image, id);
+            if (result)
+                await unitOfWork.SaveChangesAsync();
+            return Ok();
         }
     }
 }

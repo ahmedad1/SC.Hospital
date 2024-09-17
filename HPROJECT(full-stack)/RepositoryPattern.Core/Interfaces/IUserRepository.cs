@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.JsonPatch;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.JsonPatch;
 using RepositoryPattern.Core.DTOs;
 using RepositoryPattern.Core.Models;
 using RepositoryPattern.Core.ReturnedModels;
@@ -22,6 +23,11 @@ namespace RepositoryPattern.Core.Interfaces
 
         public Task<SignUpResult> MakeDoctorAccount(MakeDoctorProfileDto createDoctorProfileDto);
         public Task<bool> ChangePassword(ChangePasswordDto changePasswordDto, int id);
+        public Task<bool> UpdateDoctorProfilePicture(IFormFile? newImage, int doctorId);
+        public Task<UpdateUserDataResult> UpdatePatient(JsonPatchDocument<Patient> document, int patientId);
+        public Task<UpdateUserDataResult> UpdateDoctor(JsonPatchDocument<Doctor> document, int doctorId);
+
+        public Task<PatientResult?> GetPatient(int id);
 
         public Task<ModifyInsensitveDataResult> ModifyInSensitiveDataAsync(JsonPatchDocument<User> modifyInsensitiveData,string password, int id);
         public Task<bool> DeleteAccountAsync<T>(int Id)where T:User;
