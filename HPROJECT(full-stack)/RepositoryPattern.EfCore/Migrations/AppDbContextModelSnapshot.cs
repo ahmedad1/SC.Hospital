@@ -187,31 +187,6 @@ namespace RepositoryPatternWithUOW.EfCore.Migrations
                     b.ToTable("VerificationCode");
                 });
 
-            modelBuilder.Entity("RepositoryPatternWithUOW.Core.Models.Department", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<byte[]>("BackgroundCardImage")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("DepartmentName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Department");
-                });
-
             modelBuilder.Entity("RepositoryPatternWithUOW.Core.Models.IdentityTokenVerification", b =>
                 {
                     b.Property<int>("UserId")
@@ -233,28 +208,38 @@ namespace RepositoryPatternWithUOW.EfCore.Migrations
                     b.ToTable("IdentityTokenVerification");
                 });
 
-            modelBuilder.Entity("RepositoryPattern.Core.Models.Doctor", b =>
+            modelBuilder.Entity("RepositoryPatternWithUOW.Core.Models.Schedule", b =>
                 {
-                    b.HasBaseType("RepositoryPattern.Core.Models.User");
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
 
-                    b.Property<byte>("DaysOfTheWork")
-                        .HasColumnType("tinyint");
+                    b.Property<TimeSpan>("StartTime")
+                        .HasColumnType("time");
 
-                    b.Property<int>("DepartmentId")
+                    b.Property<int>("Day")
                         .HasColumnType("int");
 
                     b.Property<TimeSpan>("EndTime")
                         .HasColumnType("time");
 
-                    b.Property<byte[]>("ProfilePicture")
-                        .HasColumnType("varbinary(max)");
+                    b.HasKey("DoctorId", "StartTime", "Day");
 
-                    SqlServerPropertyBuilderExtensions.IsSparse(b.Property<byte[]>("ProfilePicture"));
+                    b.ToTable("Schedules");
+                });
 
-                    b.Property<TimeSpan>("StartTime")
-                        .HasColumnType("time");
+            modelBuilder.Entity("RepositoryPattern.Core.Models.Doctor", b =>
+                {
+                    b.HasBaseType("RepositoryPattern.Core.Models.User");
 
-                    b.HasIndex("DepartmentId");
+                    b.Property<string>("Department")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("ProfilePicture")
+                        .HasColumnType("nvarchar(max)");
+
+                    SqlServerPropertyBuilderExtensions.IsSparse(b.Property<string>("ProfilePicture"));
 
                     b.ToTable("Doctors");
                 });
@@ -351,15 +336,15 @@ namespace RepositoryPatternWithUOW.EfCore.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("RepositoryPattern.Core.Models.Doctor", b =>
+            modelBuilder.Entity("RepositoryPatternWithUOW.Core.Models.Schedule", b =>
                 {
-                    b.HasOne("RepositoryPatternWithUOW.Core.Models.Department", "Department")
-                        .WithMany("Doctors")
-                        .HasForeignKey("DepartmentId")
+                    b.HasOne("RepositoryPattern.Core.Models.Doctor", "Doctor")
+                        .WithMany("Schedules")
+                        .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Department");
+                    b.Navigation("Doctor");
                 });
 
             modelBuilder.Entity("RepositoryPattern.Core.Models.User", b =>
@@ -374,14 +359,11 @@ namespace RepositoryPatternWithUOW.EfCore.Migrations
                     b.Navigation("VerificationCode");
                 });
 
-            modelBuilder.Entity("RepositoryPatternWithUOW.Core.Models.Department", b =>
-                {
-                    b.Navigation("Doctors");
-                });
-
             modelBuilder.Entity("RepositoryPattern.Core.Models.Doctor", b =>
                 {
                     b.Navigation("DoctorPatient");
+
+                    b.Navigation("Schedules");
                 });
 
             modelBuilder.Entity("RepositoryPattern.Core.Models.Patient", b =>

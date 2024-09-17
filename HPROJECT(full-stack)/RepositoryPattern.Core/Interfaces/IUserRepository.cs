@@ -18,6 +18,7 @@ namespace RepositoryPattern.Core.Interfaces
         public Task<TokensResult> UpdateTokensAsync(UpdateTokensDto updateTokensDto);
         public Task<bool> SignOutAsync(string refreshToken,string email);
         public Task<bool> DeleteRefreshTokenAsync(string refreshToken);
+        public Task<SignUpResult> MakePatientAccount(MakePatientAccountDto makePatientAccountDto);
 
         public Task<SignUpResult> MakeDoctorAccount(MakeDoctorProfileDto createDoctorProfileDto);
         public Task<bool> ChangePassword(ChangePasswordDto changePasswordDto, int id);

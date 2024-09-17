@@ -21,10 +21,8 @@ namespace RepositoryPatternWithUOW.Core.ReturnedModels
                            DateOnly birthDate,
                            bool emailConfirmed,
                            string? departmentName
-,
-                           TimeSpan? startTime,
-                           TimeSpan? endTime,
-                           string? daysOfWork)
+
+                      )
         {
             Id = id;
             FirstName = firstName;
@@ -35,9 +33,7 @@ namespace RepositoryPatternWithUOW.Core.ReturnedModels
             BirthDate = birthDate;
             EmailConfirmed = emailConfirmed;
             DepartmentName = departmentName;
-            StartTime = startTime;
-            EndTime = endTime;
-            DaysOfWork = daysOfWork;
+  
         }
 
         public int Id { get; }
@@ -49,8 +45,6 @@ namespace RepositoryPatternWithUOW.Core.ReturnedModels
         public DateOnly BirthDate { get; }
         public bool EmailConfirmed { get; }
         public string? DepartmentName { get; }
-        public TimeSpan? StartTime { get; set; }
-        public TimeSpan? EndTime { get; set; }
-        public string? DaysOfWork { get; set; }
+
     }
 }

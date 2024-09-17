@@ -1,4 +1,6 @@
 ﻿
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.EntityFrameworkCore;
 using RepositoryPattern.Core.DTOs;
@@ -17,7 +19,7 @@ using System.Linq.Expressions;
 using static RepositoryPatternWithUOW.Core.CookiesGlobal;
 namespace RepositoryPattern.EfCore.Repositories
 {
-    public class UserRepositroy(AppDbContext context, MapToUser mapToUser, TokenOptionsModel JwtOptions, IMailService mailService) : IUserRepository
+    public class UserRepositroy(AppDbContext context, MapToUser mapToUser, TokenOptionsModel JwtOptions, IMailService mailService,IWebHostEnvironment webHostEnvironment) : IUserRepository
     {
         AppDbContext context = context;
         MapToUser mapToUser = mapToUser;
@@ -152,21 +154,44 @@ namespace RepositoryPattern.EfCore.Repositories
 
             
         }
-        public async Task<SignUpResult> MakeDoctorAccount(MakeDoctorProfileDto createDoctorProfileDto)
+        async Task<string> SaveFile(IFormFile file)
         {
-            if(await context.Users.AnyAsync(x=>x.UserName== createDoctorProfileDto.UserName ))
+            var fileName = Guid.NewGuid().ToString()+Path.GetExtension(file.FileName);
+            var path = Path.Combine(webHostEnvironment.WebRootPath , fileName);
+            using var stream = new FileStream(path, FileMode.Create);
+            await file.CopyToAsync(stream);
+            return fileName;
+          
+
+        }
+
+        public async Task<SignUpResult> MakeDoctorAccount(MakeDoctorProfileDto makeDoctorProfileDto)
+        {
+            if(await context.Users.AnyAsync(x=>x.UserName== makeDoctorProfileDto.UserName ))
                 return new() { Success=false,AlreadyExistField=nameof(AlreadyExistField.UserName)};
-            if (await context.Users.AnyAsync(x => x.Email == createDoctorProfileDto.Email ))
+            if (await context.Users.AnyAsync(x => x.Email == makeDoctorProfileDto.Email ))
                 return new() { Success=false, AlreadyExistField=nameof(AlreadyExistField.Email)};
 
-                Doctor doctor = mapToUser.MapToDoctor(createDoctorProfileDto);
-                doctor.EmailConfirmed = true;
+                Doctor doctor = mapToUser.MapToDoctor(makeDoctorProfileDto);
+                if(makeDoctorProfileDto.ProfilePicture is not null)
+                doctor.ProfilePicture =await SaveFile(makeDoctorProfileDto.ProfilePicture);
                 doctor.Password = BCrypt.Net.BCrypt.EnhancedHashPassword(doctor.Password);
-          
                 await context.Doctors.AddAsync(doctor);
                 return new() { Success=true};
         }
-       
+       public async Task<SignUpResult>MakePatientAccount(MakePatientAccountDto makePatientAccountDto)
+        {
+            if (await context.Users.AnyAsync(x => x.UserName == makePatientAccountDto.UserName))
+                return new() { Success = false, AlreadyExistField = nameof(AlreadyExistField.UserName) };
+            if (await context.Users.AnyAsync(x => x.Email == makePatientAccountDto.Email))
+                return new() { Success = false, AlreadyExistField = nameof(AlreadyExistField.Email) };
+            Patient patient = mapToUser.MapToPatient(makePatientAccountDto);
+    
+            patient.Password = BCrypt.Net.BCrypt.EnhancedHashPassword(patient.Password);
+            await context.Patients.AddAsync(patient);
+            return new() { Success = true };
+        }
+        
         public async Task<SignUpResult> SignUpAsync(SignUpDto signUpDto)
         {
             if (await context.Users.AnyAsync(x => x.Email == signUpDto.Email))
@@ -329,10 +354,10 @@ namespace RepositoryPattern.EfCore.Repositories
             int pageSize = 20;
             IEnumerable<UsersResult> result;
             if (typeof(T) == typeof(Patient))
-                result = await context.Set<Patient>().Skip(pageSize * (page - 1)).Take(pageSize).Select(x => new UsersResult(x.Id, x.FirstName, x.LastName, x.UserName, x.Email, x.Gender.ToString(), x.BirthDate, x.EmailConfirmed,null,null,null,null)).ToListAsync();
+                result = await context.Set<Patient>().Skip(pageSize * (page - 1)).Take(pageSize).Select(x => new UsersResult(x.Id, x.FirstName, x.LastName, x.UserName, x.Email, x.Gender.ToString(), x.BirthDate, x.EmailConfirmed,null)).ToListAsync();
             else
             {
-                result= await context.Set<Doctor>().Skip(pageSize * (page - 1)).Take(pageSize).Select(x => new UsersResult(x.Id, x.FirstName, x.LastName, x.UserName, x.Email, x.Gender.ToString(), x.BirthDate, x.EmailConfirmed,x.Department.ToString(),x.StartTime,x.EndTime,x.DaysOfTheWork.ToString())).ToListAsync();
+                result= await context.Set<Doctor>().Skip(pageSize * (page - 1)).Take(pageSize).Select(x => new UsersResult(x.Id, x.FirstName, x.LastName, x.UserName, x.Email, x.Gender.ToString(), x.BirthDate, x.EmailConfirmed,x.Department.ToString())).ToListAsync();
             }
             return result;
         }
@@ -345,9 +370,9 @@ namespace RepositoryPattern.EfCore.Repositories
             int pageSize=20;
             var result = context.Set<T>().Where(expression).Skip(pageSize * (page - 1)).Take(pageSize);
             if (typeof (T) == typeof (Patient))
-            return result.Select(x => new UsersResult(x.Id, x.FirstName, x.LastName, x.UserName, x.Email, x.Gender.ToString(), x.BirthDate, x.EmailConfirmed, null,null,null,null)).AsNoTracking();
+            return result.Select(x => new UsersResult(x.Id, x.FirstName, x.LastName, x.UserName, x.Email, x.Gender.ToString(), x.BirthDate, x.EmailConfirmed,null)).AsNoTracking();
             else
-            return result.Select(x => new UsersResult(x.Id, x.FirstName, x.LastName, x.UserName, x.Email, x.Gender.ToString(), x.BirthDate, x.EmailConfirmed, (x as Doctor)!.Department.ToString(), (x as Doctor)!.StartTime, (x as Doctor)!.EndTime, (x as Doctor)!.DaysOfTheWork.ToString())).AsNoTracking();
+            return result.Select(x => new UsersResult(x.Id, x.FirstName, x.LastName, x.UserName, x.Email, x.Gender.ToString(), x.BirthDate, x.EmailConfirmed, (x as Doctor)!.Department.ToString())).AsNoTracking();
             
 
         }

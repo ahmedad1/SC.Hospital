@@ -58,6 +58,7 @@ builder.Services.AddAuthentication().AddJwtBearer(JwtBearerDefaults.Authenticati
         }
     };
 });
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddResponseCompression(options =>
 {
     options.EnableForHttps = true;

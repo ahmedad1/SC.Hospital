@@ -1,4 +1,5 @@
-﻿using RepositoryPattern.Core.Interfaces;
+﻿using Microsoft.AspNetCore.Hosting;
+using RepositoryPattern.Core.Interfaces;
 using RepositoryPattern.EfCore;
 using RepositoryPattern.EfCore.MailService;
 using RepositoryPattern.EfCore.MapToModel;
@@ -14,10 +15,10 @@ namespace RepositoryPatternWithUOW.EfCore
         AppDbContext context;
 
         public IUserRepository UserRepository { get; }
-        public UnitOfWork(AppDbContext context,MapToUser mapToUser,TokenOptionsModel tokenOptionsModel,IMailService mailService)
+        public UnitOfWork(AppDbContext context,MapToUser mapToUser,TokenOptionsModel tokenOptionsModel,IMailService mailService,IWebHostEnvironment webHostEnvironment)
         {
             this.context=context;
-            UserRepository = new UserRepositroy(context,mapToUser,tokenOptionsModel,mailService);
+            UserRepository = new UserRepositroy(context,mapToUser,tokenOptionsModel,mailService,webHostEnvironment);
 
         }
         public async Task SaveChangesAsync()

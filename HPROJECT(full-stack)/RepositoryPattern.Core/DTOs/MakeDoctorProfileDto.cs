@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using RepositoryPatternWithUOW.Core.Enums;
@@ -33,12 +34,11 @@ namespace RepositoryPatternWithUOW.Core.DTOs
         public string Password { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
         public Gender Gender { get; set; }
+        public bool EmailConfirmed { get; set; }
         public DateOnly BirthDate { get; set; }
-        public TimeSpan StartTime { get; set; }
-        public TimeSpan EndTime { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
-        public Days DaysOfTheWork { get; set; }
-        public int DepartmentId { get; set; }
+        public Department Department{ get; set; }
+        public IFormFile? ProfilePicture { get; set; }   
 
         
     }

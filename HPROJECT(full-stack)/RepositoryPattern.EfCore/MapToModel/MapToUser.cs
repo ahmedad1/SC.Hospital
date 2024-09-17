@@ -13,9 +13,10 @@ namespace RepositoryPattern.EfCore.MapToModel
     [Mapper(EnumMappingStrategy=EnumMappingStrategy.ByName,EnumMappingIgnoreCase =true)]
     public partial class MapToUser
     {
-  
-        public partial Doctor MapToDoctor(MakeDoctorProfileDto createDoctorProfileDto);
+        [MapperIgnoreSource("ProfilePicture")]
+        public partial Doctor MapToDoctor(MakeDoctorProfileDto makeDoctorProfileDto);
         public partial Patient MapToPatient(SignUpDto signUpDto);
+        public partial Patient MapToPatient(MakePatientAccountDto makePatientAccountDto);
         
        
 

@@ -156,11 +156,30 @@ namespace Hospital.Controllers
 
             return Ok();
         }
+        bool IsImage(IFormFile? file)
+        {
+            if(file is null) return true;
+            if (file.ContentType.StartsWith("image/") && Path.GetExtension(file.FileName) is ".jpg" or ".jpeg" or ".png" or ".webp")
+                return true;
+            return false;
+        }
         [Authorize(Roles = "Adm")]
         [HttpPost("new-doctor-account")]
-        public async Task<IActionResult> MakeDoctorAccount(MakeDoctorProfileDto makeDoctorProfileDto)
+        public async Task<IActionResult> MakeDoctorAccount([FromForm]MakeDoctorProfileDto makeDoctorProfileDto)
         {
+            if (!IsImage(makeDoctorProfileDto.ProfilePicture))
+                return BadRequest();
             var result = await unitOfWork.UserRepository.MakeDoctorAccount(makeDoctorProfileDto);
+            if (!result.Success)
+                return BadRequest(result);
+            await unitOfWork.SaveChangesAsync();
+            return Ok(result);
+        }
+        [Authorize(Roles = "Adm")]
+        [HttpPost("new-patient-account")]
+        public async Task<IActionResult> MakePatientAccount([FromForm] MakePatientAccountDto makePatientAccountDto)
+        {
+            var result = await unitOfWork.UserRepository.MakePatientAccount(makePatientAccountDto);
             if (!result.Success)
                 return BadRequest(result);
             await unitOfWork.SaveChangesAsync();

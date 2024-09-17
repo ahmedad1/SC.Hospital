@@ -20,6 +20,7 @@ namespace RepositoryPattern.EfCore
         public DbSet<User> Users { get; set; }  
         public DbSet<Patient> Patients { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
+        public DbSet<Schedule> Schedules { get; set; }
         public DbSet<Admin>Admin { get; set; }
         
         
@@ -38,23 +39,20 @@ namespace RepositoryPattern.EfCore
 
             builder.Entity<Doctor>().HasMany(x => x.Patients).WithMany(x => x.Doctors).UsingEntity<DoctorPatient>();
             builder.Entity<Doctor>().Property(x => x.ProfilePicture).IsSparse();
-            builder.Entity<Doctor>().Property(x => x.DaysOfTheWork).HasConversion(x => (byte)x, x => (Days)x);
-
+            builder.Entity<Doctor>().Property(x => x.Department).HasConversion(x => x.ToString(), x => (Department)Enum.Parse(typeof(Department),x)).HasMaxLength(20);
+            builder.Entity<Doctor>().HasMany(x => x.Schedules).WithOne(x => x.Doctor).HasForeignKey(x => x.DoctorId);
+            builder.Entity<Schedule>().HasKey(x => new {x.DoctorId,x.StartTime,x.Day});
             builder.Entity<User>().HasMany(x => x.Groups).WithMany(x => x.Users).UsingEntity<UserGroups>();
             builder.Entity<User>().HasOne(x => x.VerificationCode).WithOne(x => x.User).HasForeignKey<VerificationCode>(x => x.UserId);
             builder.Entity<User>().Property(x => x.FirstName).HasMaxLength(100);
             builder.Entity<User>().Property(x => x.LastName).HasMaxLength(100);
             builder.Entity<User>().Property(x => x.UserName).HasMaxLength(100);
             builder.Entity<User>().Property(x => x.Gender).HasMaxLength(6);
-            //builder.Entity<User>().HasDiscriminator<string>("Discriminator").HasValue<Doctor>("Doc").HasValue<Patient>("Pat").HasValue<Admin>("Adm");
-            //builder.Entity<User>().Property(x=>x.Discriminator).HasMaxLength(3).HasColumnType("varchar");
             builder.Entity<User>().Property(x => x.Gender).HasConversion(x => x.ToString(), x => (Gender)Enum.Parse(typeof(Gender), x));
             builder.Entity<User>().Property(x => x.Email).HasColumnType("varchar").HasMaxLength(100);
             builder.Entity<User>().HasIndex(x => x.Email).IsUnique();
             builder.Entity<User>().HasIndex(x => x.UserName).IsUnique();
             builder.Entity<User>().Property(x => x.Password).HasMaxLength(100);
-
-
             builder.Entity<VerificationCode>().HasKey(x => new { x.UserId, x.Code });
 
 
