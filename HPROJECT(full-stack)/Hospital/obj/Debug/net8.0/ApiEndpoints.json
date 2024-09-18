@@ -131,6 +131,32 @@
   },
   {
     "ContainingType": "Hospital.Controllers.AccountController",
+    "Method": "SearchForDoctors",
+    "RelativePath": "api/Account/doctor",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "searchKey",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "searchValue",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Hospital.Controllers.AccountController",
     "Method": "UpdateDoctorData",
     "RelativePath": "api/Account/doctor/{id}",
     "HttpMethod": "PATCH",
@@ -162,27 +188,6 @@
         "Name": "page",
         "Type": "System.Int32",
         "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Hospital.Controllers.AccountController",
-    "Method": "SearchForDoctors",
-    "RelativePath": "api/Account/doctors/{type-of-searching}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "type-of-searching",
-        "Type": "System.String",
-        "IsRequired": true
-      },
-      {
-        "Name": "searchDto",
-        "Type": "RepositoryPatternWithUOW.Core.DTOs.SearchDto",
-        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -349,6 +354,32 @@
   },
   {
     "ContainingType": "Hospital.Controllers.AccountController",
+    "Method": "SearchForPatients",
+    "RelativePath": "api/Account/patient",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "searchKey",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "searchValue",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Hospital.Controllers.AccountController",
     "Method": "UpdatePatientData",
     "RelativePath": "api/Account/patient/{id}",
     "HttpMethod": "PATCH",
@@ -380,27 +411,6 @@
         "Name": "page",
         "Type": "System.Int32",
         "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Hospital.Controllers.AccountController",
-    "Method": "SearchForPatients",
-    "RelativePath": "api/Account/patients/{type-of-searching}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "type-of-searching",
-        "Type": "System.String",
-        "IsRequired": true
-      },
-      {
-        "Name": "searchDto",
-        "Type": "RepositoryPatternWithUOW.Core.DTOs.SearchDto",
-        "IsRequired": true
       }
     ],
     "ReturnTypes": []

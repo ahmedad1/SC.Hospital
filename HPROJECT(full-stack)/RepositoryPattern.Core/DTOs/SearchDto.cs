@@ -12,8 +12,6 @@ namespace RepositoryPatternWithUOW.Core.DTOs
     public class SearchDto
     {
         public string  Data { get; set; }
-        [JsonConverter(typeof(JsonStringEnumConverter))]
        
-        public int page { get; set; }
     }
 }
