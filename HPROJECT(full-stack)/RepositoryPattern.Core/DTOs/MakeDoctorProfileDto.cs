@@ -38,8 +38,10 @@ namespace RepositoryPatternWithUOW.Core.DTOs
         public DateOnly BirthDate { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
         public Department Department{ get; set; }
-        public IFormFile? ProfilePicture { get; set; }   
+        public IFormFile? ProfilePicture { get; set; }
+        public float Price { get; set; }
+        public string? Biography { get; set; }
 
-        
+
     }
 }

@@ -20,7 +20,9 @@ namespace RepositoryPatternWithUOW.Core.ReturnedModels
                            string gender,
                            DateOnly birthDate,
                            bool emailConfirmed,
-                           string? departmentName
+                           string? departmentName,
+                           float? price,
+                           string? biography
 
                       )
         {
@@ -33,7 +35,9 @@ namespace RepositoryPatternWithUOW.Core.ReturnedModels
             BirthDate = birthDate;
             EmailConfirmed = emailConfirmed;
             DepartmentName = departmentName;
-  
+            Price = price;
+            Biography = biography;
+            
         }
 
         public int Id { get; }
@@ -43,6 +47,8 @@ namespace RepositoryPatternWithUOW.Core.ReturnedModels
         public string Email { get; }
         public string Gender { get; }
         public DateOnly BirthDate { get; }
+        public float? Price { get; set; }
+        public string? Biography { get; set; }
         public bool EmailConfirmed { get; }
         public string? DepartmentName { get; }
 

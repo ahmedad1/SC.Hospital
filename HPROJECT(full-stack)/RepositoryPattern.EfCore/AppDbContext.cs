@@ -41,6 +41,7 @@ namespace RepositoryPattern.EfCore
             builder.Entity<Doctor>().Property(x => x.ProfilePicture).IsSparse();
             builder.Entity<Doctor>().Property(x => x.Department).HasConversion(x => x.ToString(), x => (Department)Enum.Parse(typeof(Department),x)).HasMaxLength(20);
             builder.Entity<Doctor>().HasMany(x => x.Schedules).WithOne(x => x.Doctor).HasForeignKey(x => x.DoctorId);
+            builder.Entity<Doctor>().Property(x => x.Biography).HasMaxLength(200);
    
             builder.Entity<User>().HasMany(x => x.Groups).WithMany(x => x.Users).UsingEntity<UserGroups>();
             builder.Entity<User>().HasOne(x => x.VerificationCode).WithOne(x => x.User).HasForeignKey<VerificationCode>(x => x.UserId);
@@ -54,7 +55,6 @@ namespace RepositoryPattern.EfCore
             builder.Entity<User>().HasIndex(x => x.UserName).IsUnique();
             builder.Entity<User>().Property(x => x.Password).HasMaxLength(100);
             builder.Entity<VerificationCode>().HasKey(x => new { x.UserId, x.Code });
-
 
             builder.Entity<UserConnections>().HasOne(x => x.Users).WithMany(x => x.UserConnections).HasForeignKey(x => x.UserId)
                 .IsRequired();

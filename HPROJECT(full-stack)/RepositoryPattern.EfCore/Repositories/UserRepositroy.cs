@@ -275,7 +275,7 @@ namespace RepositoryPattern.EfCore.Repositories
 
         public async Task<UpdateUserDataResult> UpdateDoctor(JsonPatchDocument<Doctor>document,int doctorId)
         {
-            List<string> allowed = ["firstName","lastname","username","email","password","gender","birthdate","department","EmailConfirmed"];
+            List<string> allowed = ["firstName","lastname","username","email","password","gender","birthdate","department","EmailConfirmed","Biography","price"];
             if (!document.Operations.Exists(x => allowed.Exists(e => e.Equals(x.path, StringComparison.OrdinalIgnoreCase))))
                return new() { Success = false };
             
@@ -408,7 +408,7 @@ namespace RepositoryPattern.EfCore.Repositories
     
        public async Task<DoctorResult?>GetDoctor(int id)
         {
-            return await context.Set<Doctor>().Where(x => x.Id == id).Select(x => new DoctorResult(id, x.FirstName, x.LastName, x.UserName, x.Email, x.EmailConfirmed, x.BirthDate.ToString(), x.Gender.ToString(), x.Department.ToString())).FirstOrDefaultAsync();
+            return await context.Set<Doctor>().Where(x => x.Id == id).Select(x => new DoctorResult(id, x.FirstName, x.LastName, x.UserName, x.Email, x.EmailConfirmed, x.BirthDate.ToString(), x.Gender.ToString(), x.Department.ToString(),x.Biography,x.Price)).FirstOrDefaultAsync();
         }
         public async Task<bool> VerifyPassword(string email, string password)
         {
@@ -444,10 +444,10 @@ namespace RepositoryPattern.EfCore.Repositories
             int pageSize = 20;
             IEnumerable<UsersResult> result;
             if (typeof(T) == typeof(Patient))
-                result = await context.Set<Patient>().Skip(pageSize * (page - 1)).Take(pageSize).Select(x => new UsersResult(x.Id, x.FirstName, x.LastName, x.UserName, x.Email, x.Gender.ToString(), x.BirthDate, x.EmailConfirmed,null)).ToListAsync();
+                result = await context.Set<Patient>().Skip(pageSize * (page - 1)).Take(pageSize).Select(x => new UsersResult(x.Id, x.FirstName, x.LastName, x.UserName, x.Email, x.Gender.ToString(), x.BirthDate, x.EmailConfirmed,null,null,null)).ToListAsync();
             else
             {
-                result= await context.Set<Doctor>().Skip(pageSize * (page - 1)).Take(pageSize).Select(x => new UsersResult(x.Id, x.FirstName, x.LastName, x.UserName, x.Email, x.Gender.ToString(), x.BirthDate, x.EmailConfirmed,x.Department.ToString())).ToListAsync();
+                result= await context.Set<Doctor>().Skip(pageSize * (page - 1)).Take(pageSize).Select(x => new UsersResult(x.Id, x.FirstName, x.LastName, x.UserName, x.Email, x.Gender.ToString(), x.BirthDate, x.EmailConfirmed,x.Department.ToString(),x.Price,x.Biography)).ToListAsync();
             }
             return result;
         }
@@ -460,9 +460,9 @@ namespace RepositoryPattern.EfCore.Repositories
             int pageSize=20;
             var result = context.Set<T>().Where(expression).Skip(pageSize * (page - 1)).Take(pageSize);
             if (typeof (T) == typeof (Patient))
-            return result.Select(x => new UsersResult(x.Id, x.FirstName, x.LastName, x.UserName, x.Email, x.Gender.ToString(), x.BirthDate, x.EmailConfirmed,null)).AsNoTracking();
+            return result.Select(x => new UsersResult(x.Id, x.FirstName, x.LastName, x.UserName, x.Email, x.Gender.ToString(), x.BirthDate, x.EmailConfirmed,null,null,null)).AsNoTracking();
             else
-            return result.Select(x => new UsersResult(x.Id, x.FirstName, x.LastName, x.UserName, x.Email, x.Gender.ToString(), x.BirthDate, x.EmailConfirmed, (x as Doctor)!.Department.ToString())).AsNoTracking();
+            return result.Select(x => new UsersResult(x.Id, x.FirstName, x.LastName, x.UserName, x.Email, x.Gender.ToString(), x.BirthDate, x.EmailConfirmed, (x as Doctor)!.Department.ToString(),(x as Doctor)!.Price,(x as Doctor)!.Biography)).AsNoTracking();
             
 
         }
@@ -542,6 +542,10 @@ namespace RepositoryPattern.EfCore.Repositories
                 return false;
 
             }
+        }
+        public async Task<IEnumerable<EmployeeCardResult>> GetEmployeesOfDepartment(Department department)
+        {
+            return null;
         }
     }
 }
