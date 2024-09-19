@@ -4,6 +4,7 @@ using RepositoryPattern.Core.DTOs;
 using RepositoryPattern.Core.Models;
 using RepositoryPattern.Core.ReturnedModels;
 using RepositoryPatternWithUOW.Core.DTOs;
+using RepositoryPatternWithUOW.Core.Models;
 using RepositoryPatternWithUOW.Core.ReturnedModels;
 using System.Linq.Expressions;
 
@@ -28,7 +29,7 @@ namespace RepositoryPattern.Core.Interfaces
         public Task<UpdateUserDataResult> UpdateDoctor(JsonPatchDocument<Doctor> document, int doctorId);
 
         public Task<PatientResult?> GetPatient(int id);
-
+        
         public Task<ModifyInsensitveDataResult> ModifyInSensitiveDataAsync(JsonPatchDocument<User> modifyInsensitiveData,string password, int id);
         public Task<bool> DeleteAccountAsync<T>(int Id)where T:User;
         public Task<bool> VerifyPassword(string email, string password);
@@ -40,6 +41,15 @@ namespace RepositoryPattern.Core.Interfaces
         public Task<Patient?> GetPatientBy(Expression<Func<Patient, bool>> expression);//for searching
         public Task<UpdateUserDataResult> UpdateUserData<T>(UpdateUserDto user) where T:User;
         public Task<DoctorResult?> GetDoctor(int id);
+        public IEnumerable<ScheduleResult> GetSchedulesOfDoctor(int id);
+        public Task<ScheduleResult?> GetSchedule(int shiftId);
+        public Task<bool> AddSchedule(int doctorId, ScheduleDto scheduleDto);
+        public Task<bool> DeleteSchedule(int shiftId);
+
+        public Task<bool> UpdateShift(int shiftId, JsonPatchDocument<Schedule> document);
+
+
+
 
     }
 }

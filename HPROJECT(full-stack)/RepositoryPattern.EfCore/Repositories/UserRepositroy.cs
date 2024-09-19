@@ -15,12 +15,13 @@ using RepositoryPatternWithUOW.Core.DTOs;
 using RepositoryPatternWithUOW.Core.Enums;
 using RepositoryPatternWithUOW.Core.Models;
 using RepositoryPatternWithUOW.Core.ReturnedModels;
+using RepositoryPatternWithUOW.EfCore.MapToModel;
 using System.Collections.Frozen;
 using System.Linq.Expressions;
 using static RepositoryPatternWithUOW.Core.CookiesGlobal;
 namespace RepositoryPattern.EfCore.Repositories
 {
-    public class UserRepositroy(AppDbContext context, MapToUser mapToUser, TokenOptionsModel JwtOptions, IMailService mailService,IWebHostEnvironment webHostEnvironment) : IUserRepository
+    public class UserRepositroy(AppDbContext context, MapToUser mapToUser,ScheduleMapper mapToSchedule, TokenOptionsModel JwtOptions, IMailService mailService,IWebHostEnvironment webHostEnvironment) : IUserRepository
     {
         AppDbContext context = context;
         MapToUser mapToUser = mapToUser;
@@ -498,6 +499,49 @@ namespace RepositoryPattern.EfCore.Repositories
             }
 
         }
-       
+        public IEnumerable<ScheduleResult> GetSchedulesOfDoctor(int id)
+        {
+            context.ChangeTracker.LazyLoadingEnabled = false;
+            return  context.Schedules.Where(x => x.DoctorId == id).AsNoTracking().Select(x => new ScheduleResult(x.Id,x.Day, x.StartTime, x.EndTime));
+        }
+        public async Task<ScheduleResult?> GetSchedule(int shiftId)
+        {
+            context.ChangeTracker.LazyLoadingEnabled = false;
+            return await context.Schedules.Where(x => x.Id==shiftId).AsNoTracking().Select(x => new ScheduleResult(x.Id,x.Day, x.StartTime, x.EndTime)).FirstOrDefaultAsync();
+        }
+        public async Task<bool> AddSchedule(int doctorId , ScheduleDto scheduleDto)
+        {
+            var schedule = mapToSchedule.MapToSchedule(scheduleDto);
+            schedule.DoctorId = doctorId;
+            await context.Schedules.AddAsync(schedule);
+            return true;
+        }
+        public async Task<bool> DeleteSchedule(int shiftId)
+        {
+            return await context.Schedules.Where(x => x.Id==shiftId).ExecuteDeleteAsync()>0;
+        }
+        public async Task<bool>UpdateShift(int shiftId, JsonPatchDocument<Schedule> document)
+        {
+            List<string> allowed = ["StartTime","EndTime","Day"];
+            if (document.Operations.Exists(x => !allowed.Exists(e => e.Equals(x.path, StringComparison.OrdinalIgnoreCase))))
+            {
+                return false;
+            }
+            try
+            {
+                var shift=await context.Schedules.FirstOrDefaultAsync(x=>x.Id==shiftId);
+               
+                if (shift is null)
+                    return false;
+                document.ApplyTo(shift);
+                return true;
+
+            }
+            catch
+            {
+                return false;
+
+            }
+        }
     }
 }

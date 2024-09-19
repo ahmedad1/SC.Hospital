@@ -11,6 +11,7 @@ using RepositoryPattern.Core.Models;
 using RepositoryPatternWithUOW.Core.DTOs;
 using RepositoryPatternWithUOW.Core.Enums;
 using RepositoryPatternWithUOW.Core.Interfaces;
+using RepositoryPatternWithUOW.Core.Models;
 using RepositoryPatternWithUOW.Core.ReturnedModels;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -335,6 +336,65 @@ namespace Hospital.Controllers
             if (result)
                 await unitOfWork.SaveChangesAsync();
             return Ok();
+        }
+        [Authorize(Roles ="Adm")]
+        [HttpGet("{id}/schedules")]
+        public IActionResult GetSchedulesOfEmployee(int id)
+        {
+            return Ok( unitOfWork.UserRepository.GetSchedulesOfDoctor(id));
+        }
+        [Authorize(Roles ="Adm")]
+        [HttpGet("doctor/schedule/{shiftId}")]
+        public async Task<IActionResult> GetScheduleOfEmployee(int shiftId)
+        {
+            var result = await unitOfWork.UserRepository.GetSchedule(shiftId);
+            return result is not null?Ok(result ):BadRequest();
+        }
+        [Authorize(Roles ="Adm")]
+        [HttpPost("{id}/schedule")]
+        public async Task<IActionResult> AddScheduleForDoctor(int id,ScheduleDto scheduleDto)
+        {
+            var result = await unitOfWork.UserRepository.AddSchedule(id, scheduleDto);
+            if (result)
+            {
+                try
+                {
+                    await unitOfWork.SaveChangesAsync();
+                }
+                catch
+                {
+                    return BadRequest();
+                }
+            }
+            return result ?Ok():BadRequest();
+        }
+        [Authorize(Roles ="Adm")]
+        [HttpDelete("doctor/schedule/{shiftId}")]
+        public async Task<IActionResult> DeleteSchedule(int shiftId)
+        {
+            var result = await unitOfWork.UserRepository.DeleteSchedule(shiftId);
+            return result ?Ok():BadRequest();
+        }
+        [Authorize(Roles ="Adm")]
+        [HttpPatch("doctor/schedule/{shiftId}")]
+        public async Task<IActionResult> UpdateShift(int shiftId, [FromBody] JsonPatchDocument<Schedule> document)
+        {
+            var result=await unitOfWork.UserRepository.UpdateShift(shiftId,document);
+
+            if(result)
+            {
+                try
+                {
+                  
+                    await unitOfWork.SaveChangesAsync();
+                    return Ok();
+                }
+                catch
+                {
+                    return BadRequest();
+                }
+            }
+            return BadRequest();
         }
     }
 }

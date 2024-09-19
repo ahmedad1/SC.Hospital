@@ -210,19 +210,27 @@ namespace RepositoryPatternWithUOW.EfCore.Migrations
 
             modelBuilder.Entity("RepositoryPatternWithUOW.Core.Models.Schedule", b =>
                 {
-                    b.Property<int>("DoctorId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<TimeSpan>("StartTime")
-                        .HasColumnType("time");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("Day")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DoctorId")
                         .HasColumnType("int");
 
                     b.Property<TimeSpan>("EndTime")
                         .HasColumnType("time");
 
-                    b.HasKey("DoctorId", "StartTime", "Day");
+                    b.Property<TimeSpan>("StartTime")
+                        .HasColumnType("time");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
 
                     b.ToTable("Schedules");
                 });

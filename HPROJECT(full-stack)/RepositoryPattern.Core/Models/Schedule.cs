@@ -9,6 +9,7 @@ namespace RepositoryPatternWithUOW.Core.Models
 {
     public class Schedule
     {
+        public int Id { get; set; }
         public int DoctorId { get; set; }
         public DayOfWeek Day { get; set; }
         public TimeSpan StartTime { get; set; }

@@ -41,7 +41,7 @@ namespace RepositoryPattern.EfCore
             builder.Entity<Doctor>().Property(x => x.ProfilePicture).IsSparse();
             builder.Entity<Doctor>().Property(x => x.Department).HasConversion(x => x.ToString(), x => (Department)Enum.Parse(typeof(Department),x)).HasMaxLength(20);
             builder.Entity<Doctor>().HasMany(x => x.Schedules).WithOne(x => x.Doctor).HasForeignKey(x => x.DoctorId);
-            builder.Entity<Schedule>().HasKey(x => new {x.DoctorId,x.StartTime,x.Day});
+   
             builder.Entity<User>().HasMany(x => x.Groups).WithMany(x => x.Users).UsingEntity<UserGroups>();
             builder.Entity<User>().HasOne(x => x.VerificationCode).WithOne(x => x.User).HasForeignKey<VerificationCode>(x => x.UserId);
             builder.Entity<User>().Property(x => x.FirstName).HasMaxLength(100);

@@ -12,6 +12,7 @@ using RepositoryPattern.EfCore.MapToModel;
 using RepositoryPattern.EfCore.OptionPattenModels;
 using RepositoryPatternWithUOW.Core.Interfaces;
 using RepositoryPatternWithUOW.EfCore;
+using RepositoryPatternWithUOW.EfCore.MapToModel;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,7 +29,7 @@ builder.Services.AddTransient(typeof(IUnitOfWork),typeof(UnitOfWork));
 var jwtOptions=builder.Configuration.GetSection("Jwt").Get<TokenOptionsModel>();
 builder.Services.AddSingleton(jwtOptions!);
 builder.Services.Configure<MailOptionsModel>(builder.Configuration.GetSection("MailSettings"));
-
+builder.Services.AddScoped<ScheduleMapper>();
 builder.Services.AddScoped<MapToUser>();
 builder.Services.AddCors();
 builder.Services.AddTransient<IMailService,MailService>();  
