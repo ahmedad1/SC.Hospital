@@ -396,5 +396,12 @@ namespace Hospital.Controllers
             }
             return BadRequest();
         }
+        [Authorize (Roles ="Pat")]
+        [HttpGet("department/doctors")]
+        public  IActionResult GetDoctorsOfDepartment(Department department,int page)
+        {
+            return Ok(unitOfWork.UserRepository.GetDoctorsOfDepartment(department,page));
+        }
+
     }
 }

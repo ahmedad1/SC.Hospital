@@ -543,9 +543,9 @@ namespace RepositoryPattern.EfCore.Repositories
 
             }
         }
-        public async Task<IEnumerable<EmployeeCardResult>> GetEmployeesOfDepartment(Department department)
+        public  IEnumerable<EmployeeCardResult> GetDoctorsOfDepartment(Department department,int page,int pageSize=15)
         {
-            return null;
+            return  context.Doctors.Where(x => x.Department == department).Select(x => new EmployeeCardResult(x.Id, x.FirstName, x.LastName, x.Biography, x.Price, x.ProfilePicture,x.Gender.ToString())).Skip((page-1)*pageSize).Take(pageSize).AsNoTracking();
         }
     }
 }

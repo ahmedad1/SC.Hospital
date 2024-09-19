@@ -4,6 +4,7 @@ using RepositoryPattern.Core.DTOs;
 using RepositoryPattern.Core.Models;
 using RepositoryPattern.Core.ReturnedModels;
 using RepositoryPatternWithUOW.Core.DTOs;
+using RepositoryPatternWithUOW.Core.Enums;
 using RepositoryPatternWithUOW.Core.Models;
 using RepositoryPatternWithUOW.Core.ReturnedModels;
 using System.Linq.Expressions;
@@ -45,6 +46,7 @@ namespace RepositoryPattern.Core.Interfaces
         public Task<ScheduleResult?> GetSchedule(int shiftId);
         public Task<bool> AddSchedule(int doctorId, ScheduleDto scheduleDto);
         public Task<bool> DeleteSchedule(int shiftId);
+        public IEnumerable<EmployeeCardResult> GetDoctorsOfDepartment(Department department, int page, int pageSize = 15);
 
         public Task<bool> UpdateShift(int shiftId, JsonPatchDocument<Schedule> document);
 

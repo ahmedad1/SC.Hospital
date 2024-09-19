@@ -168,6 +168,27 @@
   },
   {
     "ContainingType": "Hospital.Controllers.AccountController",
+    "Method": "GetDoctorsOfDepartment",
+    "RelativePath": "api/Account/department/doctors",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "department",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Hospital.Controllers.AccountController",
     "Method": "SearchForDoctors",
     "RelativePath": "api/Account/doctor",
     "HttpMethod": "GET",
