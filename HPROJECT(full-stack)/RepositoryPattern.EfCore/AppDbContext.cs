@@ -54,6 +54,8 @@ namespace RepositoryPattern.EfCore
             builder.Entity<User>().HasIndex(x => x.Email).IsUnique();
             builder.Entity<User>().HasIndex(x => x.UserName).IsUnique();
             builder.Entity<User>().Property(x => x.Password).HasMaxLength(100);
+            builder.Entity<Schedule>().HasIndex(x => new { x.DoctorId, x.Day }).IsUnique();
+
             builder.Entity<VerificationCode>().HasKey(x => new { x.UserId, x.Code });
 
             builder.Entity<UserConnections>().HasOne(x => x.Users).WithMany(x => x.UserConnections).HasForeignKey(x => x.UserId)

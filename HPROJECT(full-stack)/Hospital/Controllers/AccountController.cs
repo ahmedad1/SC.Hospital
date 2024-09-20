@@ -363,7 +363,7 @@ namespace Hospital.Controllers
         public async Task<IActionResult> AddScheduleForDoctor(int id,ScheduleDto scheduleDto)
         {
             var result = await unitOfWork.UserRepository.AddSchedule(id, scheduleDto);
-            if (result)
+            if (result.Success)
             {
                 try
                 {
@@ -371,10 +371,10 @@ namespace Hospital.Controllers
                 }
                 catch
                 {
-                    return BadRequest();
+                    return BadRequest(result);
                 }
             }
-            return result ?Ok():BadRequest();
+            return result.Success ?Ok():BadRequest(result);
         }
         [Authorize(Roles ="Adm")]
         [HttpDelete("doctor/schedule/{shiftId}")]
@@ -389,7 +389,7 @@ namespace Hospital.Controllers
         {
             var result=await unitOfWork.UserRepository.UpdateShift(shiftId,document);
 
-            if(result)
+            if(result.Success)
             {
                 try
                 {
@@ -399,10 +399,10 @@ namespace Hospital.Controllers
                 }
                 catch
                 {
-                    return BadRequest();
+                    return BadRequest(result);
                 }
             }
-            return BadRequest();
+            return BadRequest(result);
         }
         [Authorize (Roles ="Pat")]
         [HttpGet("department/doctors")]

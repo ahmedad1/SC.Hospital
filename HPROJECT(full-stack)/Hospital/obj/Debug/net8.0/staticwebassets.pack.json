@@ -1,6 +1,10 @@
 {
   "Files": [
     {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\379bb33c-8846-4981-8882-27881aa8def9.jpeg",
+      "PackagePath": "staticwebassets\\379bb33c-8846-4981-8882-27881aa8def9.jpeg"
+    },
+    {
       "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\8047a974-f2db-403f-ae20-7c0ef52d76a7.jpeg",
       "PackagePath": "staticwebassets\\8047a974-f2db-403f-ae20-7c0ef52d76a7.jpeg"
     },
@@ -15,6 +19,10 @@
     {
       "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\ProfileSettings.html",
       "PackagePath": "staticwebassets\\ProfileSettings.html"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\a65d4157-fb33-4a79-bef7-b52ad121beb1.jpeg",
+      "PackagePath": "staticwebassets\\a65d4157-fb33-4a79-bef7-b52ad121beb1.jpeg"
     },
     {
       "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\add-department.html",

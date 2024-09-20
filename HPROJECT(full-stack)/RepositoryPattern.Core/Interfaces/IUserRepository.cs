@@ -44,11 +44,11 @@ namespace RepositoryPattern.Core.Interfaces
         public Task<DoctorResult?> GetDoctor(int id);
         public IEnumerable<ScheduleResult> GetSchedulesOfDoctor(int id);
         public Task<ScheduleResult?> GetSchedule(int shiftId);
-        public Task<bool> AddSchedule(int doctorId, ScheduleDto scheduleDto);
+        public Task<ScheduleManipResult> AddSchedule(int doctorId, ScheduleDto scheduleDto);
         public Task<bool> DeleteSchedule(int shiftId);
         public IEnumerable<EmployeeCardResult> GetDoctorsOfDepartment(Department department, int page, int pageSize = 15);
 
-        public Task<bool> UpdateShift(int shiftId, JsonPatchDocument<Schedule> document);
+        public Task<ScheduleManipResult> UpdateShift(int shiftId, JsonPatchDocument<Schedule> document);
 
         public Task<DoctorDetails?> GetDoctorDetails(int id);
 

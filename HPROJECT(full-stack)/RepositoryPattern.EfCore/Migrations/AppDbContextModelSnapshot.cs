@@ -230,7 +230,8 @@ namespace RepositoryPatternWithUOW.EfCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DoctorId");
+                    b.HasIndex("DoctorId", "Day")
+                        .IsUnique();
 
                     b.ToTable("Schedules");
                 });

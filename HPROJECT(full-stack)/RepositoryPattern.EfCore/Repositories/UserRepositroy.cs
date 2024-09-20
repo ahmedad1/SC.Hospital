@@ -509,37 +509,41 @@ namespace RepositoryPattern.EfCore.Repositories
             context.ChangeTracker.LazyLoadingEnabled = false;
             return await context.Schedules.Where(x => x.Id==shiftId).AsNoTracking().Select(x => new ScheduleResult(x.Id,x.Day, x.StartTime, x.EndTime)).FirstOrDefaultAsync();
         }
-        public async Task<bool> AddSchedule(int doctorId , ScheduleDto scheduleDto)
+        public async Task<ScheduleManipResult> AddSchedule(int doctorId , ScheduleDto scheduleDto)
         {
+            if (await context.Schedules.AnyAsync(x => x.DoctorId == doctorId && x.Day == scheduleDto.Day))
+                return new(false, true);
             var schedule = mapToSchedule.MapToSchedule(scheduleDto);
             schedule.DoctorId = doctorId;
             await context.Schedules.AddAsync(schedule);
-            return true;
+            return new(true);
         }
         public async Task<bool> DeleteSchedule(int shiftId)
         {
             return await context.Schedules.Where(x => x.Id==shiftId).ExecuteDeleteAsync()>0;
         }
-        public async Task<bool>UpdateShift(int shiftId, JsonPatchDocument<Schedule> document)
+        public async Task<ScheduleManipResult> UpdateShift(int shiftId, JsonPatchDocument<Schedule> document)
         {
             List<string> allowed = ["StartTime","EndTime","Day"];
             if (document.Operations.Exists(x => !allowed.Exists(e => e.Equals(x.path, StringComparison.OrdinalIgnoreCase))))
             {
-                return false;
+                return new(false);
             }
             try
             {
                 var shift=await context.Schedules.FirstOrDefaultAsync(x=>x.Id==shiftId);
                
                 if (shift is null)
-                    return false;
+                    return new (false);
                 document.ApplyTo(shift);
-                return true;
+                if (await context.Schedules.AnyAsync(x => x.Id!=shift.Id && x.Day == shift.Day&&x.DoctorId==shift.DoctorId))
+                    return new(false, true);
+                return new(true);
 
             }
             catch
             {
-                return false;
+                return new(false);
 
             }
         }
