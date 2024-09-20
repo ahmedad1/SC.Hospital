@@ -50,7 +50,7 @@ namespace RepositoryPattern.Core.Interfaces
 
         public Task<bool> UpdateShift(int shiftId, JsonPatchDocument<Schedule> document);
 
-
+        public Task<DoctorDetails?> GetDoctorDetails(int id);
 
 
     }

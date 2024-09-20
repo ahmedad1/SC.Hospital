@@ -236,6 +236,22 @@
   },
   {
     "ContainingType": "Hospital.Controllers.AccountController",
+    "Method": "GetDoctorDetails",
+    "RelativePath": "api/Account/doctor/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Hospital.Controllers.AccountController",
     "Method": "GetScheduleOfEmployee",
     "RelativePath": "api/Account/doctor/schedule/{shiftId}",
     "HttpMethod": "GET",

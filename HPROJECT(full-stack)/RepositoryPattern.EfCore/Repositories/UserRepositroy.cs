@@ -547,5 +547,10 @@ namespace RepositoryPattern.EfCore.Repositories
         {
             return  context.Doctors.Where(x => x.Department == department).Select(x => new EmployeeCardResult(x.Id, x.FirstName, x.LastName, x.Biography, x.Price, x.ProfilePicture,x.Gender.ToString())).Skip((page-1)*pageSize).Take(pageSize).AsNoTracking();
         }
+        public async Task<DoctorDetails?>GetDoctorDetails(int id)
+        {
+            context.ChangeTracker.LazyLoadingEnabled = false;
+            return await context.Doctors.Where(x => x.Id == id).Select(x => new DoctorDetails(x.FirstName, x.LastName, x.Price, x.Biography, x.ProfilePicture,x.Schedules.Select(e=>new ScheduleResult(e.Id,e.Day,e.StartTime,e.EndTime)),x.Gender.ToString())).AsNoTracking().FirstOrDefaultAsync();
+        }
     }
 }

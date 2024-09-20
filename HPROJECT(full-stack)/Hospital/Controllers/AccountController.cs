@@ -343,6 +343,14 @@ namespace Hospital.Controllers
         {
             return Ok( unitOfWork.UserRepository.GetSchedulesOfDoctor(id));
         }
+        [Authorize(Roles ="Pat")]
+        [HttpGet("doctor/{id}")]
+        public async Task<IActionResult>GetDoctorDetails(int id)
+        {
+            var result = await unitOfWork.UserRepository.GetDoctorDetails(id);
+
+            return result is not null? Ok(result):BadRequest();
+        }
         [Authorize(Roles ="Adm")]
         [HttpGet("doctor/schedule/{shiftId}")]
         public async Task<IActionResult> GetScheduleOfEmployee(int shiftId)
@@ -402,6 +410,7 @@ namespace Hospital.Controllers
         {
             return Ok(unitOfWork.UserRepository.GetDoctorsOfDepartment(department,page));
         }
+
 
     }
 }
