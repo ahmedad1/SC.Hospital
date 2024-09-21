@@ -1,19 +1,24 @@
 using Azure.Core;
 using Hospital;
+using Hospital.PaymobHmacService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using RepositoryPattern.EfCore;
 using RepositoryPattern.EfCore.MailService;
 using RepositoryPattern.EfCore.MapToModel;
 using RepositoryPattern.EfCore.OptionPattenModels;
+using RepositoryPatternUOW.Core.OptionPattern;
 using RepositoryPatternWithUOW.Core.Interfaces;
 using RepositoryPatternWithUOW.EfCore;
+using RepositoryPatternWithUOW.EfCore.InitPayService;
 using RepositoryPatternWithUOW.EfCore.MapToModel;
 using System.Text;
+using The_Wedding.PaymobHmacService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,7 +37,8 @@ builder.Services.Configure<MailOptionsModel>(builder.Configuration.GetSection("M
 builder.Services.AddScoped<ScheduleMapper>();
 builder.Services.AddScoped<MapToUser>();
 builder.Services.AddCors();
-builder.Services.AddTransient<IMailService,MailService>();  
+builder.Services.AddTransient<IMailService,MailService>();
+builder.Services.AddHttpClient();
 builder.Services.AddAuthentication().AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
 {
     options.RequireHttpsMetadata = true;
@@ -59,6 +65,9 @@ builder.Services.AddAuthentication().AddJwtBearer(JwtBearerDefaults.Authenticati
         }
     };
 });
+builder.Services.AddScoped<IInitPaymentService,InitPayService>();   
+builder.Services.Configure<PaymobInitOptions>(builder.Configuration.GetSection("PaymobInit"));
+builder.Services.Configure<PaymobHmac>(builder.Configuration.GetSection("PaymobHmac"));
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddResponseCompression(options =>
 {
@@ -67,6 +76,7 @@ builder.Services.AddResponseCompression(options =>
     options.Providers.Add<BrotliCompressionProvider>();
     options.Providers.Add<GzipCompressionProvider>();
 });
+builder.Services.AddScoped<IPaymobHmacService,PaymobHmacService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

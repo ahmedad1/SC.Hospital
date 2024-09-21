@@ -136,6 +136,22 @@
   },
   {
     "ContainingType": "Hospital.Controllers.AccountController",
+    "Method": "GetAppointmentsOfDoctor",
+    "RelativePath": "api/Account/appointment",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Hospital.Controllers.AccountController",
     "Method": "SendCode",
     "RelativePath": "api/Account/code-in-email",
     "HttpMethod": "POST",
@@ -315,6 +331,22 @@
         "Name": "page",
         "Type": "System.Int32",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Hospital.Controllers.AccountController",
+    "Method": "InitPay",
+    "RelativePath": "api/Account/init-pay",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "description",
+        "Type": "RepositoryPatternWithUOW.Core.DTOs.PaymentDescription",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -600,6 +632,27 @@
         "Name": "password",
         "Type": "System.String",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Hospital.Controllers.AccountController",
+    "Method": "BuyServiceByCard",
+    "RelativePath": "api/card",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "serviceDto",
+        "Type": "RepositoryPatternUOW.Core.DTOs.Paymob.PaymobCardDto.PaymobCardDto",
+        "IsRequired": true
+      },
+      {
+        "Name": "hmac",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

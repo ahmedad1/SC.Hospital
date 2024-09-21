@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.JsonPatch;
 using RepositoryPattern.Core.DTOs;
 using RepositoryPattern.Core.Models;
 using RepositoryPattern.Core.ReturnedModels;
+using RepositoryPatternUOW.Core.DTOs.Paymob.PaymobCardDto;
 using RepositoryPatternWithUOW.Core.DTOs;
 using RepositoryPatternWithUOW.Core.Enums;
 using RepositoryPatternWithUOW.Core.Models;
@@ -47,6 +48,9 @@ namespace RepositoryPattern.Core.Interfaces
         public Task<ScheduleManipResult> AddSchedule(int doctorId, ScheduleDto scheduleDto);
         public Task<bool> DeleteSchedule(int shiftId);
         public IEnumerable<EmployeeCardResult> GetDoctorsOfDepartment(Department department, int page, int pageSize = 15);
+        public IEnumerable<BookedAppointment> GetBookedAppointments(int doctorId,int page,int pageSize=20);
+        public  Task<bool> PayAndBook(PaymobCardDto serviceDto);
+
 
         public Task<ScheduleManipResult> UpdateShift(int shiftId, JsonPatchDocument<Schedule> document);
 

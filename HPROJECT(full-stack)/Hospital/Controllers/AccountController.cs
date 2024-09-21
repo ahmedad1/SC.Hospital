@@ -1,4 +1,5 @@
 ﻿
+using Hospital.PaymobHmacService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
@@ -8,26 +9,24 @@ using Microsoft.IdentityModel.Tokens;
 using RepositoryPattern.Core.DTOs;
 using RepositoryPattern.Core.Interfaces;
 using RepositoryPattern.Core.Models;
+using RepositoryPatternUOW.Core.DTOs.Paymob.PaymobCardDto;
 using RepositoryPatternWithUOW.Core.DTOs;
 using RepositoryPatternWithUOW.Core.Enums;
 using RepositoryPatternWithUOW.Core.Interfaces;
 using RepositoryPatternWithUOW.Core.Models;
 using RepositoryPatternWithUOW.Core.ReturnedModels;
+using RepositoryPatternWithUOW.EfCore.InitPayService;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using The_Wedding.PaymobHmacService;
 using static RepositoryPatternWithUOW.Core.CookiesGlobal;
 namespace Hospital.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AccountController : ControllerBase
+    public class AccountController(IUnitOfWork unitOfWork,IInitPaymentService initPaymentService,IPaymobHmacService paymobHmacService) : ControllerBase
     {
-        IUnitOfWork unitOfWork;
-
-        public AccountController(IUnitOfWork unitOfWork)
-        {
-            this.unitOfWork = unitOfWork;
-        }
+        
 
         [HttpPost("sign-up")]
         public async Task<IActionResult> SignUp(SignUpDto signUpDto)
@@ -411,6 +410,38 @@ namespace Hospital.Controllers
             return Ok(unitOfWork.UserRepository.GetDoctorsOfDepartment(department,page));
         }
 
+        [Authorize(Roles ="Doc")]
+        [HttpGet("appointment")]
+        public  IActionResult GetAppointmentsOfDoctor(int page)
+        {
+            var id = User.Claims.FirstOrDefault(x => x.Type == "id");
+            if (id is null)
+                return BadRequest();
 
+            return Ok(unitOfWork.UserRepository.GetBookedAppointments(int.Parse(id.Value),page));
+        }
+        [Authorize(Roles ="Pat")]
+        [HttpPost("init-pay")]
+        public async Task<IActionResult> InitPay(PaymentDescription description)
+        {
+            var firstName = User.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Name);
+            var lastName = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Surname);
+            var email = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Email);
+            var id = User.Claims.FirstOrDefault(x => x.Type == "id");
+            if (firstName is null || lastName is null || email is null || id is null)
+                return BadRequest();
+
+            var result=await initPaymentService.InitPay(firstName.Value, lastName.Value, email.Value, description.DoctorId, description.Description,int.Parse(id.Value));
+            return result is null ? BadRequest() : Ok(result);
+        }
+        [HttpPost("/api/card")]
+        public async Task<IActionResult> BuyServiceByCard([FromBody] PaymobCardDto serviceDto, [FromQuery] string hmac)
+        {
+
+            var computedHmac = paymobHmacService.ComputeHmac(serviceDto);
+            if (computedHmac != hmac)
+                return BadRequest();
+            return await unitOfWork.UserRepository.PayAndBook(serviceDto) ? Ok() : BadRequest();
+        }
     }
 }

@@ -35,8 +35,8 @@ namespace RepositoryPatternWithUOW.EfCore.Migrations
                     b.Property<int>("PatientId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Appointment")
-                        .HasColumnType("datetime2");
+                    b.Property<DateOnly>("Appointment")
+                        .HasColumnType("date");
 
                     b.HasKey("DoctorId", "PatientId");
 

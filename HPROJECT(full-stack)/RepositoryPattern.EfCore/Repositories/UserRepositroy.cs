@@ -11,10 +11,13 @@ using RepositoryPattern.EfCore.MailService;
 using RepositoryPattern.EfCore.MapToModel;
 using RepositoryPattern.EfCore.OptionPattenModels;
 using RepositoryPattern.EfCore.TokensHandler;
+using RepositoryPatternUOW.Core.DTOs;
+using RepositoryPatternUOW.Core.DTOs.Paymob.PaymobCardDto;
 using RepositoryPatternWithUOW.Core.DTOs;
 using RepositoryPatternWithUOW.Core.Enums;
 using RepositoryPatternWithUOW.Core.Models;
 using RepositoryPatternWithUOW.Core.ReturnedModels;
+using RepositoryPatternWithUOW.EfCore;
 using RepositoryPatternWithUOW.EfCore.MapToModel;
 using System.Collections.Frozen;
 using System.Linq.Expressions;
@@ -555,6 +558,31 @@ namespace RepositoryPattern.EfCore.Repositories
         {
             context.ChangeTracker.LazyLoadingEnabled = false;
             return await context.Doctors.Where(x => x.Id == id).Select(x => new DoctorDetails(x.FirstName, x.LastName, x.Price, x.Biography, x.ProfilePicture,x.Schedules.Select(e=>new ScheduleResult(e.Id,e.Day,e.StartTime,e.EndTime)),x.Gender.ToString())).AsNoTracking().FirstOrDefaultAsync();
+        }
+        public IEnumerable<BookedAppointment> GetBookedAppointments(int doctorId,int page,int pageSize=20)
+        {
+
+            return context.Set<DoctorPatient>().Where(x => x.DoctorId == doctorId&&x.Appointment==DateOnly.FromDateTime(DateTime.Now)).OrderBy(x => x.Appointment).Skip((page - 1) * pageSize).Take(pageSize).Select(x => new BookedAppointment(x.Appointment, x.Patient.FirstName, x.Patient.LastName,x.Patient.Email)).AsNoTracking();
+        }
+        public async Task<bool> PayAndBook(PaymobCardDto serviceDto)
+        {
+            if (serviceDto.obj.order.items[0].description is null)
+                return false;
+            if (serviceDto.obj.success == false)
+                return false;
+            ServiceDescriptionPaymob? serviceDescriptionPaymob = Newtonsoft.Json.JsonConvert.DeserializeObject<ServiceDescriptionPaymob>(serviceDto.obj.order.items[0].description!);
+            if (serviceDescriptionPaymob is null) return false;
+            var email = serviceDto.obj.payment_key_claims.billing_data.email;
+            if (string.IsNullOrEmpty(email))
+                return false;
+            if (!Enum.TryParse(serviceDescriptionPaymob.Date, true, out DateOnly date))
+                return false;
+            if (!await context.Schedules.AnyAsync(x => x.Day == date.DayOfWeek)) return false;
+
+            if (await context.Set<DoctorPatient>().AnyAsync(x => x.PatientId == serviceDescriptionPaymob.PatientId && x.DoctorId == serviceDescriptionPaymob.DoctorId && x.Appointment.DayOfWeek==date.DayOfWeek))
+                return false;
+            await context.Set<DoctorPatient>().AddAsync(new DoctorPatient() { Appointment=date,DoctorId=serviceDescriptionPaymob.DoctorId,PatientId=serviceDescriptionPaymob.PatientId});
+            return true;
         }
     }
 }

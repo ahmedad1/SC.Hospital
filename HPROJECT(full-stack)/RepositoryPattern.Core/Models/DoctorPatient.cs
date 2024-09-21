@@ -11,7 +11,7 @@ namespace RepositoryPattern.Core.Models
         //public int Id { get; set; }
         public int DoctorId { get; set; }
         public int  PatientId { get; set; }
-        public DateTime Appointment { get; set; }
+        public DateOnly Appointment { get; set; }
         public virtual Doctor Doctor { get; set; }
         public virtual Patient Patient { get; set; }
     }

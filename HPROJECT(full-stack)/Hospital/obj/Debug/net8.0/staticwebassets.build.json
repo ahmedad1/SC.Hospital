@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "tjQmDYsbPDSIYXiGqHFokmzjHbnVKyYTYHQt+f4Xr+U=",
+  "Hash": "9uv56AvaH/+h7j3mVQAJvY3/da1THT55ud2jPB9HYtM=",
   "Source": "Hospital",
   "BasePath": "_content/Hospital",
   "Mode": "Default",
@@ -72,6 +72,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\8d26295a-5f22-41e6-822d-e467842eeb71.jpeg"
+    },
+    {
+      "Identity": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\9e2e2d50-1cc6-48c3-b4d1-690bbd25dc81.jpeg",
+      "SourceId": "Hospital",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\",
+      "BasePath": "_content/Hospital",
+      "RelativePath": "9e2e2d50-1cc6-48c3-b4d1-690bbd25dc81.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\9e2e2d50-1cc6-48c3-b4d1-690bbd25dc81.jpeg"
     },
     {
       "Identity": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\a65d4157-fb33-4a79-bef7-b52ad121beb1.jpeg",
