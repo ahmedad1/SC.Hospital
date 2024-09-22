@@ -9,6 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using RepositoryPattern.Core.DTOs;
 using RepositoryPattern.Core.Interfaces;
 using RepositoryPattern.Core.Models;
+using RepositoryPattern.EfCore.MailService;
 using RepositoryPatternUOW.Core.DTOs.Paymob.PaymobCardDto;
 using RepositoryPatternWithUOW.Core.DTOs;
 using RepositoryPatternWithUOW.Core.Enums;
@@ -24,7 +25,7 @@ namespace Hospital.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AccountController(IUnitOfWork unitOfWork,IInitPaymentService initPaymentService,IPaymobHmacService paymobHmacService) : ControllerBase
+    public class AccountController(IMailService mailService,IUnitOfWork unitOfWork,IInitPaymentService initPaymentService,IPaymobHmacService paymobHmacService) : ControllerBase
     {
         
 
@@ -441,7 +442,21 @@ namespace Hospital.Controllers
             var computedHmac = paymobHmacService.ComputeHmac(serviceDto);
             if (computedHmac != hmac)
                 return BadRequest();
-            return await unitOfWork.UserRepository.PayAndBook(serviceDto) ? Ok() : BadRequest();
+            var result = await unitOfWork.UserRepository.PayAndBook(serviceDto);
+            if (result)
+            {
+                await unitOfWork.SaveChangesAsync();
+                return Ok();
+            }
+            return BadRequest();
         }
+        //[HttpPost("/api/card")]
+        //public async Task<IActionResult> BuyServiceByCard([FromBody] object serviceDto, [FromQuery] string hmac)
+        //{
+
+        //    await mailService.Send("ao1258@fayoum.edu.eg", "PaymobDTO", serviceDto.ToString()+" _____ "+hmac);
+        //    return Ok();    
+        //}
+
     }
 }

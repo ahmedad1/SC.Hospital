@@ -3,17 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{2DCFC8E3-572B-4D81-9A8F-8579F33A05CC}|Hospital.csproj|c:\\users\\infotech\\desktop\\hproject(full-stack)\\hospital\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2DCFC8E3-572B-4D81-9A8F-8579F33A05CC}|Hospital.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{6AE820EF-C2A5-4279-BAE3-A2D53CFF13FB}|..\\RepositoryPattern.EfCore\\RepositoryPatternWithUOW.EfCore.csproj|c:\\users\\infotech\\desktop\\hproject(full-stack)\\repositorypattern.efcore\\repositories\\userrepositroy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6AE820EF-C2A5-4279-BAE3-A2D53CFF13FB}|..\\RepositoryPattern.EfCore\\RepositoryPatternWithUOW.EfCore.csproj|c:\\users\\infotech\\desktop\\hproject(full-stack)\\repositorypattern.efcore\\initpayservice\\initpayservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2DCFC8E3-572B-4D81-9A8F-8579F33A05CC}|Hospital.csproj|c:\\users\\infotech\\desktop\\hproject(full-stack)\\hospital\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2DCFC8E3-572B-4D81-9A8F-8579F33A05CC}|Hospital.csproj|solutionrelative:controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9B44BC5-5886-4EE6-ADF2-FCFAB598A6E7}|..\\RepositoryPattern.Core\\RepositoryPatternWithUOW.Core.csproj|c:\\users\\infotech\\desktop\\hproject(full-stack)\\repositorypattern.core\\models\\doctorpatient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9B44BC5-5886-4EE6-ADF2-FCFAB598A6E7}|..\\RepositoryPattern.Core\\RepositoryPatternWithUOW.Core.csproj|c:\\users\\infotech\\desktop\\hproject(full-stack)\\repositorypattern.core\\models\\doctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B9B44BC5-5886-4EE6-ADF2-FCFAB598A6E7}|..\\RepositoryPattern.Core\\RepositoryPatternWithUOW.Core.csproj|c:\\users\\infotech\\desktop\\hproject(full-stack)\\repositorypattern.core\\interfaces\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2DCFC8E3-572B-4D81-9A8F-8579F33A05CC}|Hospital.csproj|c:\\users\\infotech\\desktop\\hproject(full-stack)\\hospital\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2DCFC8E3-572B-4D81-9A8F-8579F33A05CC}|Hospital.csproj|solutionrelative:controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2DCFC8E3-572B-4D81-9A8F-8579F33A05CC}|Hospital.csproj|c:\\users\\infotech\\desktop\\hproject(full-stack)\\hospital\\cookieshandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2DCFC8E3-572B-4D81-9A8F-8579F33A05CC}|Hospital.csproj|solutionrelative:cookieshandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B9B44BC5-5886-4EE6-ADF2-FCFAB598A6E7}|..\\RepositoryPattern.Core\\RepositoryPatternWithUOW.Core.csproj|c:\\users\\infotech\\desktop\\hproject(full-stack)\\repositorypattern.core\\dtos\\servicedescriptionpaymob.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
@@ -22,24 +33,13 @@
       "AbsoluteMoniker": "D:0:0:{6AE820EF-C2A5-4279-BAE3-A2D53CFF13FB}|..\\RepositoryPattern.EfCore\\RepositoryPatternWithUOW.EfCore.csproj|c:\\users\\infotech\\desktop\\hproject(full-stack)\\repositorypattern.efcore\\initpayservice\\iinitpaymentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2DCFC8E3-572B-4D81-9A8F-8579F33A05CC}|Hospital.csproj|c:\\users\\infotech\\desktop\\hproject(full-stack)\\hospital\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2DCFC8E3-572B-4D81-9A8F-8579F33A05CC}|Hospital.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{6AE820EF-C2A5-4279-BAE3-A2D53CFF13FB}|..\\RepositoryPattern.EfCore\\RepositoryPatternWithUOW.EfCore.csproj|c:\\users\\infotech\\desktop\\hproject(full-stack)\\repositorypattern.efcore\\optionpattenmodels\\paymobinitoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2DCFC8E3-572B-4D81-9A8F-8579F33A05CC}|Hospital.csproj|c:\\users\\infotech\\desktop\\hproject(full-stack)\\hospital\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{2DCFC8E3-572B-4D81-9A8F-8579F33A05CC}|Hospital.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B9B44BC5-5886-4EE6-ADF2-FCFAB598A6E7}|..\\RepositoryPattern.Core\\RepositoryPatternWithUOW.Core.csproj|c:\\users\\infotech\\desktop\\hproject(full-stack)\\repositorypattern.core\\dtos\\paymentdescription.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6AE820EF-C2A5-4279-BAE3-A2D53CFF13FB}|..\\RepositoryPattern.EfCore\\RepositoryPatternWithUOW.EfCore.csproj|c:\\users\\infotech\\desktop\\hproject(full-stack)\\repositorypattern.efcore\\tokenshandler\\tokens.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B9B44BC5-5886-4EE6-ADF2-FCFAB598A6E7}|..\\RepositoryPattern.Core\\RepositoryPatternWithUOW.Core.csproj|c:\\users\\infotech\\desktop\\hproject(full-stack)\\repositorypattern.core\\models\\doctorpatient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B9B44BC5-5886-4EE6-ADF2-FCFAB598A6E7}|..\\RepositoryPattern.Core\\RepositoryPatternWithUOW.Core.csproj|c:\\users\\infotech\\desktop\\hproject(full-stack)\\repositorypattern.core\\returnedmodels\\bookedappointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
@@ -50,9 +50,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{2DCFC8E3-572B-4D81-9A8F-8579F33A05CC}|Hospital.csproj|c:\\users\\infotech\\desktop\\hproject(full-stack)\\hospital\\paymobhmacservice\\paymobhmac.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2DCFC8E3-572B-4D81-9A8F-8579F33A05CC}|Hospital.csproj|solutionrelative:paymobhmacservice\\paymobhmac.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B9B44BC5-5886-4EE6-ADF2-FCFAB598A6E7}|..\\RepositoryPattern.Core\\RepositoryPatternWithUOW.Core.csproj|c:\\users\\infotech\\desktop\\hproject(full-stack)\\repositorypattern.core\\models\\doctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B9B44BC5-5886-4EE6-ADF2-FCFAB598A6E7}|..\\RepositoryPattern.Core\\RepositoryPatternWithUOW.Core.csproj|c:\\users\\infotech\\desktop\\hproject(full-stack)\\repositorypattern.core\\returnedmodels\\doctorresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
@@ -95,9 +92,6 @@
     },
     {
       "AbsoluteMoniker": "D:0:0:{6AE820EF-C2A5-4279-BAE3-A2D53CFF13FB}|..\\RepositoryPattern.EfCore\\RepositoryPatternWithUOW.EfCore.csproj|c:\\users\\infotech\\desktop\\hproject(full-stack)\\repositorypattern.efcore\\maptomodel\\maptouser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B9B44BC5-5886-4EE6-ADF2-FCFAB598A6E7}|..\\RepositoryPattern.Core\\RepositoryPatternWithUOW.Core.csproj|c:\\users\\infotech\\desktop\\hproject(full-stack)\\repositorypattern.core\\enums\\department.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -107,154 +101,76 @@
       "DocumentGroups": [
         {
           "DockedHeight": 106,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "InitPayService.cs",
-              "DocumentMoniker": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.EfCore\\InitPayService\\InitPayService.cs",
-              "RelativeDocumentMoniker": "..\\RepositoryPattern.EfCore\\InitPayService\\InitPayService.cs",
-              "ToolTip": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.EfCore\\InitPayService\\InitPayService.cs",
-              "RelativeToolTip": "..\\RepositoryPattern.EfCore\\InitPayService\\InitPayService.cs",
-              "ViewState": "AQIAAF4AAAAAAAAAAAAiwIgAAAAcAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-21T11:09:12.275Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ServiceDescriptionPaymob.cs",
-              "DocumentMoniker": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.Core\\DTOs\\ServiceDescriptionPaymob.cs",
-              "RelativeDocumentMoniker": "..\\RepositoryPattern.Core\\DTOs\\ServiceDescriptionPaymob.cs",
-              "ToolTip": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.Core\\DTOs\\ServiceDescriptionPaymob.cs",
-              "RelativeToolTip": "..\\RepositoryPattern.Core\\DTOs\\ServiceDescriptionPaymob.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAuwA8AAAAaAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-21T12:07:31.881Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "IInitPaymentService.cs",
-              "DocumentMoniker": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.EfCore\\InitPayService\\IInitPaymentService.cs",
-              "RelativeDocumentMoniker": "..\\RepositoryPattern.EfCore\\InitPayService\\IInitPaymentService.cs",
-              "ToolTip": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.EfCore\\InitPayService\\IInitPaymentService.cs",
-              "RelativeToolTip": "..\\RepositoryPattern.EfCore\\InitPayService\\IInitPaymentService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAuwAQAAAAkAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-21T11:08:34.742Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAAEUAAAAAAAAAAAAAAE4AAABDAAAA",
+              "ViewState": "AQIAACkAAAAAAAAAAAAAAFAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-17T11:35:02.559Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "AccountController.cs",
               "DocumentMoniker": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\Controllers\\AccountController.cs",
               "RelativeDocumentMoniker": "Controllers\\AccountController.cs",
               "ToolTip": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\Controllers\\AccountController.cs",
               "RelativeToolTip": "Controllers\\AccountController.cs",
-              "ViewState": "AQIAAKYBAAAAAAAAAAAqwLsBAAA9AAAA",
+              "ViewState": "AQIAALMBAAAAAAAAAAAAAMABAAAcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-19T16:49:46.148Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "IUserRepository.cs",
               "DocumentMoniker": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.Core\\Interfaces\\IUserRepository.cs",
               "RelativeDocumentMoniker": "..\\RepositoryPattern.Core\\Interfaces\\IUserRepository.cs",
               "ToolTip": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.Core\\Interfaces\\IUserRepository.cs",
               "RelativeToolTip": "..\\RepositoryPattern.Core\\Interfaces\\IUserRepository.cs",
-              "ViewState": "AQIAAC0AAAAAAAAAAAAMwDMAAAAlAAAA",
+              "ViewState": "AQIAACUAAAAAAAAAAAApwDMAAAAlAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-20T21:12:03.551Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "UserRepositroy.cs",
               "DocumentMoniker": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.EfCore\\Repositories\\UserRepositroy.cs",
               "RelativeDocumentMoniker": "..\\RepositoryPattern.EfCore\\Repositories\\UserRepositroy.cs",
               "ToolTip": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.EfCore\\Repositories\\UserRepositroy.cs",
               "RelativeToolTip": "..\\RepositoryPattern.EfCore\\Repositories\\UserRepositroy.cs",
-              "ViewState": "AQIAADECAAAAAAAAAAArwDwCAACzAAAA",
+              "ViewState": "AQIAADECAAAAAAAAAAA+wEMCAABeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-20T21:14:16.17Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "PaymobInitOptions.cs",
-              "DocumentMoniker": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.EfCore\\OptionPattenModels\\PaymobInitOptions.cs",
-              "RelativeDocumentMoniker": "..\\RepositoryPattern.EfCore\\OptionPattenModels\\PaymobInitOptions.cs",
-              "ToolTip": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.EfCore\\OptionPattenModels\\PaymobInitOptions.cs",
-              "RelativeToolTip": "..\\RepositoryPattern.EfCore\\OptionPattenModels\\PaymobInitOptions.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAKAAAA",
+              "DocumentIndex": 4,
+              "Title": "Doctor.cs",
+              "DocumentMoniker": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.Core\\Models\\Doctor.cs",
+              "RelativeDocumentMoniker": "..\\RepositoryPattern.Core\\Models\\Doctor.cs",
+              "ToolTip": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.Core\\Models\\Doctor.cs",
+              "RelativeToolTip": "..\\RepositoryPattern.Core\\Models\\Doctor.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAWAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-21T16:13:24.817Z",
+              "WhenOpened": "2024-09-19T16:17:53.153Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\appsettings.json",
-              "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\appsettings.json",
-              "RelativeToolTip": "appsettings.json",
-              "ViewState": "AQIAAA8AAAAAAAAAAAAAABkAAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-09-21T11:16:48.704Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Tokens.cs",
-              "DocumentMoniker": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.EfCore\\TokensHandler\\Tokens.cs",
-              "RelativeDocumentMoniker": "..\\RepositoryPattern.EfCore\\TokensHandler\\Tokens.cs",
-              "ToolTip": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.EfCore\\TokensHandler\\Tokens.cs",
-              "RelativeToolTip": "..\\RepositoryPattern.EfCore\\TokensHandler\\Tokens.cs",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-21T14:47:34.428Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "PaymentDescription.cs",
-              "DocumentMoniker": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.Core\\DTOs\\PaymentDescription.cs",
-              "RelativeDocumentMoniker": "..\\RepositoryPattern.Core\\DTOs\\PaymentDescription.cs",
-              "ToolTip": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.Core\\DTOs\\PaymentDescription.cs",
-              "RelativeToolTip": "..\\RepositoryPattern.Core\\DTOs\\PaymentDescription.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAuwAkAAAAjAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-21T14:43:51.265Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 3,
               "Title": "DoctorPatient.cs",
               "DocumentMoniker": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.Core\\Models\\DoctorPatient.cs",
               "RelativeDocumentMoniker": "..\\RepositoryPattern.Core\\Models\\DoctorPatient.cs",
@@ -267,6 +183,78 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ServiceDescriptionPaymob.cs",
+              "DocumentMoniker": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.Core\\DTOs\\ServiceDescriptionPaymob.cs",
+              "RelativeDocumentMoniker": "..\\RepositoryPattern.Core\\DTOs\\ServiceDescriptionPaymob.cs",
+              "ToolTip": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.Core\\DTOs\\ServiceDescriptionPaymob.cs",
+              "RelativeToolTip": "..\\RepositoryPattern.Core\\DTOs\\ServiceDescriptionPaymob.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAuwA8AAAAaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-21T12:07:31.881Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CookiesHandler.cs",
+              "DocumentMoniker": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\CookiesHandler.cs",
+              "RelativeDocumentMoniker": "CookiesHandler.cs",
+              "ToolTip": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\CookiesHandler.cs",
+              "RelativeToolTip": "CookiesHandler.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAuwA8AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-21T18:43:05.309Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "IInitPaymentService.cs",
+              "DocumentMoniker": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.EfCore\\InitPayService\\IInitPaymentService.cs",
+              "RelativeDocumentMoniker": "..\\RepositoryPattern.EfCore\\InitPayService\\IInitPaymentService.cs",
+              "ToolTip": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.EfCore\\InitPayService\\IInitPaymentService.cs",
+              "RelativeToolTip": "..\\RepositoryPattern.EfCore\\InitPayService\\IInitPaymentService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAuwAQAAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-21T11:08:34.742Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "PaymobInitOptions.cs",
+              "DocumentMoniker": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.EfCore\\OptionPattenModels\\PaymobInitOptions.cs",
+              "RelativeDocumentMoniker": "..\\RepositoryPattern.EfCore\\OptionPattenModels\\PaymobInitOptions.cs",
+              "ToolTip": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.EfCore\\OptionPattenModels\\PaymobInitOptions.cs",
+              "RelativeToolTip": "..\\RepositoryPattern.EfCore\\OptionPattenModels\\PaymobInitOptions.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAKAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-21T16:13:24.817Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Tokens.cs",
+              "DocumentMoniker": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.EfCore\\TokensHandler\\Tokens.cs",
+              "RelativeDocumentMoniker": "..\\RepositoryPattern.EfCore\\TokensHandler\\Tokens.cs",
+              "ToolTip": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.EfCore\\TokensHandler\\Tokens.cs",
+              "RelativeToolTip": "..\\RepositoryPattern.EfCore\\TokensHandler\\Tokens.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-21T14:47:34.428Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "PaymentDescription.cs",
+              "DocumentMoniker": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.Core\\DTOs\\PaymentDescription.cs",
+              "RelativeDocumentMoniker": "..\\RepositoryPattern.Core\\DTOs\\PaymentDescription.cs",
+              "ToolTip": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.Core\\DTOs\\PaymentDescription.cs",
+              "RelativeToolTip": "..\\RepositoryPattern.Core\\DTOs\\PaymentDescription.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAuwAkAAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-21T14:43:51.265Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 12,
               "Title": "BookedAppointment.cs",
               "DocumentMoniker": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.Core\\ReturnedModels\\BookedAppointment.cs",
@@ -275,8 +263,7 @@
               "RelativeToolTip": "..\\RepositoryPattern.Core\\ReturnedModels\\BookedAppointment.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAA1AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-21T12:22:55.717Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-21T12:22:55.717Z"
             },
             {
               "$type": "Document",
@@ -301,12 +288,11 @@
               "RelativeToolTip": "..\\RepositoryPattern.Core\\ReturnedModels\\ScheduleManipResult.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAuwAgAAABFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-20T21:12:58.925Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-20T21:12:58.925Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 18,
               "Title": "DoctorDetails.cs",
               "DocumentMoniker": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.Core\\ReturnedModels\\DoctorDetails.cs",
               "RelativeDocumentMoniker": "..\\RepositoryPattern.Core\\ReturnedModels\\DoctorDetails.cs",
@@ -318,7 +304,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 17,
               "Title": "EmployeeCardResult.cs",
               "DocumentMoniker": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.Core\\ReturnedModels\\EmployeeCardResult.cs",
               "RelativeDocumentMoniker": "..\\RepositoryPattern.Core\\ReturnedModels\\EmployeeCardResult.cs",
@@ -330,7 +316,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 19,
               "Title": "ScheduleResult.cs",
               "DocumentMoniker": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.Core\\ReturnedModels\\ScheduleResult.cs",
               "RelativeDocumentMoniker": "..\\RepositoryPattern.Core\\ReturnedModels\\ScheduleResult.cs",
@@ -343,18 +329,6 @@
             {
               "$type": "Document",
               "DocumentIndex": 15,
-              "Title": "Doctor.cs",
-              "DocumentMoniker": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.Core\\Models\\Doctor.cs",
-              "RelativeDocumentMoniker": "..\\RepositoryPattern.Core\\Models\\Doctor.cs",
-              "ToolTip": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.Core\\Models\\Doctor.cs",
-              "RelativeToolTip": "..\\RepositoryPattern.Core\\Models\\Doctor.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAWAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-19T16:17:53.153Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
               "Title": "DoctorResult.cs",
               "DocumentMoniker": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.Core\\ReturnedModels\\DoctorResult.cs",
               "RelativeDocumentMoniker": "..\\RepositoryPattern.Core\\ReturnedModels\\DoctorResult.cs",
@@ -366,7 +340,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 16,
               "Title": "UpdateUserDto.cs",
               "DocumentMoniker": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.Core\\DTOs\\UpdateUserDto.cs",
               "RelativeDocumentMoniker": "..\\RepositoryPattern.Core\\DTOs\\UpdateUserDto.cs",
@@ -378,7 +352,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 20,
               "Title": "UsersResult.cs",
               "DocumentMoniker": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.Core\\ReturnedModels\\UsersResult.cs",
               "RelativeDocumentMoniker": "..\\RepositoryPattern.Core\\ReturnedModels\\UsersResult.cs",
@@ -390,7 +364,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 21,
               "Title": "MakeDoctorProfileDto.cs",
               "DocumentMoniker": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.Core\\DTOs\\MakeDoctorProfileDto.cs",
               "RelativeDocumentMoniker": "..\\RepositoryPattern.Core\\DTOs\\MakeDoctorProfileDto.cs",
@@ -402,7 +376,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 24,
               "Title": "UnitOfWork.cs",
               "DocumentMoniker": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.EfCore\\UnitOfWork.cs",
               "RelativeDocumentMoniker": "..\\RepositoryPattern.EfCore\\UnitOfWork.cs",
@@ -414,7 +388,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 23,
               "Title": "ScheduleDto.cs",
               "DocumentMoniker": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.Core\\DTOs\\ScheduleDto.cs",
               "RelativeDocumentMoniker": "..\\RepositoryPattern.Core\\DTOs\\ScheduleDto.cs",
@@ -426,7 +400,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 22,
               "Title": "Schedule.cs",
               "DocumentMoniker": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.Core\\Models\\Schedule.cs",
               "RelativeDocumentMoniker": "..\\RepositoryPattern.Core\\Models\\Schedule.cs",
@@ -438,7 +412,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 25,
               "Title": "ScheduleMapper.cs",
               "DocumentMoniker": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.EfCore\\MapToModel\\ScheduleMapper.cs",
               "RelativeDocumentMoniker": "..\\RepositoryPattern.EfCore\\MapToModel\\ScheduleMapper.cs",
@@ -450,7 +424,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 26,
               "Title": "PatientResult.cs",
               "DocumentMoniker": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.Core\\ReturnedModels\\PatientResult.cs",
               "RelativeDocumentMoniker": "..\\RepositoryPattern.Core\\ReturnedModels\\PatientResult.cs",
@@ -462,7 +436,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 27,
               "Title": "MakePatientAccountDto.cs",
               "DocumentMoniker": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.Core\\DTOs\\MakePatientAccountDto.cs",
               "RelativeDocumentMoniker": "..\\RepositoryPattern.Core\\DTOs\\MakePatientAccountDto.cs",
@@ -474,7 +448,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 28,
               "Title": "MapToUser.cs",
               "DocumentMoniker": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.EfCore\\MapToModel\\MapToUser.cs",
               "RelativeDocumentMoniker": "..\\RepositoryPattern.EfCore\\MapToModel\\MapToUser.cs",
@@ -483,18 +457,6 @@
               "ViewState": "AQIAAAMAAAAAAAAAAAAAAAoAAAAtAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-17T11:24:22.058Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 30,
-              "Title": "Department.cs",
-              "DocumentMoniker": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.Core\\Enums\\Department.cs",
-              "RelativeDocumentMoniker": "..\\RepositoryPattern.Core\\Enums\\Department.cs",
-              "ToolTip": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.Core\\Enums\\Department.cs",
-              "RelativeToolTip": "..\\RepositoryPattern.Core\\Enums\\Department.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-17T12:36:25.28Z"
             }
           ]
         },

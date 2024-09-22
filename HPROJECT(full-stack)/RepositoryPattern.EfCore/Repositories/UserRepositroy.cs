@@ -575,13 +575,14 @@ namespace RepositoryPattern.EfCore.Repositories
             var email = serviceDto.obj.payment_key_claims.billing_data.email;
             if (string.IsNullOrEmpty(email))
                 return false;
-            if (!Enum.TryParse(serviceDescriptionPaymob.Date, true, out DateOnly date))
+            if (!DateOnly.TryParse(serviceDescriptionPaymob.Date, out DateOnly date))
                 return false;
             if (!await context.Schedules.AnyAsync(x => x.Day == date.DayOfWeek)) return false;
 
-            if (await context.Set<DoctorPatient>().AnyAsync(x => x.PatientId == serviceDescriptionPaymob.PatientId && x.DoctorId == serviceDescriptionPaymob.DoctorId && x.Appointment.DayOfWeek==date.DayOfWeek))
+            if (await context.Set<DoctorPatient>().AnyAsync(x => x.PatientId == serviceDescriptionPaymob.PatientId && x.DoctorId == serviceDescriptionPaymob.DoctorId && x.Appointment==date))
                 return false;
-            await context.Set<DoctorPatient>().AddAsync(new DoctorPatient() { Appointment=date,DoctorId=serviceDescriptionPaymob.DoctorId,PatientId=serviceDescriptionPaymob.PatientId});
+            await context.Set<DoctorPatient>().AddAsync(new DoctorPatient() { Appointment = date, DoctorId = serviceDescriptionPaymob.DoctorId, PatientId = serviceDescriptionPaymob.PatientId });
+            await mailService.Send(email, "Payment for booking a doctor", $"You have paid successfully for booking at the date <b>{date}</b> and your booking number is <b>#{await context.Set<DoctorPatient>().CountAsync(x => x.DoctorId == serviceDescriptionPaymob.DoctorId&&x.Appointment==date) + 1}</b>");
             return true;
         }
     }

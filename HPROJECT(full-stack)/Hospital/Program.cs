@@ -89,7 +89,8 @@ if (app.Environment.IsDevelopment())
 app.UseResponseCompression();
 
 app.UseHttpsRedirection();
-app.UseCors(x => x.WithOrigins("http://localhost:3000").AllowCredentials().AllowAnyHeader().AllowAnyMethod());
+//app.UseCors(x => x.WithOrigins("http://localhost:3000").AllowCredentials().AllowAnyHeader().AllowAnyMethod());
+app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 app.UseAuthorization();
 app.UseStaticFiles();
 app.MapControllers();

@@ -12,7 +12,7 @@ namespace RepositoryPatternWithUOW.Core.Enums
         Opthalmology,
         Internal_Medicine,
         Orthopedic,
-        Analysis,
+        Dermatology,
         Neurology
     }
 }

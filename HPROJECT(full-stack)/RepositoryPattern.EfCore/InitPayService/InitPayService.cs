@@ -117,7 +117,9 @@ namespace RepositoryPatternWithUOW.EfCore.InitPayService
             {
                 ServiceDescriptionPaymob? descriptionPaymob = JsonConvert.DeserializeObject<ServiceDescriptionPaymob>(pDescription);
                 if (descriptionPaymob is null) return null;
-                if (!Enum.TryParse(descriptionPaymob.Date, true, out DateOnly date))
+                //if (!Enum.TryParse(descriptionPaymob.Date, true, out DateOnly date))
+                //    return null;
+                if (!DateOnly.TryParse(descriptionPaymob.Date, out DateOnly date))
                     return null;
                 if (!await context.Schedules.AnyAsync(x => x.Day == date.DayOfWeek)) return null;
                 if (descriptionPaymob == null) return null;
@@ -125,7 +127,7 @@ namespace RepositoryPatternWithUOW.EfCore.InitPayService
 
                 var res1 = await FirstStep();
                 if (res1 is null) return null;
-                var res2 = await SecondStep(res1.Token, doctorId.ToString(), doctor.Price * 100, pDescription);
+                var res2 = await SecondStep(res1.Token, doctorId.ToString(), doctor.Price * 100, JsonConvert.SerializeObject(descriptionPaymob));
                 if (res2 is null) return null;
                 var res3 = await ThirdStep(res1.Token, res2.Id, doctor.Price * 100, firstName, lastName, email, "01010101010", payInitOptions.Value.CardIntId);
                 if (res3 == null) return null;

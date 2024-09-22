@@ -1,0 +1,17 @@
+@media (max-width:768px){
+
+    .p1{
+        object-position: right !important;
+    }
+   
+}
+@media (min-width:520px ) and (max-width:768px){
+.p3{
+    object-position: -27vw -17px !important;
+}
+}
+@media (max-width:520px ) {
+    .p3{
+        object-position: -55vw -17px !important;
+    }
+    }

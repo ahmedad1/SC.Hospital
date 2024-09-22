@@ -76,6 +76,11 @@
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.201/PortableRuntimeIdentifierGraph.json"
         }
+      },
+      "runtimes": {
+        "win-x86": {
+          "#import": []
+        }
       }
     },
     "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\RepositoryPattern.EfCore\\RepositoryPatternWithUOW.EfCore.csproj": {
@@ -171,6 +176,11 @@
             }
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.201/PortableRuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "win-x86": {
+          "#import": []
         }
       }
     }
