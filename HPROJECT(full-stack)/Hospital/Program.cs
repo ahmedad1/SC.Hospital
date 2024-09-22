@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
+using RepositoryPattern.Core.OptionPattern;
 using RepositoryPattern.EfCore;
 using RepositoryPattern.EfCore.MailService;
 using RepositoryPattern.EfCore.MapToModel;
@@ -77,6 +78,7 @@ builder.Services.AddResponseCompression(options =>
     options.Providers.Add<GzipCompressionProvider>();
 });
 builder.Services.AddScoped<IPaymobHmacService,PaymobHmacService>();
+builder.Services.Configure<RecaptchaSecret>(builder.Configuration.GetSection("RecaptchaSecret"));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -89,8 +91,8 @@ if (app.Environment.IsDevelopment())
 app.UseResponseCompression();
 
 app.UseHttpsRedirection();
-//app.UseCors(x => x.WithOrigins("http://localhost:3000").AllowCredentials().AllowAnyHeader().AllowAnyMethod());
-app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+app.UseCors(x => x.WithOrigins("http://localhost:3000").AllowCredentials().AllowAnyHeader().AllowAnyMethod());
+//app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 app.UseAuthorization();
 app.UseStaticFiles();
 app.MapControllers();

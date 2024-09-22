@@ -5,10 +5,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using RepositoryPattern.Core.DTOs;
 using RepositoryPattern.Core.Interfaces;
 using RepositoryPattern.Core.Models;
+using RepositoryPattern.Core.OptionPattern;
+using RepositoryPattern.Core.RecaptchaResponseModel;
 using RepositoryPattern.EfCore.MailService;
 using RepositoryPatternUOW.Core.DTOs.Paymob.PaymobCardDto;
 using RepositoryPatternWithUOW.Core.DTOs;
@@ -18,6 +21,7 @@ using RepositoryPatternWithUOW.Core.Models;
 using RepositoryPatternWithUOW.Core.ReturnedModels;
 using RepositoryPatternWithUOW.EfCore.InitPayService;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net.Http;
 using System.Security.Claims;
 using The_Wedding.PaymobHmacService;
 using static RepositoryPatternWithUOW.Core.CookiesGlobal;
@@ -25,13 +29,16 @@ namespace Hospital.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AccountController(IMailService mailService,IUnitOfWork unitOfWork,IInitPaymentService initPaymentService,IPaymobHmacService paymobHmacService) : ControllerBase
+    public class AccountController(IOptions<RecaptchaSecret>recaptchaSecret,IHttpClientFactory httpClientFactory,IUnitOfWork unitOfWork,IInitPaymentService initPaymentService,IPaymobHmacService paymobHmacService) : ControllerBase
     {
         
 
         [HttpPost("sign-up")]
         public async Task<IActionResult> SignUp(SignUpDto signUpDto)
         {
+            var validatedRecaptcha = await ValidateRecaptchaAsync(signUpDto.RecaptchaToken, recaptchaSecret.Value.SecretKey, "signup");
+            if (!validatedRecaptcha)
+                return BadRequest();
             var result = await unitOfWork.UserRepository.SignUpAsync(signUpDto);
             if (!result.Success)
                 return BadRequest(result);
@@ -41,6 +48,9 @@ namespace Hospital.Controllers
         [HttpPost("log-in")]
         public async Task<IActionResult> Login(LoginDto loginDto)
         {
+            var validatedRecaptcha = await ValidateRecaptchaAsync(loginDto.RecaptchaToken, recaptchaSecret.Value.SecretKey, "login");
+            if (!validatedRecaptcha)
+                return BadRequest();
             var result = await unitOfWork.UserRepository.LoginAsync(loginDto);
             if (!result.Success)
                 return NotFound();
@@ -308,6 +318,19 @@ namespace Hospital.Controllers
                     return BadRequest();
                 return Ok(result);
             }
+        }
+        private async Task<bool> ValidateRecaptchaAsync(string recaptchaToken, string secretKey, string actionName)
+        {
+            using var formUrlEncoded = new FormUrlEncodedContent([KeyValuePair.Create("secret", secretKey), KeyValuePair.Create("response", recaptchaToken)]);
+
+            var fetcher = httpClientFactory.CreateClient();
+            using var response = await fetcher.PostAsync($"https://www.google.com/recaptcha/api/siteverify", formUrlEncoded);
+            if (!response.IsSuccessStatusCode)
+                return false;
+            var resultData = await response.Content.ReadFromJsonAsync<RecaptchaResponse>();
+
+            return resultData!.success && resultData.score >= .5 && resultData.action == actionName;
+
         }
 
         [Authorize(Roles = "Adm")]

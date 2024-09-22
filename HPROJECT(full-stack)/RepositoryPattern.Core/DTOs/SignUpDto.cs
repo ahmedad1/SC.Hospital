@@ -26,7 +26,9 @@ namespace RepositoryPattern.Core.DTOs
         public  required string Email { get; set; }
         [StringLength(100)]
         public required string Password { get; set; }
-  
-      
+        [StringLength(2000)]
+        public string RecaptchaToken { get; set; }
+
+
     }
 }
