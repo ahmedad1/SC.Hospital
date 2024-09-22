@@ -213,6 +213,10 @@
       "PackagePath": "staticwebassets\\images\\doctoress.webp"
     },
     {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\favicon.ico",
+      "PackagePath": "staticwebassets\\images\\favicon.ico"
+    },
+    {
       "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\heartdept.jpg",
       "PackagePath": "staticwebassets\\images\\heartdept.jpg"
     },
@@ -223,10 +227,6 @@
     {
       "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\loading.png",
       "PackagePath": "staticwebassets\\images\\loading.png"
-    },
-    {
-      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\logo.png",
-      "PackagePath": "staticwebassets\\images\\logo.png"
     },
     {
       "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\user-solid.svg",

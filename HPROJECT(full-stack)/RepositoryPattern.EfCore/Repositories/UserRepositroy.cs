@@ -15,16 +15,18 @@ using RepositoryPatternUOW.Core.DTOs;
 using RepositoryPatternUOW.Core.DTOs.Paymob.PaymobCardDto;
 using RepositoryPatternWithUOW.Core.DTOs;
 using RepositoryPatternWithUOW.Core.Enums;
+using RepositoryPatternWithUOW.Core.Interfaces;
 using RepositoryPatternWithUOW.Core.Models;
 using RepositoryPatternWithUOW.Core.ReturnedModels;
 using RepositoryPatternWithUOW.EfCore;
 using RepositoryPatternWithUOW.EfCore.MapToModel;
 using System.Collections.Frozen;
 using System.Linq.Expressions;
+using System.Net.Http.Json;
 using static RepositoryPatternWithUOW.Core.CookiesGlobal;
 namespace RepositoryPattern.EfCore.Repositories
 {
-    public class UserRepositroy(AppDbContext context, MapToUser mapToUser,ScheduleMapper mapToSchedule, TokenOptionsModel JwtOptions, IMailService mailService,IWebHostEnvironment webHostEnvironment) : IUserRepository
+    public class UserRepositroy(AppDbContext context, MapToUser mapToUser,ScheduleMapper mapToSchedule, TokenOptionsModel JwtOptions, IMailService mailService,IWebHostEnvironment webHostEnvironment,IHttpClientFactory httpClientFactory) : IUserRepository
     {
         AppDbContext context = context;
         MapToUser mapToUser = mapToUser;
@@ -74,6 +76,56 @@ namespace RepositoryPattern.EfCore.Repositories
                RefreshToken=refToken,
                Jwt=jwt
             };
+        }
+        public async Task<LoginResult> GoogleOAuthAsync(string accessToken)
+        {
+            GoogleOAuthUserDataDto? responseModel;
+            var httpClient = httpClientFactory.CreateClient();
+            using (var request = new HttpRequestMessage(HttpMethod.Get, "https://www.googleapis.com/oauth2/v3/userinfo"))
+            {
+                request.Headers.Add("Authorization", $"Bearer {accessToken}");
+                using var response = await httpClient.SendAsync(request);
+                if (!response.IsSuccessStatusCode)
+                    return new LoginResult { Success = false };
+                responseModel = await response.Content.ReadFromJsonAsync<GoogleOAuthUserDataDto>();
+                if (!responseModel!.Email_Verified)
+                    return new() { Success=false,EmailConfirmed=false};
+            }
+
+            var user = await context.Users.FirstOrDefaultAsync(x => x.Email == responseModel.Email);
+            if (user is null)
+            {
+                string[] fullName = responseModel.Name.Split(" ");
+
+                var patient = new Patient()
+                {
+                    Email = responseModel.Email,
+                    EmailConfirmed = true,
+                    FirstName = fullName[0],
+                    LastName = fullName[1] ?? " ",
+
+                };
+                await context.Users.AddAsync(patient);
+                var refreshToken = TokensHandler.Tokens.Generate();
+                patient.RefreshToken = [new RefreshToken { ExpiresAt = ExpirationOfRefreshToken, Token = refreshToken }];
+                await context.SaveChangesAsync();
+                var jwt = Tokens.Generate(patient,JwtOptions,ExpirationOfJwt);
+                return new LoginResult() { Success = true, Email = patient.Email, EmailConfirmed = false, Jwt = jwt, RefreshToken = refreshToken };
+                //return new LoginResult(true, true, jwt, refreshToken, responseModel.Email, customer.FirstName, customer.LastName, customer.Id, "Customer", customer.UserName);
+            }
+           
+            else
+            {
+                var jwt = Tokens.Generate(user,JwtOptions,ExpirationOfJwt);
+                var refreshToken = Tokens.Generate();
+                user.RefreshToken!.Add(new RefreshToken { ExpiresAt = ExpirationOfRefreshToken, Token = refreshToken});
+                await context.SaveChangesAsync();
+                return new LoginResult() { Success = true, Email = user.Email, EmailConfirmed = false, Jwt = jwt, RefreshToken = refreshToken };
+
+                //return new LoginResult(true, true, jwt, refreshToken, responseModel.Email, user.FirstName, user.LastName, user.Id, user is Customer ? "Customer" : (user is Employee ? "Employee" : "Admin"), user.UserName);
+            }
+
+
         }
         public async Task<bool> SendEmailVerificationAsync(string email,bool? IsForRestPassword=false)
         {

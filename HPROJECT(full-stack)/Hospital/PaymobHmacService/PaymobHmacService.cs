@@ -1,14 +1,13 @@
-﻿using Hospital.PaymobHmacService;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 using RepositoryPatternUOW.Core.DTOs.Paymob.PaymobCardDto;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace The_Wedding.PaymobHmacService
+namespace Hospital.PaymobHmacService
 {
-    public class PaymobHmacService(IOptions<PaymobHmac>PaymobHmacOptions) : IPaymobHmacService
+    public class PaymobHmacService(IOptions<PaymobHmac> PaymobHmacOptions) : IPaymobHmacService
     {
-   
+
 
 
         public string ComputeHmac(PaymobCardDto paymobCardDto)
@@ -23,10 +22,10 @@ namespace The_Wedding.PaymobHmacService
             }
         }
 
-     
+
         private string GetConcatedRequestParams(PaymobCardDto paymobDto)
         {
-            return (
+            return
                  paymobDto.obj.amount_cents.ToString() +
                  paymobDto.obj.created_at +
                  paymobDto.obj.currency +
@@ -47,7 +46,7 @@ namespace The_Wedding.PaymobHmacService
                  paymobDto.obj.source_data.sub_type +
                  paymobDto.obj.source_data.type +
                  paymobDto.obj.success.ToString().ToLowerInvariant()
-                 );
+                 ;
         }
     }
 }

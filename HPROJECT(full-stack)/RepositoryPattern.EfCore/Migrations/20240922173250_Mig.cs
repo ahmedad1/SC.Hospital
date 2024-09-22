@@ -21,11 +21,11 @@ namespace RepositoryPatternWithUOW.EfCore.Migrations
                     Id = table.Column<int>(type: "int", nullable: false, defaultValueSql: "NEXT VALUE FOR [UserSequence]"),
                     FirstName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     Email = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Gender = table.Column<string>(type: "nvarchar(6)", maxLength: 6, nullable: false),
-                    BirthDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    Gender = table.Column<string>(type: "nvarchar(6)", maxLength: 6, nullable: true),
+                    BirthDate = table.Column<DateOnly>(type: "date", nullable: true),
                     EmailConfirmed = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -40,11 +40,11 @@ namespace RepositoryPatternWithUOW.EfCore.Migrations
                     Id = table.Column<int>(type: "int", nullable: false, defaultValueSql: "NEXT VALUE FOR [UserSequence]"),
                     FirstName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     Email = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Gender = table.Column<string>(type: "nvarchar(6)", maxLength: 6, nullable: false),
-                    BirthDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    Gender = table.Column<string>(type: "nvarchar(6)", maxLength: 6, nullable: true),
+                    BirthDate = table.Column<DateOnly>(type: "date", nullable: true),
                     EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
                     ProfilePicture = table.Column<string>(type: "nvarchar(max)", nullable: true)
                         .Annotation("SqlServer:Sparse", true),
@@ -88,11 +88,11 @@ namespace RepositoryPatternWithUOW.EfCore.Migrations
                     Id = table.Column<int>(type: "int", nullable: false, defaultValueSql: "NEXT VALUE FOR [UserSequence]"),
                     FirstName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     Email = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Gender = table.Column<string>(type: "nvarchar(6)", maxLength: 6, nullable: false),
-                    BirthDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    Gender = table.Column<string>(type: "nvarchar(6)", maxLength: 6, nullable: true),
+                    BirthDate = table.Column<DateOnly>(type: "date", nullable: true),
                     EmailConfirmed = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -215,7 +215,8 @@ namespace RepositoryPatternWithUOW.EfCore.Migrations
                 name: "IX_Admin_UserName",
                 table: "Admin",
                 column: "UserName",
-                unique: true);
+                unique: true,
+                filter: "[UserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DoctorPatient_PatientId",
@@ -232,7 +233,8 @@ namespace RepositoryPatternWithUOW.EfCore.Migrations
                 name: "IX_Doctors_UserName",
                 table: "Doctors",
                 column: "UserName",
-                unique: true);
+                unique: true,
+                filter: "[UserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_IdentityTokenVerification_UserId",
@@ -250,7 +252,8 @@ namespace RepositoryPatternWithUOW.EfCore.Migrations
                 name: "IX_Patients_UserName",
                 table: "Patients",
                 column: "UserName",
-                unique: true);
+                unique: true,
+                filter: "[UserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Schedules_DoctorId_Day",

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "6z1uYiB9dtamo/op3LQnm3PHayO7Z/P8o6irvIS4bPM=",
+  "Hash": "pYtPUDTnDDv4RUav+F4RbZ9Ad7nOSwV0rdCXQCapEBI=",
   "Source": "Hospital",
   "BasePath": "_content/Hospital",
   "Mode": "Default",
@@ -1005,6 +1005,25 @@
       "OriginalItemSpec": "wwwroot\\images\\EyeDepart.jpg"
     },
     {
+      "Identity": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\favicon.ico",
+      "SourceId": "Hospital",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\",
+      "BasePath": "_content/Hospital",
+      "RelativePath": "images/favicon.ico",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\favicon.ico"
+    },
+    {
       "Identity": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\heartdept.jpg",
       "SourceId": "Hospital",
       "SourceType": "Discovered",
@@ -1060,25 +1079,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\loading.png"
-    },
-    {
-      "Identity": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\logo.png",
-      "SourceId": "Hospital",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\",
-      "BasePath": "_content/Hospital",
-      "RelativePath": "images/logo.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\logo.png"
     },
     {
       "Identity": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\userlogo.png",

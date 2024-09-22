@@ -1,38 +1,34 @@
 ﻿
 using Hospital.PaymobHmacService;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using RepositoryPattern.Core.DTOs;
-using RepositoryPattern.Core.Interfaces;
 using RepositoryPattern.Core.Models;
 using RepositoryPattern.Core.OptionPattern;
 using RepositoryPattern.Core.RecaptchaResponseModel;
-using RepositoryPattern.EfCore.MailService;
+using RepositoryPatternUOW.Core.DTOs;
 using RepositoryPatternUOW.Core.DTOs.Paymob.PaymobCardDto;
 using RepositoryPatternWithUOW.Core.DTOs;
 using RepositoryPatternWithUOW.Core.Enums;
 using RepositoryPatternWithUOW.Core.Interfaces;
 using RepositoryPatternWithUOW.Core.Models;
-using RepositoryPatternWithUOW.Core.ReturnedModels;
 using RepositoryPatternWithUOW.EfCore.InitPayService;
 using System.IdentityModel.Tokens.Jwt;
-using System.Net.Http;
 using System.Security.Claims;
-using The_Wedding.PaymobHmacService;
 using static RepositoryPatternWithUOW.Core.CookiesGlobal;
 namespace Hospital.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableRateLimiting("DefaultAuthPolicy")]
     public class AccountController(IOptions<RecaptchaSecret>recaptchaSecret,IHttpClientFactory httpClientFactory,IUnitOfWork unitOfWork,IInitPaymentService initPaymentService,IPaymobHmacService paymobHmacService) : ControllerBase
     {
-        
 
+        [EnableRateLimiting("AuthPolicy")]
         [HttpPost("sign-up")]
         public async Task<IActionResult> SignUp(SignUpDto signUpDto)
         {
@@ -45,6 +41,8 @@ namespace Hospital.Controllers
             await unitOfWork.SaveChangesAsync();
             return Ok();
         }
+        [EnableRateLimiting("AuthPolicy")]
+
         [HttpPost("log-in")]
         public async Task<IActionResult> Login(LoginDto loginDto)
         {
@@ -68,6 +66,28 @@ namespace Hospital.Controllers
 
             return Ok();
         }
+        [DisableRateLimiting]
+        [HttpPost("google-oauth")]
+        public async Task<IActionResult>GoogleOAuth(GoogleOAuthTokenDto googleOAuthTokenDto)
+        {
+            var result = await unitOfWork.UserRepository.GoogleOAuthAsync(googleOAuthTokenDto.AccessToken);
+            if (result.Success)
+            {
+                var jwtObj = new JwtSecurityTokenHandler().ReadJwtToken(result.Jwt);
+                var payload = jwtObj.Payload;
+                CookiesHandler.SetCookiesInResponse(payload, result, Response);
+                return Ok(new { EmailConfirmed = true, Success = true });
+            }
+            else
+            {
+                if (!result.EmailConfirmed)
+                {
+                   
+                    return Ok(new { EmailConfirmed = false, Success = true });
+                }
+                return BadRequest();
+            }
+        }
         [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetUser()
@@ -79,6 +99,8 @@ namespace Hospital.Controllers
             var result = await unitOfWork.UserRepository.GetUser(int.Parse(id.Value));
             return result is null ? BadRequest() : Ok(result);
         }
+        [DisableRateLimiting]
+
         [HttpPost("code-in-email")]
         public async Task<IActionResult> SendCode([FromBody] SendCodeDto sendCodeDto)
         {
@@ -88,6 +110,7 @@ namespace Hospital.Controllers
             
             return Ok();
         }
+        [DisableRateLimiting]
         [HttpPost("confirmation-code")]
         public async Task<IActionResult> ValidateCode(ValidateCodeDto validateCode)
         {
@@ -134,6 +157,7 @@ namespace Hospital.Controllers
             return Ok();
         }
         [HttpPost("tokens")]
+        [DisableRateLimiting]
         public async Task<IActionResult> UpdateTokens()
         {
             if (!Request.Cookies.TryGetValue(RefreshTokenCookieKey,out string? refToken)||!Request.Cookies.TryGetValue(UserNameCookieKey,out string? userName))
@@ -148,6 +172,7 @@ namespace Hospital.Controllers
             CookiesHandler.SetCookie(RefreshTokenCookieKey, result.RefreshToken, ExpirationOfRefreshToken, true, Response);
             return Ok();
         }
+        [Authorize]
         [HttpDelete("sign-out")]
         public async Task<IActionResult> SignOut()
         {
@@ -458,6 +483,7 @@ namespace Hospital.Controllers
             var result=await initPaymentService.InitPay(firstName.Value, lastName.Value, email.Value, description.DoctorId, description.Description,int.Parse(id.Value));
             return result is null ? BadRequest() : Ok(result);
         }
+        [EnableRateLimiting("DefaultPolicy")]
         [HttpPost("/api/card")]
         public async Task<IActionResult> BuyServiceByCard([FromBody] PaymobCardDto serviceDto, [FromQuery] string hmac)
         {

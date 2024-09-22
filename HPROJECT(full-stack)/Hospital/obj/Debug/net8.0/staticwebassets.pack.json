@@ -1,6 +1,14 @@
 {
   "Files": [
     {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\02947096-90a3-4370-ad74-53401f582436.jpeg",
+      "PackagePath": "staticwebassets\\02947096-90a3-4370-ad74-53401f582436.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\1c8b4177-437f-4ba7-8702-68b3c7fc6773.jpeg",
+      "PackagePath": "staticwebassets\\1c8b4177-437f-4ba7-8702-68b3c7fc6773.jpeg"
+    },
+    {
       "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\379bb33c-8846-4981-8882-27881aa8def9.jpeg",
       "PackagePath": "staticwebassets\\379bb33c-8846-4981-8882-27881aa8def9.jpeg"
     },
@@ -95,6 +103,10 @@
     {
       "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\doctor.html",
       "PackagePath": "staticwebassets\\doctor.html"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\e3cae0d0-56d8-4aec-b035-fcc74f083cc2.jpeg",
+      "PackagePath": "staticwebassets\\e3cae0d0-56d8-4aec-b035-fcc74f083cc2.jpeg"
     },
     {
       "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\emailConfirmation.html",
@@ -213,6 +225,10 @@
       "PackagePath": "staticwebassets\\images\\doctoress.webp"
     },
     {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\favicon.ico",
+      "PackagePath": "staticwebassets\\images\\favicon.ico"
+    },
+    {
       "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\heartdept.jpg",
       "PackagePath": "staticwebassets\\images\\heartdept.jpg"
     },
@@ -223,10 +239,6 @@
     {
       "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\loading.png",
       "PackagePath": "staticwebassets\\images\\loading.png"
-    },
-    {
-      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\logo.png",
-      "PackagePath": "staticwebassets\\images\\logo.png"
     },
     {
       "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\user-solid.svg",

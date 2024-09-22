@@ -337,6 +337,22 @@
   },
   {
     "ContainingType": "Hospital.Controllers.AccountController",
+    "Method": "GoogleOAuth",
+    "RelativePath": "api/Account/google-oauth",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "googleOAuthTokenDto",
+        "Type": "RepositoryPatternUOW.Core.DTOs.GoogleOAuthTokenDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Hospital.Controllers.AccountController",
     "Method": "InitPay",
     "RelativePath": "api/Account/init-pay",
     "HttpMethod": "POST",

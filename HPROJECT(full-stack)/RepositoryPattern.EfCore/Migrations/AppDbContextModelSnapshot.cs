@@ -88,7 +88,7 @@ namespace RepositoryPatternWithUOW.EfCore.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseSequence(b.Property<int>("Id"));
 
-                    b.Property<DateOnly>("BirthDate")
+                    b.Property<DateOnly?>("BirthDate")
                         .HasColumnType("date");
 
                     b.Property<string>("Email")
@@ -105,7 +105,6 @@ namespace RepositoryPatternWithUOW.EfCore.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Gender")
-                        .IsRequired()
                         .HasMaxLength(6)
                         .HasColumnType("nvarchar(6)");
 
@@ -115,12 +114,10 @@ namespace RepositoryPatternWithUOW.EfCore.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Password")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("UserName")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -130,7 +127,8 @@ namespace RepositoryPatternWithUOW.EfCore.Migrations
                         .IsUnique();
 
                     b.HasIndex("UserName")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[UserName] IS NOT NULL");
 
                     b.ToTable((string)null);
 

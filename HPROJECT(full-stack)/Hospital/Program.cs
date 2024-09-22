@@ -1,11 +1,7 @@
-using Azure.Core;
-using Hospital;
 using Hospital.PaymobHmacService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using RepositoryPattern.Core.OptionPattern;
@@ -19,7 +15,7 @@ using RepositoryPatternWithUOW.EfCore;
 using RepositoryPatternWithUOW.EfCore.InitPayService;
 using RepositoryPatternWithUOW.EfCore.MapToModel;
 using System.Text;
-using The_Wedding.PaymobHmacService;
+using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -79,6 +75,30 @@ builder.Services.AddResponseCompression(options =>
 });
 builder.Services.AddScoped<IPaymobHmacService,PaymobHmacService>();
 builder.Services.Configure<RecaptchaSecret>(builder.Configuration.GetSection("RecaptchaSecret"));
+builder.Services.AddRateLimiter(x =>
+{
+    x.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+    x.AddPolicy("DefaultPolicy", context => RateLimitPartition.GetFixedWindowLimiter(context.Connection.RemoteIpAddress!.ToString(), x => new FixedWindowRateLimiterOptions
+    {
+        PermitLimit = 60,
+        Window = TimeSpan.FromSeconds(60)
+    }));
+    x.AddPolicy("DefaultAuthPolicy", context => RateLimitPartition.GetFixedWindowLimiter(context.Request.Cookies["jwt"], x => new FixedWindowRateLimiterOptions
+    {
+        PermitLimit = 60,
+        Window = TimeSpan.FromSeconds(60)
+    }));
+
+    x.AddPolicy("AuthPolicy", context => RateLimitPartition.GetFixedWindowLimiter(context.Connection.RemoteIpAddress!.ToString(), x =>
+    {
+        return new FixedWindowRateLimiterOptions
+        {
+            PermitLimit = 5,
+            Window = TimeSpan.FromSeconds(8)
+        };
+    }));
+
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

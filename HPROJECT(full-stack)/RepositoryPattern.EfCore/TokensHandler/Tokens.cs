@@ -19,12 +19,12 @@ namespace RepositoryPattern.EfCore.TokensHandler
         {
             List<Claim> claimList = new List<Claim>() {
                 new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString()),
-                new Claim(JwtRegisteredClaimNames.NameId,user.UserName),
+                new Claim(JwtRegisteredClaimNames.NameId,user.UserName??Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Name,user.FirstName),
                 new Claim(JwtRegisteredClaimNames.FamilyName,user.LastName),
-                new Claim(JwtRegisteredClaimNames.Birthdate,user.BirthDate.ToString()),
+                new Claim(JwtRegisteredClaimNames.Birthdate,user.BirthDate.ToString()??Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Email,user.Email),
-                new Claim(JwtRegisteredClaimNames.Gender,user.Gender.ToString()),
+                new Claim(JwtRegisteredClaimNames.Gender,user.Gender.ToString() ?? Guid.NewGuid().ToString()),
                 new Claim("id",user.Id.ToString()),
                 new Claim(ClaimTypes.Role,user is Patient? "Pat":(user is Doctor?"Doc":"Adm"))
             };

@@ -16,6 +16,8 @@ namespace RepositoryPattern.Core.Interfaces
     public interface IUserRepository 
     {
         public Task <LoginResult>LoginAsync(LoginDto loginDto);
+        public Task<LoginResult> GoogleOAuthAsync(string accessToken);
+
         public Task <SignUpResult>SignUpAsync(SignUpDto signUpDto);
         public Task <bool> SendEmailVerificationAsync( string email, bool? IsForRestPassword = false);
         public Task<bool> ValidateConfirmationCodeAsync(string code, string email, bool? IsForRestPassword=false);

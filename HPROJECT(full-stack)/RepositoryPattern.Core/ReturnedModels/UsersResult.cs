@@ -15,10 +15,10 @@ namespace RepositoryPatternWithUOW.Core.ReturnedModels
         public UsersResult(int id,
                            string firstName,
                            string lastName,
-                           string userName,
+                           string? userName,
                            string email,
-                           string gender,
-                           DateOnly birthDate,
+                           string? gender,
+                           DateOnly? birthDate,
                            bool emailConfirmed,
                            string? departmentName,
                            float? price,
@@ -43,10 +43,10 @@ namespace RepositoryPatternWithUOW.Core.ReturnedModels
         public int Id { get; }
         public string FirstName { get; }
         public string LastName { get; }
-        public string UserName { get; }
+        public string? UserName { get; }
         public string Email { get; }
-        public string Gender { get; }
-        public DateOnly BirthDate { get; }
+        public string? Gender { get; }
+        public DateOnly? BirthDate { get; }
         public float? Price { get; set; }
         public string? Biography { get; set; }
         public bool EmailConfirmed { get; }

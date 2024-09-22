@@ -1,4 +1,4 @@
-﻿namespace The_Wedding.PaymobHmacService
+﻿namespace Hospital.PaymobHmacService
 {
 
     public class PaymobHmac
