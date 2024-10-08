@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>S.C Hospital</title>
+    <meta name="discription"
+        content="Find professional doctors or clinc for you ,Book Appointment with the doctor you want">
+    <meta name="keywords" content="clinc, doctor, health">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script>
+        function gC(t){let n=document.cookie.split("; ");for(let i of n){let e=i.split("=");if(e[0]==t)return decodeURIComponent(e[1])}return null}async function DR(t){return await fetch(t,{method:"DELETE"})}const bAA=location.origin+"/api/Account/";async function sO(){200==(await DR(`${bAA}sign-out`)).status&&(location.href=`${location.origin}/index.html`)}!async function(){gC("role")&&gC("userName")&&gC("firstName")&&gC("lastName")&&gC("gender")&&gC("birthDate")&&gC("email")||(await sO(),location.href="/index.html")}();
+    </script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/mystyle.css">
+    <link rel="icon" type="image/x-icon" href="images/logo.png">
+    <link rel="stylesheet" href="css/user.css">
+</head>
+
+<body>
+
+
+
+    <!-- NavBar -->
+
+
+
+    <nav class="navbar navbar-expand-lg bg-light navbar-light sticky-top">
+        <a href="user.html" class="navbar-brand text-primary">S.C Hospital</a><!--special care hospital-->
+        <!-- <input type="text"placeholder=search class=" d-lg-none mr-4 "style=width:50%;outline:none;> -->
+        <a href="#N" data-toggle=collapse class="navbar-toggler"><span class="navbar-toggler-icon"></span></a>
+
+        <div class="collapse navbar-collapse" id="N">
+            <ul class="navbar-nav ml-auto ">
+                <li class="nav-item"><a href="user.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="#serv" class="nav-link">Services</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link">Contact us</a></li>
+                <li class="nav-item"><a href="#about" class="nav-link">About us</a></li>
+                <li class="nav-item"><a href="#feed" class="nav-link">Feedback</a></li>
+                <li class="nav-item"><a href="#appo" class="nav-link appoints">Appointments</a></li>
+
+                <!-- <li class="nav-item"><a href="#" class="nav-link btn btn-outline-primary text-primary rounded">Login</a></li>-->
+
+            </ul>
+            <!-- <a href="#login" class="nav-link btn btn-outline-primary ml-lg-2 mt-sm-3 mt-lg-0  "style=max-width:78px>Login</a> -->
+            <div class="nav-link d-flex p-0 mt-lg-0 mt-3" style="gap:5px">
+                <img src="./images/user-solid.svg" class="ml-lg-2  mt-lg-0  " width=15 alt="">
+                <a href="ProfileSettings.html" class="text-muted usernamespan">USER</a>
+
+            </div>
+            <button class=" btn btn-outline-primary ml-lg-3 mt-3 mt-lg-0 signout">Sign out</button>
+        </div>
+
+    </nav>
+    <script>
+        function gC(e) { let t = document.cookie.split("; "); for (let n of t) { let r = n.split("="); if (r[0] == e) return decodeURIComponent(r[1]) } return null } let usernamespan = document.querySelector(".usernamespan"); usernamespan.innerText = gC("firstName");
+    </script>
+    <div id="particles-js">
+    </div>
+
+
+    <!-- landing -->
+    <div class="container landd">
+        <div class="row mt-5 justify-content-between">
+            <div class="col-lg-6 col-12 align-self-center text-center">
+                <h3 class="text-primary wrapp">Experience In All Medical Departments</h4>
+                    <p class="mt-3 text-muted " style=line-height:1.6>Search on best doctors and book appointment, You
+                        can find any departement , High efficiency, easy payment and instant booking Regular
+                        appointments </p>
+                    <a class="btn btn-warning " href="#serv">Departments</a>
+            </div>
+            <div class="col-lg-6 col-12 d-flex justify-content-center">
+                <img height="480" class="mt-lg-0 land " style="margin-top: 3rem;" src="./images/doctor-14044.png">
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+    <div class="container featu" id="serv">
+        <div class="features d-flex flex-column align-items-center mt-5">
+            <h3 class="mt-5">Services & Features</h3>
+            <p class="text-center">All departments with many professional doctors and you can book an appointment </p>
+            <div class="row">
+                <a href="dentistdep.html" class="col-lg-4 col-md-6 col-12" style="text-decoration:none">
+                    <div class="card">
+                        <img src="images/Dental.webp" class="card-img-top" alt="">
+                        <div class="card-body ">
+                            <h6 class="card-title ">Department of Dental</h6>
+                            <div class="card-text text-muted">Many Professional & Experts Dentists For Diagnose Your
+                                Teeth And Trying To Getting Rid of Your toothache</div>
+                        </div>
+                    </div>
+                </a>
+                <a href="eyedep.html" class="col-lg-4 col-md-6 col-12" style="text-decoration:none">
+                    <div class="card">
+                        <img src="images/EyeDepart.jpg" class="card-img-top " alt="">
+                        <div class="card-body mt-lg-3" style="margin-top:-.4em">
+                            <h6 class="card-title">Department of Ophthalmology</h6>
+                            <div class="card-text text-muted">Many Professional & Experts Optometrists For Diagnose Your
+                                Eyes And Trying To Getting Rid of Your week looking</div>
+                        </div>
+                    </div>
+                </a>
+                <a href="internal.html" class="col-lg-4 col-md-6 col-12" style="text-decoration:none">
+                    <div class="card">
+                        <img src="images/internalmedicine.jpg" class="card-img-top" alt="">
+                        <div class="card-body" style=margin-top:2%>
+                            <h6 class="card-title">Department of Internal Medicine</h6>
+                            <div class="card-text text-muted">Many Professional & Experts Doctors For Diagnose Your Body
+                                And Trying To Getting Rid of Your Viruses & Cough</div>
+                        </div>
+                    </div>
+                </a>
+                <a href="bones.html" class="col-lg-4 col-md-6 col-12" style="text-decoration:none">
+                    <div class="card">
+                        <img src="images/bonedept.jpg" class="card-img-top hw " style="height: 13.5em;" alt="">
+                        <div class="card-body mt-2 mt-lg-0 ">
+                            <h6 class="card-title">Department of Orthopedic</h6>
+                            <div class="card-text text-muted">Many Professional & Experts Orthopedists For Diagnose Your
+                                Bones And Trying To Treat broken bones</div>
+                        </div>
+                    </div>
+                </a>
+                <a href="Analysis.html" class="col-lg-4 col-md-6 col-12" style="text-decoration:none">
+                    <div class="card">
+                        <img src="images/analysis.jpg" class="card-img-top " alt="">
+                        <div class="card-body mt-2">
+                            <h6 class="card-title">Analysis & Radiology Department</h6>
+                            <div class="card-text text-muted">Many Professional & Experts Lab Doctors For Making Sevral
+                                Tests For You And Trying To Get The Most Accurate Possible Results</div>
+                        </div>
+                    </div>
+                </a>
+                <a href="brain.html" class="col-lg-4 col-md-6 col-12" style="text-decoration:none">
+                    <div class="card">
+                        <img src="images/braindept.jpg" class="card-img-top " alt="">
+                        <div class="card-body mt-2">
+                            <h6 class="card-title">Department of Neurology</h6>
+                            <div class="card-text text-muted">Many Professional & Experts Neurologist For Diagnose Your
+                                Brain And Trying To Keep Your Brain Cells Healthy</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- About US -->
+
+
+
+    <div class="container mt-5 " id="about">
+        <div class="d-flex justify-content-center">
+            <h3>About Us</h3>
+        </div>
+        <p class=" mt-3 text-muted " style=line-height:2>
+            This Website has been created in 2022 as a professional hospital to meet patients needs
+            with many departments and professional doctors , The creator Name Is Ahmed Omar ,
+            We will keep making updates for solving the bugs and make the website more professional and
+            provide more facilities to make your usage easier and faster , If you found a bug , please give us a
+            feedback to fix & improve it
+        </p>
+    </div>
+
+
+
+    <!-- Contanct us -->
+
+
+
+    <div class="container mt-5" id="contact">
+        <div class="d-flex justify-content-center">
+            <h3>Contact Us</h3>
+        </div>
+        <form action="" class="form-control mt-5">
+            <div class="form-group">
+                <label for="f">Full Name </label>
+                <input id="f" placeholder="Enter Your Full Name" required type="text" name="fullname"
+                    class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="e">Email</label>
+                <input name=email id="#e" type="email" required placeholder="example@example.com" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="m">Your Message</label>
+                <textarea required name="message" id="m" class="form-control"></textarea>
+            </div>
+            <input type="submit" class="btn btn-outline-primary w-100">
+        </form>
+    </div>
+
+
+
+
+
+
+
+
+    <!-- FeedBack -->
+
+
+
+    <div class="container mt-5" id=feed>
+        <div id="contact" class="d-flex justify-content-center">
+            <h3>Feedback</h3>
+        </div>
+        <div class="feedback">
+            <form action="" class="form-control mt-4">
+                <p>How Do You Rate Our WebSite ?</p>
+                <div class="form-group">
+                    <input required type="radio" name="rate" id="bad" value=bad>
+                    <label for="bad">Bad</label>
+                    <input required type="radio" name="rate" id="good" value=good>
+                    <label for="good">Good</label>
+                    <input required type="radio" name="rate" id="VeryGood" value="very good">
+                    <label for="VeryGood">Very Good</label>
+                    <input required type="radio" name="rate" id="Exellend" value=exellend>
+                    <label for="Exellend">Exellend</label>
+                </div>
+                <p>Explain Your Answer</p>
+                <textarea name="explainfeed" required class="form-control"></textarea>
+                <input type="submit" class="btn btn-outline-primary w-100 mt-2">
+            </form>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- footer -->
+
+
+
+    <section class="mt-5">
+        <!-- Footer -->
+        <footer class="text-center text-white" style="background-color: #0a4275;">
+            <!-- Grid container -->
+            <div class="container p-4 pb-0">
+                <!-- Section: CTA -->
+                <section class="">
+                    <p class="d-flex justify-content-center align-items-center">
+
+                    </p>
+                </section>
+                <!-- Section: CTA -->
+            </div>
+            <!-- Grid container -->
+
+            <!-- Copyright -->
+            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                © 2022 Copyright:
+                <a class="text-white" href="index.html">SCHospital.com</a>
+            </div>
+            <!-- Copyright -->
+        </footer>
+        <!-- Footer -->
+    </section>
+
+    <a class="tog" href="#">&#8593;</a>
+
+    <script src="js/popper.min.js"></script>
+    <script src="js/jquery-3.6.1.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script type="module" src="js/shared.js"></script>
+    <script src="js/user.js" type=module></script>
+    <script src="js/myscript.js"></script>
+    <script src="js/particles.min.js" type="text/javascript"></script>
+    <script src="js/app.js" type="text/javascript"></script>
+</body>
+
+</html>

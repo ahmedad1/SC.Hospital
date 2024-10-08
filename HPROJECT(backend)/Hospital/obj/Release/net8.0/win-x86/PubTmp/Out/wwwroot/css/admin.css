@@ -1,0 +1,29 @@
+body,html{
+    overflow-x:hidden;
+}
+.aside-title{
+    height: 3em;
+
+}
+.list-group-item-action{
+    height: 4em;
+    
+} 
+.input-cell{
+    width: 5em;
+}
+.input-cell-depts{
+    width: 10em;
+}
+#particles-js{
+height: 100vh;
+position: absolute;
+}
+@media(min-width:992px){
+    aside{
+        height:92.46vh !important
+    }
+}
+.item-aside{
+    border: 1px white solid !important;
+}

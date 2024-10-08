@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>S.C Hospital</title>
+  <meta name="discription"
+    content="Find professional doctors or clinc for you ,Book Appointment with the doctor you want">
+  <meta name="keywords" content="clinc, doctor, health">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/mystyle.css">
+  <link rel="icon" type="image/x-icon" href="images/logo.png">
+  <style>
+    table {
+      min-height: 200px;
+    }
+
+    .slide {
+      min-height: 303px;
+    }
+  </style>
+</head>
+
+<body>
+
+
+
+  <!-- NavBar -->
+
+
+
+  <nav class="navbar navbar-expand-lg bg-light navbar-light sticky-top">
+    <a href="doctor.html" class="navbar-brand text-primary">S.C Hospital</a><!--special care hospital-->
+    <!-- <input type="text"placeholder=search class=" d-lg-none mr-4 "style=width:50%;outline:none;> -->
+
+    <a href="#N" data-toggle=collapse class="navbar-toggler"><span class="navbar-toggler-icon"></span></a>
+
+    <div class="collapse navbar-collapse" id="N">
+      <ul class="navbar-nav ml-auto ">
+        <li class="nav-item"><a href="#table" class="nav-link">Table</a></li>
+        <li class="nav-item"><a href="#form" class="nav-link">Form</a></li>
+        <li class="nav-item"><a href="./changepassword.html" class="nav-link">Password</a></li>
+        <!-- <li class="nav-item"><a href="#" class="nav-link btn btn-outline-primary text-primary rounded">Login</a></li>-->
+
+      </ul>
+      <!-- <a href="#login" class="nav-link btn btn-outline-primary ml-lg-2 mt-sm-3 mt-lg-0  "style=max-width:78px>Login</a> -->
+      <div class="nav-link d-flex p-0 mt-lg-0 mt-3" style="gap:5px">
+        <img src="./images/user-solid.svg" class="ml-lg-2  mt-lg-0  " width=15 alt="">
+        <span class="text-muted usernamespan" style=>USER</span>
+
+      </div>
+      <a href="#" class=" btn btn-outline-primary ml-lg-3 mt-3 mt-lg-0 signout">Sign out</a>
+    </div>
+
+  </nav>
+  <div class="root mt-5 ">
+
+    <div class="carousel slide " id="slide">
+      <ol class="carousel-indicators">
+        <li data-target="#slide" data-slide-to="0" class=active></li>
+        <li data-target="#slide" data-slide-to="1"></li>
+        <li data-target="#slide" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <table class="table sat" id="table">
+
+            <thead>
+              <h4 class="ml-2 text-muted">Saturday</h4>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name Of the Patient</th>
+                <th scope="col">Email</th>
+                <th scope="col">Day</th>
+                <th scope="col">Time</th>
+                <th scope="col">Birthdate</th>
+
+
+
+              </tr>
+            </thead>
+            <tbody>
+              <!-- <tr id="a">
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>mark@example.com</td>
+                     <td> <a href="#" class="btn btn-outline-success a">Done</a></td>
+                  </tr>
+                  <tr id="b">
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>example@example.com</td>
+                    <td> <a href="#" class="btn btn-outline-success b">Done</a></td>
+                  </tr>
+                  <tr id="c">
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>example@example.com Bird</td>
+                    <td> <a href="#" class="btn btn-outline-success c">Done</a></td>
+                    
+                  </tr> -->
+            </tbody>
+          </table>
+        </div>
+        <div class="carousel-item ">
+          <table class="table sun" id="table">
+
+            <thead>
+              <h4 class="ml-2 text-muted">Sunday</h4>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name Of the Patient</th>
+                <th scope="col">Email</th>
+                <th scope="col">Day</th>
+                <th scope="col">Time</th>
+                <th scope="col">Birthdate</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <!--<tr id="a">
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>mark@example.com</td>
+                     <td> <a href="#" class="btn btn-outline-success a">Done</a></td>
+                  </tr>
+                  <tr id="b">
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>example@example.com</td>
+                    <td> <a href="#" class="btn btn-outline-success b">Done</a></td>
+                  </tr>
+                  <tr id="c">
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>example@example.com Bird</td>
+                    <td> <a href="#" class="btn btn-outline-success c">Done</a></td>
+                    
+                  </tr> -->
+            </tbody>
+          </table>
+        </div>
+        <div class="carousel-item ">
+          <table class="table mon" id="table">
+
+            <thead>
+              <h4 class="ml-2 text-muted">Monday</h4>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name Of the Patient</th>
+                <th scope="col">Email</th>
+                <th scope="col">Day</th>
+                <th scope="col">Time</th>
+                <th scope="col">Birthdate</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- <tr id="a">
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>mark@example.com</td>
+                      <td> <a href="#" class="btn btn-outline-success a">Done</a></td>
+                  </tr>
+                  <tr id="b">
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>example@example.com</td>
+                    <td> <a href="#" class="btn btn-outline-success b">Done</a></td>
+                  </tr>
+                  <tr id="c">
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>example@example.com Bird</td>
+                    <td> <a href="#" class="btn btn-outline-success c">Done</a></td>
+                    
+                  </tr> -->
+            </tbody>
+          </table>
+
+        </div>
+        <div class="carousel-item ">
+          <table class="table tue" id="table">
+
+            <thead>
+              <h4 class="ml-2 text-muted">Tuesday</h4>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name Of the Patient</th>
+                <th scope="col">Email</th>
+                <th scope="col">Day</th>
+                <th scope="col">Time</th>
+                <th scope="col">Birthdate</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <!--<tr id="a">
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>mark@example.com</td>
+                      <td> <a href="#" class="btn btn-outline-success a">Done</a></td>
+                  </tr>
+                  <tr id="b">
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>example@example.com</td>
+                    <td> <a href="#" class="btn btn-outline-success b">Done</a></td>
+                  </tr>
+                  <tr id="c">
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>example@example.com Bird</td>
+                    <td> <a href="#" class="btn btn-outline-success c">Done</a></td>
+                    
+                  </tr> -->
+            </tbody>
+          </table>
+
+        </div>
+        <div class="carousel-item ">
+          <table class="table wed" id="table">
+
+            <thead>
+              <h4 class="ml-2 text-muted">Wednesday</h4>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name Of the Patient</th>
+                <th scope="col">Email</th>
+                <th scope="col">Day</th>
+                <th scope="col">Time</th>
+                <th scope="col">Birthdate</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <!-- <tr id="a">
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>mark@example.com</td>
+                      <td> <a href="#" class="btn btn-outline-success a">Done</a></td>
+                  </tr>
+                  <tr id="b">
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>example@example.com</td>
+                    <td> <a href="#" class="btn btn-outline-success b">Done</a></td>
+                  </tr>
+                  <tr id="c">
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>example@example.com Bird</td>
+                    <td> <a href="#" class="btn btn-outline-success c">Done</a></td>
+                    
+                  </tr> -->
+            </tbody>
+          </table>
+
+        </div>
+        <div class="carousel-item ">
+          <table class="table thu" id="table">
+
+            <thead>
+              <h4 class="ml-2 text-muted">Thursday</h4>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name Of the Patient</th>
+                <th scope="col">Email</th>
+                <th scope="col">Day</th>
+                <th scope="col">Time</th>
+                <th scope="col">Birthdate</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <!-- <tr id="a">
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>mark@example.com</td>
+                      <td> <a href="#" class="btn btn-outline-success a">Done</a></td>
+                  </tr>
+                  <tr id="b">
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>example@example.com</td>
+                    <td> <a href="#" class="btn btn-outline-success b">Done</a></td>
+                  </tr>
+                  <tr id="c">
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>example@example.com Bird</td>
+                    <td> <a href="#" class="btn btn-outline-success c">Done</a></td>
+                    
+                  </tr> -->
+            </tbody>
+          </table>
+
+        </div>
+        <div class="carousel-item ">
+          <table class="table fri" id="table">
+
+            <thead>
+              <h4 class="ml-2 text-muted">Friday</h4>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name Of the Patient</th>
+                <th scope="col">Email</th>
+                <th scope="col">Day</th>
+                <th scope="col">Time</th>
+                <th scope="col">Birthdate</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <!--  <tr id="a">
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>mark@example.com</td>
+                      <td> <a href="#" class="btn btn-outline-success a">Done</a></td>
+                  </tr>
+                  <tr id="b">
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>example@example.com</td>
+                    <td> <a href="#" class="btn btn-outline-success b">Done</a></td>
+                  </tr>
+                  <tr id="c">
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>example@example.com Bird</td>
+                    <td> <a href="#" class="btn btn-outline-success c">Done</a></td>
+                    
+                  </tr> -->
+            </tbody>
+          </table>
+
+        </div>
+
+      </div>
+      <a href="#slide" class="carousel-control-prev" data-slide="prev"
+        style="margin:auto;height:fit-content;width:fit-content"><span
+          class="carousel-control-prev-icon bg-primary"></span></a>
+      <a href="#slide" class="carousel-control-next" data-slide="next"
+        style="margin:auto;height:fit-content;width:fit-content"><span
+          class="carousel-control-next-icon bg-primary"></span></a>
+    </div>
+
+    <div class="form mt-5" id=form>
+
+      <form action="" class="form-control p-3 ">
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">Name Of Analysis Or Radiology</div>
+            </div>
+            <input type="text" class="form-control">
+
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">Email Of The Patient</div>
+            </div>
+            <input type="email" required class="form-control">
+          </div>
+        </div>
+
+
+
+        <input type="submit" value="Submit" class="form-control btn btn-outline-primary mt-3">
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- footer -->
+
+
+
+  <section class="mt-5">
+    <!-- Footer -->
+    <footer class="text-center text-white" style="background-color: #0a4275;">
+      <!-- Grid container -->
+      <div class="container p-4 pb-0">
+        <!-- Section: CTA -->
+        <section class="">
+          <p class="d-flex justify-content-center align-items-center">
+
+          </p>
+        </section>
+        <!-- Section: CTA -->
+      </div>
+      <!-- Grid container -->
+
+      <!-- Copyright -->
+      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2022 Copyright:
+        <a class="text-white" href="index.html">SCHospital.com</a>
+      </div>
+      <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+  </section>
+
+  <a class="tog" href="#">&#8593;</a>
+
+  <script src="js/popper.min.js"></script>
+  <script src="js/jquery-3.6.1.min.js"></script>
+  <script src="js/bootstrap.js"></script>
+  <script type="module" src="js/shared.js"></script>
+  <script src="js/doctor.js" type=module></script>
+  <script src="js/myscript.js"></script>
+
+</body>
+
+</html>

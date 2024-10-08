@@ -1,0 +1,17 @@
+C:\Users\Infotech\Desktop\HPROJECT(full-stack)\RepositoryPattern.EfCore\bin\Release\net8.0\RepositoryPatternWithUOW.EfCore.deps.json
+C:\Users\Infotech\Desktop\HPROJECT(full-stack)\RepositoryPattern.EfCore\bin\Release\net8.0\RepositoryPatternWithUOW.EfCore.runtimeconfig.json
+C:\Users\Infotech\Desktop\HPROJECT(full-stack)\RepositoryPattern.EfCore\bin\Release\net8.0\RepositoryPatternWithUOW.EfCore.dll
+C:\Users\Infotech\Desktop\HPROJECT(full-stack)\RepositoryPattern.EfCore\bin\Release\net8.0\RepositoryPatternWithUOW.EfCore.pdb
+C:\Users\Infotech\Desktop\HPROJECT(full-stack)\RepositoryPattern.EfCore\bin\Release\net8.0\RepositoryPatternWithUOW.Core.dll
+C:\Users\Infotech\Desktop\HPROJECT(full-stack)\RepositoryPattern.EfCore\bin\Release\net8.0\RepositoryPatternWithUOW.Core.pdb
+C:\Users\Infotech\Desktop\HPROJECT(full-stack)\RepositoryPattern.EfCore\obj\Release\net8.0\RepositoryPatternWithUOW.EfCore.csproj.AssemblyReference.cache
+C:\Users\Infotech\Desktop\HPROJECT(full-stack)\RepositoryPattern.EfCore\obj\Release\net8.0\RepositoryPatternWithUOW.EfCore.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Infotech\Desktop\HPROJECT(full-stack)\RepositoryPattern.EfCore\obj\Release\net8.0\RepositoryPatternWithUOW.EfCore.AssemblyInfoInputs.cache
+C:\Users\Infotech\Desktop\HPROJECT(full-stack)\RepositoryPattern.EfCore\obj\Release\net8.0\RepositoryPatternWithUOW.EfCore.AssemblyInfo.cs
+C:\Users\Infotech\Desktop\HPROJECT(full-stack)\RepositoryPattern.EfCore\obj\Release\net8.0\RepositoryPatternWithUOW.EfCore.csproj.CoreCompileInputs.cache
+C:\Users\Infotech\Desktop\HPROJECT(full-stack)\RepositoryPattern.EfCore\obj\Release\net8.0\Reposito.85E4C891.Up2Date
+C:\Users\Infotech\Desktop\HPROJECT(full-stack)\RepositoryPattern.EfCore\obj\Release\net8.0\RepositoryPatternWithUOW.EfCore.dll
+C:\Users\Infotech\Desktop\HPROJECT(full-stack)\RepositoryPattern.EfCore\obj\Release\net8.0\refint\RepositoryPatternWithUOW.EfCore.dll
+C:\Users\Infotech\Desktop\HPROJECT(full-stack)\RepositoryPattern.EfCore\obj\Release\net8.0\RepositoryPatternWithUOW.EfCore.pdb
+C:\Users\Infotech\Desktop\HPROJECT(full-stack)\RepositoryPattern.EfCore\obj\Release\net8.0\RepositoryPatternWithUOW.EfCore.genruntimeconfig.cache
+C:\Users\Infotech\Desktop\HPROJECT(full-stack)\RepositoryPattern.EfCore\obj\Release\net8.0\ref\RepositoryPatternWithUOW.EfCore.dll

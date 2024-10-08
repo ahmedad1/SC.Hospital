@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>S.C Hospital</title>
+    <meta name="discription"
+        content="Find professional doctors or clinc for you ,Book Appointment with the doctor you want">
+    <meta name="keywords" content="clinc, doctor, health">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        function gC(t) { let n = document.cookie.split("; "); for (let i of n) { let e = i.split("="); if (e[0] == t) return decodeURIComponent(e[1]) } return null } async function DR(t) { return await fetch(t, { method: "DELETE" }) } const bAA = location.origin + "/api/Account/"; async function sO() { 200 == (await DR(`${bAA}sign-out`)).status && (location.href = `${location.origin}/index.html`) } !async function(t=!0){if(!(gC("role")&&gC("userName")&&gC("firstName")&&gC("lastName")&&gC("gender")&&gC("birthDate")&&gC("email"))||"Pat"==gC("role")&&(location.pathname.startsWith("/doctor.html")||location.pathname.startsWith("/admin.html")||location.pathname.startsWith("/add-doctor.html"))||"Doc"==gC("role")&&!(location.pathname.startsWith("/doctor.html")||location.pathname.startsWith("/ProfileSettings.html"))||"Adm"==gC("role")&&!(location.pathname.startsWith("/admin.html")||location.pathname.startsWith("/add-doctor.html")||location.pathname.startsWith("/ProfileSettings.html")))return await sO(!1,t),t&&(location.href="/index.html"),!1}();
+    </script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/mystyle.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="icon" type="image/x-icon" href="images/logo.png">
+
+</head>
+
+<body>
+
+
+
+    <!-- NavBar -->
+
+
+
+    <nav class="navbar navbar-expand-lg bg-light navbar-light sticky-top">
+        <a href="admin.html" class="navbar-brand text-primary">S.C Hospital</a><!--special care hospital-->
+        <!-- <input type="text"placeholder=search class=" d-lg-none mr-4 "style=width:50%;outline:none;> -->
+        <a href="#N" data-toggle=collapse class="navbar-toggler"><span class="navbar-toggler-icon"></span></a>
+
+        <div class="collapse navbar-collapse" id="N">
+            <ul class="navbar-nav ml-auto ">
+            </ul>
+            <!-- <a href="#login" class="nav-link btn btn-outline-primary ml-lg-2 mt-sm-3 mt-lg-0  "style=max-width:78px>Login</a> -->
+
+            <div class="nav-link d-flex p-0 mt-lg-0 mt-3" style="gap:5px">
+                <img src="./images/user-solid.svg" class="ml-lg-2  mt-lg-0  " width=15 alt="">
+                <a href="ProfileSettings.html" class="text-muted usernamespan">USER</a>
+
+            </div>
+
+            <button class=" btn btn-outline-primary ml-lg-3 mt-3 mt-lg-0 signout">Sign out</button>
+
+        </div>
+
+    </nav>
+    <script>
+        function gC(e) { let t = document.cookie.split("; "); for (let n of t) { let r = n.split("="); if (r[0] == e) return decodeURIComponent(r[1]) } return null } let usernamespan = document.querySelector(".usernamespan"); usernamespan.innerText = gC("firstName");
+    </script>
+
+    <div class="container p-5">
+        <form class="form-control p-5 "id="add-doctor-form">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">First Name</span>
+                    </div>
+                    <input type="text" class="form-control"id=firstName>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Last Name</span>
+                    </div>
+                    <input type="text" class="form-control"id=lastName>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Username</span>
+                    </div>
+                    <input type="text" class="form-control"id="userName">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Email</span>
+                    </div>
+                    <input type="email" class="form-control"id="email">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Password</span>
+                    </div>
+                    <input type="password" class="form-control"id="password">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Gender</span>
+                    </div>
+                    <select  id="gender"class="form-control">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Birthdate</span>
+                    </div>
+                    <input type="date" id="dateOnly"class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Department Name</span>
+                    </div>
+                    <select  id="departmentName"class="form-control">
+                        <!-- <option value="Dental"selected>Dental</option>
+                        <option value="Ophthalmology">Ophthalmology</option>
+                        <option value="InternalMedicine">Internal Medicine</option>
+                        <option value="Orthopedic">Orthopedic</option>
+                        <option value="Analysis">Analysis & Radiology</option>
+                        <option value="Neurology">Neurology</option> -->
+                    </select>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Start Time</span>
+                    </div>
+                    <input required type="time" id="startTime"class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">End Time</span>
+                    </div>
+                    <input required type="time" id="endTime"class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Days of the work</span>
+                    </div>
+                    <select id="days"  class="form-control" multiple>
+                        <option value="1">Saturday</option>
+                        <option value="2">Sunday</option>
+                        <option value="4">Monday</option>
+                        <option value="8">Tuesday</option>
+                        <option value="16">Wednesday</option>
+                        <option value="32">Thursday</option>
+                        <option value="64">Friday</option>
+                      </select>
+                </div>
+            </div>
+          
+            <button type="submit" class="btn btn-outline-primary form-control"id="addDoctor">Add</button>
+        </form>
+
+    </div>
+
+
+
+
+
+
+    <script src="js/popper.min.js"></script>
+    <script src="js/jquery-3.6.1.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script type="module" src="js/add-doctor.js"></script>
+    <script type="module" src="js/shared.js"></script>
+
+    <!-- <script src="js/admin.js" type=module></script> -->
+
+</body>
+
+</html>

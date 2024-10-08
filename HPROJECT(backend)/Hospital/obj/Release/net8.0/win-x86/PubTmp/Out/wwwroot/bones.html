@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Department of Orthopedic</title>
+  <meta name="discription"
+    content="Find professional doctors or clinc for you ,Book Appointment with the doctor you want">
+  <meta name="keywords" content="clinc, doctor, health">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script>
+    async function DR(t){return await fetch(t,{method:"DELETE"})}async function sO(){let t=location.origin+"/api/Account/";await DR(`${t}sign-out`)}async function cFC(){return!(!(gC("role")&&gC("userName")&&gC("firstName")&&gC("lastName")&&gC("gender")&&gC("birthDate")&&gC("email"))||"Pat"==gC("role")&&(location.pathname.startsWith("/doctor.html")||location.pathname.startsWith("/admin.html")))&&("Doc"!=gC("role")||!!location.pathname.startsWith("/doctor.html"))&&("Adm"!=gC("role")||!!location.pathname.startsWith("/admin.html"))||(await sO(!1),!1)}function gC(t){let a=document.cookie.split("; ");for(let n of a){let e=n.split("=");if(e[0]==t)return decodeURIComponent(e[1])}return null}!async function(){await cFC()}();
+    </script>
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/mystyle.css">
+  <link rel="icon" type="image/x-icon" href="images/logo.png">
+  <link rel="stylesheet" href="css/dentist.css">
+</head>
+
+<body>
+
+
+
+  <!-- NavBar -->
+
+
+
+  <nav class="navbar navbar-expand-lg bg-light navbar-light sticky-top">
+    <a href="index.html" class="navbar-brand text-primary">S.C Hospital</a><!--special care hospital-->
+    <!-- <input type="text"placeholder=search class=" d-lg-none mr-4 "style=width:50%;outline:none;> -->
+    <a href="#N" data-toggle=collapse class="navbar-toggler"><span class="navbar-toggler-icon"></span></a>
+
+    <div class="collapse navbar-collapse" id="N">
+      <ul class="navbar-nav ml-auto ">
+        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+        <li class="nav-item"><a href="index.html#serv" class="nav-link">Services</a></li>
+        <li class="nav-item"><a href="index.html#contact" class="nav-link">Contact us</a></li>
+        <li class="nav-item"><a href="index.html#about" class="nav-link">About us</a></li>
+        <li class="nav-item"><a href="index.html#feed" class="nav-link">Feedback</a></li>
+        <!-- <li class="nav-item"><a href="#" class="nav-link btn btn-outline-primary text-primary rounded">Login</a></li>-->
+
+      </ul>
+      <a href="index.html#login" class="nav-link btn btn-outline-primary ml-lg-2 mt-sm-3 mt-lg-0  "
+        style=max-width:78px>Login</a>
+    </div>
+  </nav>
+
+  <script>
+    function gTFH(a){let l={"<":"&lt;",">":"&gt;"};return a?.replace(/[<>]/gi,function(a){return l[a]})}function gNAL(a){return`<a href="user.html" class="navbar-brand text-primary">S.C Hospital</a><!--special care hospital-->
+     <!-- <input type="text"placeholder=search class=" d-lg-none mr-4 "style=width:50%;outline:none;> -->
+     <a href="#N"data-toggle=collapse class="navbar-toggler"><span class="navbar-toggler-icon"></span></a>
+     
+     <div class="collapse navbar-collapse" id="N">
+         <ul class="navbar-nav ml-auto ">
+             <li class="nav-item"><a href="user.html" class="nav-link">Home</a></li>
+             <li class="nav-item"><a href="user.html#serv" class="nav-link">Services</a></li>
+             <li class="nav-item"><a href="user.html#contact" class="nav-link">Contact us</a></li>
+             <li class="nav-item"><a href="user.html#about" class="nav-link">About us</a></li>
+             <li class="nav-item"><a href="user.html#feed" class="nav-link">Feedback</a></li>
+             <li class="nav-item"><a href="#appo" class="nav-link appoints">Appointments</a></li>
+             <li class="nav-item"><a href="./changepassword.html" class="nav-link">Password</a></li>
+             <!-- <li class="nav-item"><a href="#" class="nav-link btn btn-outline-primary text-primary rounded">Login</a></li>-->
+         
+         </ul>
+         <!-- <a href="#login" class="nav-link btn btn-outline-primary ml-lg-2 mt-sm-3 mt-lg-0  "style=max-width:78px>Login</a> -->
+        <div class="nav-link d-flex p-0 mt-lg-0 mt-3"style="gap:5px">
+         <img src="./images/user-solid.svg"class="ml-lg-2  mt-lg-0  "width=15 alt="">
+         <a href="ProfileSettings.html" class="text-muted usernamespan">${gTFH(a)}</a>
+        
+         </div> 
+     <button class=" btn btn-outline-primary ml-lg-3 mt-3 mt-lg-0 signout">Sign out</button>
+     </div>`}!async function(){gC("firstName")?document.querySelector("nav").innerHTML=gNAL(gC("firstName")):null}();
+   </script>
+
+  <!-- breadcrumb -->
+
+
+
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item "><a href="index.html">Home</a></li>
+      <li class="breadcrumb-item active">Department of Orthopedic</li>
+
+    </ol>
+  </nav>
+
+
+
+  <!-- carousel -->
+
+
+
+
+  <div class="carousel slide " id="slide">
+    <ol class="carousel-indicators">
+      <li data-target="#slide" data-slide-to="0" class=active></li>
+      <li data-target="#slide" data-slide-to="1"></li>
+      <li data-target="#slide" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="images/carouesl/i10.jpeg" class="w-100" style="object-fit:cover;height:25rem" alt="">
+      </div>
+      <div class="carousel-item ">
+        <img src="images/carouesl/i12.jpg" class="w-100" style="object-fit:cover;object-position:0px -40px;height:25rem"
+          alt="">
+      </div>
+      <div class="carousel-item ">
+        <img src="images/carouesl/i11.jpg" class="w-100" style="object-fit:cover;object-position:center;height:25rem"
+          alt="">
+      </div>
+
+    </div>
+    <a href="#slide" class="carousel-control-prev" data-slide="prev"><span
+        class="carousel-control-prev-icon"></span></a>
+    <a href="#slide" class="carousel-control-next" data-slide="next"><span
+        class="carousel-control-next-icon"></span></a>
+  </div>
+  <!-- <img src="images/carouesl/i1.jpg"class="w-100 bi"style="object-fit:cover;height:25rem" alt=""> -->
+
+  <!-- body -->
+
+
+
+  <div class="container mt-5">
+    <div class="text-center text-primary">
+      <h4>Department of Orthopedic</h4><small class="text muted text-dark" style=letter-spacing:2px>Many Professionals &
+        Experts Doctors</small>
+    </div>
+    <div class="row mt-5">
+      <a href="#tamer-yehia" data-toggle=modal class="col-lg-4 col-md-6 col-12" style="text-decoration: none">
+        <div class="card">
+          <!-- <div class="card-img-top"style="background:url('destistdep-images/eman-tantawy.jpg') ;min-height:180px ; background-size:cover;background-position-y:-90px;"></div> -->
+          <img src="images/doctor.webp" class="card-img-top" alt="">
+          <div class="card-body">
+            <h6 class="card-title">Dr.Tamer Yehia</h6>
+            <p class="card-text text-muted">Consultant orthopedic surgery, spine surgery and shoulder injuries</p>
+            <span class="text-success fs-5" style="font-size:19px">350EGP</span>
+          </div>
+          <div class="btn btn-outline-primary">Book Now</div>
+        </div>
+
+      </a>
+      <a href="#omar-saeed" data-toggle=modal class="col-lg-4 col-md-6 col-12" style="text-decoration: none">
+        <div class="card ">
+          <img src="images/doctor.webp" class="card-img-top" alt="">
+          <!-- <div class="card-img-top"style="background:url('destistdep-images/Mostafa-ali.jpg') ;min-height:180px ; background-size:cover;"></div> -->
+          <div class="card-body">
+            <h6 class="card-title">Dr.Omar Saeed</h6>
+            <p class="card-text text-muted">Specialist in orthopedics, spine, plasma injection, joint replacement</p>
+            <span class="text-success fs-5" style="font-size:19px">300EGP</span>
+          </div>
+          <div class="btn btn-outline-primary">Book Now</div>
+        </div>
+
+      </a>
+      <a href="#mohamed-ahmed" data-toggle=modal class="col-lg-4 col-md-6 col-12" style="text-decoration: none">
+        <div class="card ">
+          <img src="images/doctor.webp" class="card-img-top" alt="">
+          <!-- <div class="card-img-top"style="background:url('destistdep-images/Mostafa-ali.jpg') ;min-height:180px ; background-size:cover;"></div> -->
+          <div class="card-body">
+            <h6 class="card-title">Dr.Mohamed Ahmed Yahia</h6>
+            <p class="card-text text-muted">Professor & Head of Orthopedic Department</p>
+            <span class="text-success fs-5" style="font-size:19px">1000EGP</span>
+          </div>
+          <div class="btn btn-outline-primary">Book Now</div>
+        </div>
+
+      </a>
+      <a href="#emad-tadrous" data-toggle=modal class="col-lg-4 col-md-6 col-12" style="text-decoration: none">
+        <div class="card ">
+          <img src="images/doctor.webp" class="card-img-top" alt="">
+          <!-- <div class="card-img-top"style="background:url('destistdep-images/Mostafa-ali.jpg') ;min-height:180px ; background-size:cover;"></div> -->
+          <div class="card-body">
+            <h6 class="card-title">Dr.Emad Tadrous</h6>
+            <p class="card-text text-muted">Specialist orthopedic Specialized in Adult Rheumatology,Arthroscopy </p>
+            <span class="text-success fs-5" style="font-size:19px">150EGP</span>
+          </div>
+          <div class="btn btn-outline-primary">Book Now</div>
+        </div>
+
+      </a>
+      <a href="#moataz-salah" data-toggle=modal class="col-lg-4 col-md-6 col-12" style="text-decoration: none">
+        <div class="card ">
+          <img src="images/doctor.webp" class="card-img-top" alt="">
+          <!-- <div class="card-img-top"style="background:url('destistdep-images/Mostafa-ali.jpg') ;min-height:180px ; background-size:cover;"></div> -->
+          <div class="card-body">
+            <h6 class="card-title">Dr.Moataz Salah</h6>
+            <p class="card-text text-muted">Specialist in orthopedics and Joints surgery&nbsp;&nbsp;&nbsp;</p>
+            <span class="text-success fs-5" style="font-size:19px">180EGP</span>
+          </div>
+          <div class="btn btn-outline-primary">Book Now</div>
+        </div>
+
+      </a>
+      <a href="#mahmoud-abd-elbaset" data-toggle=modal class="col-lg-4 col-md-6 col-12" style="text-decoration: none">
+        <div class="card ">
+          <img src="images/doctor.webp" class="card-img-top" alt="">
+          <!-- <div class="card-img-top"style="background:url('destistdep-images/Mostafa-ali.jpg') ;min-height:180px ; background-size:cover;"></div> -->
+          <div class="card-body">
+            <h6 class="card-title">Dr.Mahmoud Abd Elbaset</h6>
+            <p class="card-text text-muted">Consultant of Orthopedic Surgery and Sport Injuries</p>
+            <span class="text-success fs-5" style="font-size:19px">200EGP</span>
+          </div>
+          <div class="btn btn-outline-primary">Book Now</div>
+        </div>
+
+      </a>
+      <a href="#mostafa-khalil" data-toggle=modal class="col-lg-4 col-md-6 col-12" style="text-decoration: none">
+        <div class="card ">
+          <img src="images/doctor.webp" class="card-img-top" alt="">
+          <!-- <div class="card-img-top"style="background:url('destistdep-images/Mostafa-ali.jpg') ;min-height:180px ; background-size:cover;"></div> -->
+          <div class="card-body">
+            <h6 class="card-title">Dr.Mostafa Khalil</h6>
+            <p class="card-text text-muted">Conservative Treatment of knee arthritis pain</p>
+            <span class="text-success fs-5" style="font-size:19px">400EGP</span>
+          </div>
+          <div class="btn btn-outline-primary">Book Now</div>
+        </div>
+
+      </a>
+      <a href="#mohamed-elserwy" data-toggle=modal class="col-lg-4 col-md-6 col-12" style="text-decoration: none">
+        <div class="card ">
+          <img src="images/doctor.webp" class="card-img-top" alt="">
+          <!-- <div class="card-img-top"style="background:url('destistdep-images/Mostafa-ali.jpg') ;min-height:180px ; background-size:cover;"></div> -->
+          <div class="card-body">
+            <h6 class="card-title">Dr.Mohamed Elserwy</h6>
+            <p class="card-text text-muted">Consultsnt of Orthopedic and Spinal surgery</p>
+            <span class="text-success fs-5" style="font-size:19px">200EGP</span>
+          </div>
+          <div class="btn btn-outline-primary">Book Now</div>
+        </div>
+
+      </a>
+      <a href="#hany-bakr" data-toggle=modal class="col-lg-4 col-md-6 col-12" style="text-decoration: none">
+        <div class="card ">
+          <img src="images/doctor.webp" class="card-img-top" alt="">
+          <!-- <div class="card-img-top"style="background:url('destistdep-images/Mostafa-ali.jpg') ;min-height:180px ; background-size:cover;"></div> -->
+          <div class="card-body">
+            <h6 class="card-title">Dr.Hany Bakr</h6>
+            <p class="card-text text-muted">M.D and Consultant of hip and Knee arthroscopy surgery</p>
+            <span class="text-success fs-5" style="font-size:19px">260EGP</span>
+          </div>
+          <div class="btn btn-outline-primary">Book Now</div>
+        </div>
+
+      </a>
+    </div>
+
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+  <!-- modals -->
+
+
+
+
+
+
+  <div class="modal fade " id="tamer-yehia" tabindex="-1" role="dialog" aria-labelledby="tamer-yehia"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered " role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="tamer-yehia">Dr. Tamer Yehia</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body  mb-0">
+          <span class="text-muted " style="font-family:auto;">Human care clinic, orthopedic surgery, knee and shoulder
+            arthroscopic, spine surgery M.S.C in Orthopaedic surgery , Fellow of the Egyptian Orthopaedic Association ,
+            Fellow the British Orthopaedic association , M.D. Degree kasr el ainy</span>
+          <hr>
+          <p class=" text-info mt-3  mb-0">Available All Days From 7:30 Pm To 11:00 Pm </p>
+          <hr>
+          <p class="text-primary">Book Now Or Call 16676</p>
+
+          <hr>
+          <form action="">
+            <div class="input-group">
+              <span class="input-group-text">Choose The Day</span>
+              <select name="tamer-yehia-booked" class="form-select form-select-sm form-control"
+                aria-label="form-select-sm">
+                <option value="null" selected>Choose A Day</option>
+                <option value="sat">Saturday</option>
+                <option value="sun">Sunday</option>
+                <option value="mon">Monday</option>
+                <option value="tue">Tuesday</option>
+                <option value="wed">Wednesday</option>
+                <option value="thu">Thursday</option>
+                <option value="fri">Friday</option>
+              </select>
+            </div>
+            <input type="submit" class="d-none">
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary book"
+            onclick="document.querySelector('#tamer-yehia [type=submit]').click()">Book now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="modal fade " id="omar-saeed" tabindex="-1" role="dialog" aria-labelledby="omar-saeed" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered " role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="omar-saeed">Dr. Omar Saeed</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body  mb-0">
+          <span class="text-muted " style="font-family:auto;">Specialist in orthopedics, spine, plasma injection, joint
+            replacement, treatment of pediatric bone deformities and prosthetics, member of the Egyptian Orthopedic
+            Association</span>
+          <hr>
+          <p class=" text-info mt-3  mb-0">Available All Days From 1:45 Pm To 4:45 Pm </p>
+          <hr>
+          <p class="text-primary">Book Now Or Call 16676</p>
+
+          <hr>
+          <form action="">
+            <div class="input-group">
+              <span class="input-group-text">Choose The Day</span>
+              <select name="omar-saeed-booked" class="form-select form-select-sm form-control"
+                aria-label="form-select-sm">
+                <option value="null" selected>Choose A Day</option>
+                <option value="sat">Saturday</option>
+                <option value="sun">Sunday</option>
+                <option value="mon">Monday</option>
+                <option value="tue">Tuesday</option>
+                <option value="wed">Wednesday</option>
+                <option value="thu">Thursday</option>
+                <option value="fri">Friday</option>
+              </select>
+            </div>
+            <input type="submit" class="d-none">
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary book"
+            onclick="document.querySelector('#omar-saeed [type=submit]').click()">Book now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="modal fade " id="mohamed-ahmed" tabindex="-1" role="dialog" aria-labelledby="mohamed-ahmed"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered " role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="mohamed-ahmed">Dr. Mohamed Ahmed Yahia</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body  mb-0">
+          <span class="text-muted " style="font-family:auto;">Professor of Orthopedic and Sports Medicine Azhar
+            University in Cairo Head of Sports Orthopedic Unit - Zahraa University Hospital Member of Medical Committee
+            of UIPM (International Olympic Federation) Chairman of Medical Committee Egyptian Olympic Committee Honoured
+            Republic Medal MD in Orthopedics 2003 Diploma of Sports Medicine from IOC - Switzerland - 2015</span>
+          <hr>
+          <p class=" text-info mt-3  mb-0">Available All Days From 9:00 Pm To 11:00 Pm </p>
+          <hr>
+          <p class="text-primary">Book Now Or Call 16676</p>
+
+          <hr>
+          <form action="">
+            <div class="input-group">
+              <span class="input-group-text">Choose The Day</span>
+              <select name="mohamed-ahmed-booked" class="form-select form-select-sm form-control"
+                aria-label="form-select-sm">
+                <option value="null" selected>Choose A Day</option>
+                <option value="sat">Saturday</option>
+                <option value="sun">Sunday</option>
+                <option value="mon">Monday</option>
+                <option value="tue">Tuesday</option>
+                <option value="wed">Wednesday</option>
+                <option value="thu">Thursday</option>
+                <option value="fri">Friday</option>
+              </select>
+            </div>
+            <input type="submit" class="d-none">
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary book"
+            onclick="document.querySelector('#mohamed-ahmed [type=submit]').click()">Book now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="modal fade " id="emad-tadrous" tabindex="-1" role="dialog" aria-labelledby="emad-tadrous"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered " role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="emad-tadrous">Dr. Emad Tadrous</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body  mb-0">
+          <span class="text-muted " style="font-family:auto;">Orthopedist Specialized in Adult Rheumatology, Pediatric
+            Rheumatology, Arthroscopy and Sports injuries, Microscopic Surgery, Osteopathic Medicine, Adult Orthopedics,
+            Pediatric Orthopedics, Foot and Ankle Orthopedics, Joint Replacement, Bone Deformities, Adult Orthopedic
+            Surgery, Pediatric Orthopedic Surgery and Hand and Upper Limb Surgery</span>
+          <hr>
+          <p class=" text-info mt-3  mb-0">Available All Days From 8:00 Pm To 11:00 Pm </p>
+          <hr>
+          <p class="text-primary">Book Now Or Call 16676</p>
+
+          <hr>
+          <form action="">
+            <div class="input-group">
+              <span class="input-group-text">Choose The Day</span>
+              <select name="emad-tadrous-booked" class="form-select form-select-sm form-control"
+                aria-label="form-select-sm">
+                <option value="null" selected>Choose A Day</option>
+                <option value="sat">Saturday</option>
+                <option value="sun">Sunday</option>
+                <option value="mon">Monday</option>
+                <option value="tue">Tuesday</option>
+                <option value="wed">Wednesday</option>
+                <option value="thu">Thursday</option>
+                <option value="fri">Friday</option>
+              </select>
+            </div>
+            <input type="submit" class="d-none">
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary book"
+            onclick="document.querySelector('#emad-tadrous [type=submit]').click()">Book now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="modal fade " id="moataz-salah" tabindex="-1" role="dialog" aria-labelledby="moataz-salah"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered " role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="moataz-salah">Dr. Moataz Salah</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body  mb-0">
+          <span class="text-muted " style="font-family:auto;">Master in orthopedic and spine surgery Head of Emergency
+            Department at S.C hospital , Specialist in orthopedics and Joints surgery</span>
+          <hr>
+          <p class=" text-info mt-3  mb-0">Available All Days From 7:00 Pm To 11:00 Pm </p>
+          <hr>
+          <p class="text-primary">Book Now Or Call 16676</p>
+
+          <hr>
+          <form action="">
+            <div class="input-group">
+              <span class="input-group-text">Choose The Day</span>
+              <select name="moataz-salah-booked" class="form-select form-select-sm form-control"
+                aria-label="form-select-sm">
+                <option value="null" selected>Choose A Day</option>
+                <option value="sat">Saturday</option>
+                <option value="sun">Sunday</option>
+                <option value="mon">Monday</option>
+                <option value="tue">Tuesday</option>
+                <option value="wed">Wednesday</option>
+                <option value="thu">Thursday</option>
+                <option value="fri">Friday</option>
+              </select>
+            </div>
+            <input type="submit" class="d-none">
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary book"
+            onclick="document.querySelector('#moataz-salah [type=submit]').click()">Book now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="modal fade " id="mahmoud-abd-elbaset" tabindex="-1" role="dialog" aria-labelledby="mahmoud-abd-elbaset"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered " role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="mahmoud-abd-elbaset">Dr. Mahmoud Abd Elbaset</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body  mb-0">
+          <span class="text-muted " style="font-family:auto;">Masters in Orthopaedic Surgery Ain Shams
+            University.Consultant of Orthopedic Surgery and Sport InjuriesOrthopedist . Specialized in Adult
+            Orthopedics</span>
+          <hr>
+          <p class=" text-info mt-3  mb-0">Available All Days From 9:00 Pm To 10:45 Pm </p>
+          <hr>
+          <p class="text-primary">Book Now Or Call 16676</p>
+
+          <hr>
+          <form action="">
+            <div class="input-group">
+              <span class="input-group-text">Choose The Day</span>
+              <select name="mahmoud-abd-elbaset-booked" class="form-select form-select-sm form-control"
+                aria-label="form-select-sm">
+                <option value="null" selected>Choose A Day</option>
+                <option value="sat">Saturday</option>
+                <option value="sun">Sunday</option>
+                <option value="mon">Monday</option>
+                <option value="tue">Tuesday</option>
+                <option value="wed">Wednesday</option>
+                <option value="thu">Thursday</option>
+                <option value="fri">Friday</option>
+              </select>
+            </div>
+            <input type="submit" class="d-none">
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary book"
+            onclick="document.querySelector('#mahmoud-abd-elbaset [type=submit]').click()">Book now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <div class="modal fade " id="mostafa-khalil" tabindex="-1" role="dialog" aria-labelledby="mostafa-khalil"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered " role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="mostafa-khalil">Dr. Mostafa Khalil</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body  mb-0">
+          <span class="text-muted " style="font-family:auto;">Conservative Ttreatment of knee arthritis and managment of
+            chronic recurrent lower back pain</span>
+          <hr>
+          <p class=" text-info mt-3  mb-0">Available All Days From 7:00 Pm To 8:15 Pm </p>
+          <hr>
+          <p class="text-primary">Book Now Or Call 16676</p>
+
+          <hr>
+          <form action="">
+            <div class="input-group">
+              <span class="input-group-text">Choose The Day</span>
+              <select name="mostafa-khalil-booked" class="form-select form-select-sm form-control"
+                aria-label="form-select-sm">
+                <option value="null" selected>Choose A Day</option>
+                <option value="sat">Saturday</option>
+                <option value="sun">Sunday</option>
+                <option value="mon">Monday</option>
+                <option value="tue">Tuesday</option>
+                <option value="wed">Wednesday</option>
+                <option value="thu">Thursday</option>
+                <option value="fri">Friday</option>
+              </select>
+            </div>
+            <input type="submit" class="d-none">
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary book"
+            onclick="document.querySelector('#mostafa-khalil [type=submit]').click()">Book now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+  <div class="modal fade " id="mohamed-elserwy" tabindex="-1" role="dialog" aria-labelledby="mohamed-elserwy"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered " role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="mohamed-elserwy">Dr. Mohamed Elserwy</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body  mb-0">
+          <span class="text-muted " style="font-family:auto;">Orthopedist Specialized in Pediatric Spine Surgery, Adult
+            Rheumatology, Adult Orthopedic Surgery, Hand and Upper Limb Surgery, Microscopic Surgery, Adult Spine
+            Surgery, Adult Orthopedics, Arthroscopy and Sports injuries, Bone Deformities, Foot and Ankle Orthopedics,
+            Joint Replacement and Pediatric Orthopedic Surgery , Consultant of orthopedics, spine and arthroscopy</span>
+          <hr>
+          <p class=" text-info mt-3  mb-0">Available All Days From 6:00 Pm To 9:15 Pm </p>
+          <hr>
+          <p class="text-primary">Book Now Or Call 16676</p>
+
+          <hr>
+          <form action="">
+            <div class="input-group">
+              <span class="input-group-text">Choose The Day</span>
+              <select name="mohamed-elserwy-booked" class="form-select form-select-sm form-control"
+                aria-label="form-select-sm">
+                <option value="null" selected>Choose A Day</option>
+                <option value="sat">Saturday</option>
+                <option value="sun">Sunday</option>
+                <option value="mon">Monday</option>
+                <option value="tue">Tuesday</option>
+                <option value="wed">Wednesday</option>
+                <option value="thu">Thursday</option>
+                <option value="fri">Friday</option>
+              </select>
+            </div>
+            <input type="submit" class="d-none">
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary book"
+            onclick="document.querySelector('#mohamed-elserwy [type=submit]').click()">Book now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="modal fade " id="hany-bakr" tabindex="-1" role="dialog" aria-labelledby="hany-bakr" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered " role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="hany-bakr">Dr. Hany Bakr</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body  mb-0">
+          <span class="text-muted " style="font-family:auto;">M.D and Consultant of hip and Knee arthroscopy and
+            arthroplasty Surgery , Fellow of Infanta leonor University, Spain lecturer of orthopedic surgery and sports
+            medicine</span>
+          <hr>
+          <p class=" text-info mt-3  mb-0">Available All Days From 9:00 Pm To 11:59 Pm </p>
+          <hr>
+          <p class="text-primary">Book Now Or Call 16676</p>
+
+          <hr>
+          <form action="">
+            <div class="input-group">
+              <span class="input-group-text">Choose The Day</span>
+              <select name="hany-bakr-booked" class="form-select form-select-sm form-control"
+                aria-label="form-select-sm">
+                <option value="null" selected>Choose A Day</option>
+                <option value="sat">Saturday</option>
+                <option value="sun">Sunday</option>
+                <option value="mon">Monday</option>
+                <option value="tue">Tuesday</option>
+                <option value="wed">Wednesday</option>
+                <option value="thu">Thursday</option>
+                <option value="fri">Friday</option>
+              </select>
+            </div>
+            <input type="submit" class="d-none">
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary book"
+            onclick="document.querySelector('#hany-bakr [type=submit]').click()">Book now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <!-- footer -->
+
+
+
+  <section class="mt-5">
+    <!-- Footer -->
+    <footer class="text-center text-white" style="background-color: #0a4275;">
+      <!-- Grid container -->
+      <div class="container p-4 pb-0">
+        <!-- Section: CTA -->
+        <section class="">
+          <p class="d-flex justify-content-center align-items-center">
+            <span class="me-3">Register for free</span>
+            <a href="index.html#sign" class="btn btn-outline-light btn-rounded ml-1">
+              Sign up!
+            </a>
+          </p>
+        </section>
+        <!-- Section: CTA -->
+      </div>
+      <!-- Grid container -->
+
+      <!-- Copyright -->
+      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2022 Copyright:
+        <a class="text-white" href="index.html">SCHospital.com</a>
+      </div>
+      <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+  </section>
+
+  <a class="tog" href="#">&#8593;</a>
+
+  <script src="js/popper.min.js"></script>
+  <script src="js/jquery-3.6.1.min.js"></script>
+  <script src="js/bootstrap.js"></script>
+  <script type="module" src="js/shared.js"></script>
+  <script src="js/depts.js" type="module"></script>
+  <script src="js/myscript.js"></script>
+</body>
+
+</html>

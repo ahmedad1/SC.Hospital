@@ -1,0 +1,373 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\02947096-90a3-4370-ad74-53401f582436.jpeg",
+      "PackagePath": "staticwebassets\\02947096-90a3-4370-ad74-53401f582436.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\1c8b4177-437f-4ba7-8702-68b3c7fc6773.jpeg",
+      "PackagePath": "staticwebassets\\1c8b4177-437f-4ba7-8702-68b3c7fc6773.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\379bb33c-8846-4981-8882-27881aa8def9.jpeg",
+      "PackagePath": "staticwebassets\\379bb33c-8846-4981-8882-27881aa8def9.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\8047a974-f2db-403f-ae20-7c0ef52d76a7.jpeg",
+      "PackagePath": "staticwebassets\\8047a974-f2db-403f-ae20-7c0ef52d76a7.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\8d26295a-5f22-41e6-822d-e467842eeb71.jpeg",
+      "PackagePath": "staticwebassets\\8d26295a-5f22-41e6-822d-e467842eeb71.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\9e2e2d50-1cc6-48c3-b4d1-690bbd25dc81.jpeg",
+      "PackagePath": "staticwebassets\\9e2e2d50-1cc6-48c3-b4d1-690bbd25dc81.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\Analysis.html",
+      "PackagePath": "staticwebassets\\Analysis.html"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\ProfileSettings.html",
+      "PackagePath": "staticwebassets\\ProfileSettings.html"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\a65d4157-fb33-4a79-bef7-b52ad121beb1.jpeg",
+      "PackagePath": "staticwebassets\\a65d4157-fb33-4a79-bef7-b52ad121beb1.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\add-department.html",
+      "PackagePath": "staticwebassets\\add-department.html"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\add-doctor.html",
+      "PackagePath": "staticwebassets\\add-doctor.html"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\admin.html",
+      "PackagePath": "staticwebassets\\admin.html"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\be367422-bc59-4209-9f8b-e1240912b183.jpeg",
+      "PackagePath": "staticwebassets\\be367422-bc59-4209-9f8b-e1240912b183.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\bones.html",
+      "PackagePath": "staticwebassets\\bones.html"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\brain.html",
+      "PackagePath": "staticwebassets\\brain.html"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\changepassword.html",
+      "PackagePath": "staticwebassets\\changepassword.html"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\css\\admin.css",
+      "PackagePath": "staticwebassets\\css\\admin.css"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\css\\bootstrap.css"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\css\\dentist.css",
+      "PackagePath": "staticwebassets\\css\\dentist.css"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\css\\eye.css",
+      "PackagePath": "staticwebassets\\css\\eye.css"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\css\\internal.css",
+      "PackagePath": "staticwebassets\\css\\internal.css"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\css\\mystyle.css",
+      "PackagePath": "staticwebassets\\css\\mystyle.css"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\css\\user.css",
+      "PackagePath": "staticwebassets\\css\\user.css"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\dentistdep.html",
+      "PackagePath": "staticwebassets\\dentistdep.html"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\doctor.html",
+      "PackagePath": "staticwebassets\\doctor.html"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\e3cae0d0-56d8-4aec-b035-fcc74f083cc2.jpeg",
+      "PackagePath": "staticwebassets\\e3cae0d0-56d8-4aec-b035-fcc74f083cc2.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\emailConfirmation.html",
+      "PackagePath": "staticwebassets\\emailConfirmation.html"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\eyedep.html",
+      "PackagePath": "staticwebassets\\eyedep.html"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\Dental.webp",
+      "PackagePath": "staticwebassets\\images\\Dental.webp"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\EyeDepart.jpg",
+      "PackagePath": "staticwebassets\\images\\EyeDepart.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\aaw.txt",
+      "PackagePath": "staticwebassets\\images\\aaw.txt"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\analysis.jpg",
+      "PackagePath": "staticwebassets\\images\\analysis.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\bonedept.jpg",
+      "PackagePath": "staticwebassets\\images\\bonedept.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\braindept.jpg",
+      "PackagePath": "staticwebassets\\images\\braindept.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\carouesl\\ashe3a.jpg",
+      "PackagePath": "staticwebassets\\images\\carouesl\\ashe3a.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\carouesl\\i1.jpg",
+      "PackagePath": "staticwebassets\\images\\carouesl\\i1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\carouesl\\i10.jpeg",
+      "PackagePath": "staticwebassets\\images\\carouesl\\i10.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\carouesl\\i11.jpg",
+      "PackagePath": "staticwebassets\\images\\carouesl\\i11.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\carouesl\\i12.jpg",
+      "PackagePath": "staticwebassets\\images\\carouesl\\i12.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\carouesl\\i13.jpg",
+      "PackagePath": "staticwebassets\\images\\carouesl\\i13.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\carouesl\\i14.jpg",
+      "PackagePath": "staticwebassets\\images\\carouesl\\i14.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\carouesl\\i15.webp",
+      "PackagePath": "staticwebassets\\images\\carouesl\\i15.webp"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\carouesl\\i16.jpg",
+      "PackagePath": "staticwebassets\\images\\carouesl\\i16.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\carouesl\\i2.jpg",
+      "PackagePath": "staticwebassets\\images\\carouesl\\i2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\carouesl\\i3.jpg",
+      "PackagePath": "staticwebassets\\images\\carouesl\\i3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\carouesl\\i4.jpg",
+      "PackagePath": "staticwebassets\\images\\carouesl\\i4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\carouesl\\i5.jpg",
+      "PackagePath": "staticwebassets\\images\\carouesl\\i5.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\carouesl\\i6.jpg",
+      "PackagePath": "staticwebassets\\images\\carouesl\\i6.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\carouesl\\i7.jpeg",
+      "PackagePath": "staticwebassets\\images\\carouesl\\i7.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\carouesl\\i8.jpg",
+      "PackagePath": "staticwebassets\\images\\carouesl\\i8.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\carouesl\\i9.png",
+      "PackagePath": "staticwebassets\\images\\carouesl\\i9.png"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\doctor-14044.png",
+      "PackagePath": "staticwebassets\\images\\doctor-14044.png"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\doctor.jpg",
+      "PackagePath": "staticwebassets\\images\\doctor.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\doctor.webp",
+      "PackagePath": "staticwebassets\\images\\doctor.webp"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\doctoress.webp",
+      "PackagePath": "staticwebassets\\images\\doctoress.webp"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\favicon.ico",
+      "PackagePath": "staticwebassets\\images\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\heartdept.jpg",
+      "PackagePath": "staticwebassets\\images\\heartdept.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\internalmedicine.jpg",
+      "PackagePath": "staticwebassets\\images\\internalmedicine.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\loading.png",
+      "PackagePath": "staticwebassets\\images\\loading.png"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\user-solid.svg",
+      "PackagePath": "staticwebassets\\images\\user-solid.svg"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\userlogo.png",
+      "PackagePath": "staticwebassets\\images\\userlogo.png"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\images\\wallp1.jpg",
+      "PackagePath": "staticwebassets\\images\\wallp1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\internal.html",
+      "PackagePath": "staticwebassets\\internal.html"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\js\\ProfileSettings.js",
+      "PackagePath": "staticwebassets\\js\\ProfileSettings.js"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\js\\add-department.js",
+      "PackagePath": "staticwebassets\\js\\add-department.js"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\js\\add-doctor.js",
+      "PackagePath": "staticwebassets\\js\\add-doctor.js"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\js\\admin.js",
+      "PackagePath": "staticwebassets\\js\\admin.js"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\js\\analysis.js",
+      "PackagePath": "staticwebassets\\js\\analysis.js"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\js\\app.js",
+      "PackagePath": "staticwebassets\\js\\app.js"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\js\\bootstrap.js"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\js\\changepassword.js",
+      "PackagePath": "staticwebassets\\js\\changepassword.js"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\js\\checkingInDepts.js",
+      "PackagePath": "staticwebassets\\js\\checkingInDepts.js"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\js\\depts.js",
+      "PackagePath": "staticwebassets\\js\\depts.js"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\js\\doctor.js",
+      "PackagePath": "staticwebassets\\js\\doctor.js"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\js\\emailConfirmation.js",
+      "PackagePath": "staticwebassets\\js\\emailConfirmation.js"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\js\\formvalidation.js",
+      "PackagePath": "staticwebassets\\js\\formvalidation.js"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\js\\index.js",
+      "PackagePath": "staticwebassets\\js\\index.js"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\js\\jquery-3.6.1.min.js",
+      "PackagePath": "staticwebassets\\js\\jquery-3.6.1.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\js\\myscript.js",
+      "PackagePath": "staticwebassets\\js\\myscript.js"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\js\\particles.min.js",
+      "PackagePath": "staticwebassets\\js\\particles.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\js\\popper.min.js",
+      "PackagePath": "staticwebassets\\js\\popper.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\js\\popper.min.js.map",
+      "PackagePath": "staticwebassets\\js\\popper.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\js\\shared.js",
+      "PackagePath": "staticwebassets\\js\\shared.js"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\js\\user.js",
+      "PackagePath": "staticwebassets\\js\\user.js"
+    },
+    {
+      "Id": "C:\\Users\\Infotech\\Desktop\\HPROJECT(full-stack)\\Hospital\\wwwroot\\user.html",
+      "PackagePath": "staticwebassets\\user.html"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Hospital.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.Hospital.props",
+      "PackagePath": "build\\Hospital.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.Hospital.props",
+      "PackagePath": "buildMultiTargeting\\Hospital.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.Hospital.props",
+      "PackagePath": "buildTransitive\\Hospital.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

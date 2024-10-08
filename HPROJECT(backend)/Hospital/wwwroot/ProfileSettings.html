@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>S.C Hospital</title>
+    <meta name="discription"content="Find professional doctors or clinc for you ,Book Appointment with the doctor you want">
+    <meta name="keywords" content="clinc, doctor, health">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/mystyle.css">
+    <link rel="icon" type="image/x-icon"href="images/logo.png">
+    <style>
+        body{
+            height: 100vh;
+            background-color: #eee;
+        }
+        .data{
+            box-shadow: 0 0 7px;
+        }
+
+    </style>
+</head>
+<body>
+
+
+
+    <!-- NavBar -->
+
+
+
+    <nav class="navbar navbar-expand-lg bg-light navbar-light sticky-top">
+        <a href="user.html" class="navbar-brand text-primary">S.C Hospital</a><!--special care hospital-->
+        <!-- <input type="text"placeholder=search class=" d-lg-none mr-4 "style=width:50%;outline:none;> -->
+        <a href="#N"data-toggle=collapse class="navbar-toggler"><span class="navbar-toggler-icon"></span></a>
+        
+        <div class="collapse navbar-collapse" id="N">
+            <ul class="navbar-nav ml-auto ">
+                <li class="nav-item"><a href="user.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="#serv" class="nav-link">Services</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link">Contact us</a></li>
+                <li class="nav-item"><a href="#about" class="nav-link">About us</a></li>
+                <li class="nav-item"><a href="#feed" class="nav-link">Feedback</a></li>
+                <li class="nav-item"><a href="#appo" class="nav-link appoints">Appointments</a></li>
+
+                <!-- <li class="nav-item"><a href="#" class="nav-link btn btn-outline-primary text-primary rounded">Login</a></li>-->
+            
+            </ul>
+            <!-- <a href="#login" class="nav-link btn btn-outline-primary ml-lg-2 mt-sm-3 mt-lg-0  "style=max-width:78px>Login</a> -->
+           <div class="nav-link d-flex p-0 mt-lg-0 mt-3"style="gap:5px">
+            <img src="./images/user-solid.svg"class="ml-lg-2  mt-lg-0  "width=15 alt="">
+            <a href="ProfileSettings.html" class="text-muted usernamespan"style>USER</a>
+           
+        </div> 
+        <button  class=" btn btn-outline-primary ml-lg-3 mt-3 mt-lg-0 signout">Sign out</button>
+        </div>
+        
+    </nav>
+
+
+<div class="container align-items-center ">
+
+<h4 class="mt-5 text-primary"style="font-size:1.9em">Profile Settings</h4>
+<form  class="form-control px-5 pt-5 mt-5 passwordChangingForm" style="border-bottom: none;">
+    <label for="oldPassword"class="text-muted mt-2">Old Password </label>
+    <input type="password"id="oldPassword"required class="form-control mt-2">
+
+    <label for="newPassword"class="text-muted mt-2">New Password</label>
+    <input type="password"id="newPassword"class="form-control mt-2"required maxlength="100"minlength="8">
+    <input type="checkbox"id="showNewPass" class="mt-2">
+    <label for="showNewPass"class="mt-2">Show Password</label>
+    <br>  
+    <button type="submit" class="btn btn-outline-primary mt-3 saveNewPassword">Save</button>
+</form>
+<form class="form-control px-5 pb-5 pt-4  "style="border-top:none">
+
+
+    <label for="firstName"class="text-muted">First Name</label>
+    <input type="text"id="firstName" class="form-control mt-2">
+
+    <label for="lastName"class="text-muted mt-2">Last Name</label>
+    <input type="text"id="lastName"class="form-control mt-2">
+
+    <label for="email"class="text-muted mt-2">Email</label>
+    <input type="email"id="email"class="form-control mt-2" disabled>
+
+    <label for="userName"class="text-muted mt-2">UserName</label>
+    <input type="text"id="userName"class="form-control mt-2">
+
+    <label for="birthDate"class="text-muted mt-2">BirthDate</label>
+    <input type="date"id="birthDate"class="form-control mt-2">
+    
+    <input type="radio"id="male" name="gender"value="male"class=" mt-2">
+    <label for="male"class="text-muted mt-2">Male</label>
+
+    <input type="radio"id="female" name="gender"value="female"class="mt-2">
+    <label for="female"class="text-muted mt-2">Female</label>
+    <br>
+
+    <a href="#"  data-toggle="modal" class="btn btn-outline-primary mt-3 submitData">Save</a>
+
+
+
+
+</form>
+
+</div>
+
+<!-- modal -->
+<div class="modal fade" id="passwordVerification" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-muted" id="verifyPasswordAlert">Verify your password</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            
+            <form id="passwordForm"class="form-control">
+                <label for="verifyPassword">Your password before saving changes</label>
+                <input id="verifyPassword" required type="password"class="form-control">
+                <input type="checkbox"id="showPassword"class="showpass mt-2" >
+                <label for="showPassword" class="mt-2">Show Password</label>
+    
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary closemodal" data-dismiss="modal">Close</button>
+          <button type="submit"class="btn btn-primary submitVerifying" >Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+     
+
+    <script src="js/popper.min.js"></script>
+    <script src="js/jquery-3.6.1.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script type="module" src="js/shared.js"></script>
+    <script type="module" src="js/ProfileSettings.js"></script>
+  
+    
+</body>
+</html>
